@@ -10,8 +10,11 @@
                 <ul v-for="(item, i) in menuList" v-bind:key="i">
                   <li v-for="(sub, j) in item" v-bind:key="j">
                     <a v-bind:href="sub ? '/#/product/' + sub.id : ''">
-                      <img v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'" alt="">
-                      {{ sub ? sub.name : '小米9' }}
+                      <img
+                        v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'"
+                        alt=""
+                      />
+                      {{ sub ? sub.name : "小米9" }}
                     </a>
                   </li>
                 </ul>
@@ -48,7 +51,7 @@
       </div> -->
       <!-- <div class="banner">
         <a href="/#/product/30">
-          <img v-lazy="'/imgs/banner-1.png'" alt="">
+          <img v-lazy="'/imgs/banner-1.png'" alt="" />
         </a>
       </div> -->
     </div>
@@ -86,27 +89,28 @@
   </div>
 </template>
 <script>
-
 export default {
-  name: 'myIndex',
-  components: {
-  },
+  name: "myIndex",
+  components: {},
   data() {
     return {
       adsList: [
         {
           id: 33,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 48,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 45,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 47,
-          img: '../assets/logo.png'
-        }
+          img: "../assets/logo.png",
+        },
       ],
       goodList: [],
       showModal: false
@@ -135,13 +139,13 @@ export default {
     },
     goToCart() {
       // this.$router.push('/cart');
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style lang="scss">
-@import './../assets/scss/config.scss';
-@import './../assets/scss/mixin.scss';
+@import "./../assets/scss/config.scss";
+@import "./../assets/scss/mixin.scss";
 
 .index {
   .swiper-box {
@@ -170,8 +174,8 @@ export default {
               position: absolute;
               right: 30px;
               top: 17.5px;
-              content: ' ';
-              @include bgImg(10px, 15px, '../assets/logo.png');
+              content: " ";
+              @include bgImg(10px, 15px, "../assets/logo.png");
             }
           }
 
@@ -300,11 +304,11 @@ export default {
               color: $colorG;
 
               &.new-pro {
-                background-color: #7ECF68;
+                background-color: #7ecf68;
               }
 
               &.kill-pro {
-                background-color: #E82626;
+                background-color: #e82626;
               }
             }
 
@@ -330,14 +334,14 @@ export default {
               }
 
               .price {
-                color: #F20A0A;
+                color: #f20a0a;
                 font-size: $fontJ;
                 font-weight: bold;
                 cursor: pointer;
 
                 &:after {
-                  @include bgImg(22px, 22px, '../assets/logo.png');
-                  content: ' ';
+                  @include bgImg(22px, 22px, "../assets/logo.png");
+                  content: " ";
                   margin-left: 5px;
                   vertical-align: middle;
                 }

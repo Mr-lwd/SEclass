@@ -15,7 +15,7 @@ export default {
   name: "HomeView",
   components: {
     navFooter,
-    navHeader
+    navHeader,
   },
 };
 </script>
