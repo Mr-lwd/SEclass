@@ -4,15 +4,14 @@
       <div class="swiper-box">
         <div class="nav-menu">
           <ul class="menu-wrap">
-            111111
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
               <div class="children">
-                <ul v-for="(item,i) in menuList" v-bind:key="i">
-                  <li v-for="(sub,j) in item" v-bind:key="j">
-                    <a v-bind:href="sub?'/#/product/'+sub.id:''">
-                      <img v-bind:src="sub?sub.img:'/imgs/item-box-1.png'" alt="">
-                      {{sub?sub.name:'小米9'}}
+                <ul v-for="(item, i) in menuList" v-bind:key="i">
+                  <li v-for="(sub, j) in item" v-bind:key="j">
+                    <a v-bind:href="sub ? '/#/product/' + sub.id : ''">
+                      <img v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'" alt="">
+                      {{ sub ? sub.name : '小米9' }}
                     </a>
                   </li>
                 </ul>
@@ -41,18 +40,37 @@
             </li>
           </ul>
         </div>
-        <swiper v-bind:options="swiperOption">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="../assets/logo.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="../assets/logo.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="../assets/logo.png" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <!-- <swiper v-bind:options="swiperOption">
           <swiper-slide v-for="(item, index) in slideList" v-bind:key="index">
             <a v-bind:href="'/#/product/' + item.id"><img v-bind:src="item.img"></a>
           </swiper-slide>
           <div class="swiper-scrollbar"></div>
-          <!--                滚动条-->
           <div class="swiper-button-next"></div>
-          <!--                下一页-->
           <div class="swiper-button-prev"></div>
-          <!--                上一页-->
-
-        </swiper>
+        </swiper> -->
       </div>
       <div class="ads-box">
         <a v-bind:href="'/#/product/' + item.id" v-for="(item, index) in adsList" v-bind:key="index">
@@ -102,57 +120,57 @@
 <script>
 import ServiceBar from './../components/ServiceBar'
 import Modal from './../components/Modal'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/swiper.min.css'
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
+// import 'swiper/swiper.min.css'
 
 export default {
   name: 'myIndex',
   components: {
-    swiper,
-    swiperSlide,
+    // swiper,
+    // swiperSlide,
     ServiceBar,
     Modal
   },
   data() {
     return {
-      swiperOption: {
-        autoplay: true,
-        loop: true,
-        effect: 'cube',
-        cubeEffect: {
-          shadowOffset: 100,
-          shadowScale: 0.6
-        },
-        pagination: {
-          clickable: true
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }
-      },
-      slideList: [
-        {
-          id: '42',
-          img: '../assets/logo.png'
-        },
-        {
-          id: '45',
-          img: '../assets/logo.png'
-        },
-        {
-          id: '46',
-          img: '../assets/logo.png'
-        },
-        {
-          id: '',
-          img: '../assets/logo.png'
-        },
-        {
-          id: '',
-          img: '../assets/logo.png'
-        }
-      ],
+      // swiperOption: {
+      //   autoplay: true,
+      //   loop: true,
+      //   effect: 'cube',
+      //   cubeEffect: {
+      //     shadowOffset: 100,
+      //     shadowScale: 0.6
+      //   },
+      //   pagination: {
+      //     clickable: true
+      //   },
+      //   navigation: {
+      //     nextEl: '.swiper-button-next',
+      //     prevEl: '.swiper-button-prev',
+      //   }
+      // },
+      // slideList: [
+      //   {
+      //     id: '42',
+      //     img: '../assets/logo.png'
+      //   },
+      //   {
+      //     id: '45',
+      //     img: '../assets/logo.png'
+      //   },
+      //   {
+      //     id: '46',
+      //     img: '../assets/logo.png'
+      //   },
+      //   {
+      //     id: '',
+      //     img: '../assets/logo.png'
+      //   },
+      //   {
+      //     id: '',
+      //     img: '../assets/logo.png'
+      //   }
+      // ],
       menuList: [
         [
           {

@@ -12,7 +12,6 @@
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
-    "swiper": "^8.4.5",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
