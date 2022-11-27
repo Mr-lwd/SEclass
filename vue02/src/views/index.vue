@@ -62,11 +62,14 @@
           <div class="banner-left">
             <a href="javascript:;"><img src="../assets/logo.png" alt=""></a>
           </div>
-          <div class="list-box">
+          <div class="list-box" v-if = "goodList">
             <div class="list" v-for="(arr, i) in goodList" v-bind:key="i" >
               <div class="item" v-for="(item, j) in arr" v-bind:key="j">
-                <div class="item-img" v-if = "item.photos[0]?.url">
-                  <img src="{{item.photos[0].url}}" alt="">
+                <div class="item-img" v-if="item.photos[0]" >
+                  <img :src="item.photos[0].url"  alt="">
+                </div>
+                <div class="item-img" v-if="!item.photos[0]" >
+                  <img src="../assets/logo.png"  alt="">
                 </div>
                 <div class="item-info">
                   <h3>{{ item.goods.name }}</h3>
