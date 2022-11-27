@@ -43,9 +43,17 @@ export default {
       }
       axios.post('/user/login', data, config).then(
         (res) => {
-          console.log(res);
+         let token = res.data.data.Authorization;
+          this.$store.commit("setToken",token);
+          this.$router.push('/index');
+          alert("登录成功");
+
         }
-      )
+      ).catch(res=>
+      {
+        console.log(res);
+        alert("登录失败");
+      })
     }
   }
 };
