@@ -60,21 +60,23 @@
         <h2>热销商品</h2>
         <div class="wrapper" v-if="goodList">
           <div class="banner-left">
-            <a href="javascript:;"><img src="../assets/logo.png" alt=""></a>
+            <a href="javascript:;"><img src="../assets/logo.png" alt="" /></a>
           </div>
-          <div class="list-box" v-if = "goodList">
-            <div class="list" v-for="(arr, i) in goodList" v-bind:key="i" >
+          <div class="list-box" v-if="goodList">
+            <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
               <div class="item" v-for="(item, j) in arr" v-bind:key="j">
-                <div class="item-img" v-if="item.photos[0]" >
-                  <img :src="item.photos[0].url"  alt="">
+                <div class="item-img" v-if="item.photos[0]">
+                  <img :src="item.photos[0].url" alt="" />
                 </div>
-                <div class="item-img" v-if="!item.photos[0]" >
-                  <img src="../assets/logo.png"  alt="">
+                <div class="item-img" v-if="!item.photos[0]">
+                  <img src="../assets/logo.png" alt="" />
                 </div>
                 <div class="item-info">
                   <h3>{{ item.goods.name }}</h3>
                   <p>{{ item.goods.detail }}</p>
-                  <p class="price" @click="addCart(item.goods.id)">{{ item.goods.price }}元</p>
+                  <p class="price" @click="addCart(item.goods.id)">
+                    {{ item.goods.price }}元
+                  </p>
                 </div>
               </div>
             </div>
@@ -116,20 +118,26 @@ export default {
         },
       ],
       goodList: [],
-      showModal: false
-    }
+      showModal: false,
+    };
   },
   mounted() {
-      this.init()
+    this.init();
   },
   methods: {
     init() {
-      this.axios.get('/goods/list?pageNum=1&pageSize=10').then((res) => {
-        console.log(res.data.data.goodsList);
-        this.goodList = [res.data.data.goodsList.slice(0, 4), res.data.data.goodsList.slice(4, 8)];
-        console.log(this.goodList[1]);
-        // console.log(this.goodList[1][2].photos);
-      }).catch((e) => {})
+      this.axios
+        .get("/goods/list?pageNum=1&pageSize=10")
+        .then((res) => {
+          console.log(res.data.data.goodsList);
+          this.goodList = [
+            res.data.data.goodsList.slice(0, 4),
+            res.data.data.goodsList.slice(4, 8),
+          ];
+          console.log(this.goodList[1]);
+          // console.log(this.goodList[1][2].photos);
+        })
+        .catch((e) => {});
     },
     addCart(id) {
       // this.axios.post('/carts',{

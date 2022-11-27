@@ -1,5 +1,7 @@
 # vue02
 
+node version 18.11.0
+
 ## Project setup
 
 ```
