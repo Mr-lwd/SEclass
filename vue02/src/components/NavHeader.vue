@@ -137,6 +137,9 @@
     },
     methods:{
       login(){
+        this.$router.push({
+          name: "login"
+        })
       },
       getProductList(){
       //   this.getProductList();
