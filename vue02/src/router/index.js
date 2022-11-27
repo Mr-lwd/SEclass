@@ -4,6 +4,7 @@ import home from "../views/HomeView";
 import index from "../views/index";
 import LoginPage from "../views/Login";
 import RegisterPage from "../views/Register";
+import UserInfoPage from "@/views/userInfoPage";
 const routes = [
   {
     path: "/",
@@ -26,6 +27,11 @@ const routes = [
         name: "register",
         component: RegisterPage,
       },
+      {
+        path: "/userInfo",
+        name: "userInfo",
+        component:UserInfoPage,
+      }
     ],
   },
   {

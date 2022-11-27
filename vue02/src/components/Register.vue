@@ -1,14 +1,24 @@
 <template>
   <div>
-    <form class="row g-3"  v-on:submit.prevent>
+    <form class="row g-3" v-on:submit.prevent>
       <div class="col-md-3 RegisterForm">
         <div class="col-md-12">
           <label for="username" class="col-md-6 form-label">用户名</label>
-          <input type="uuid" class="form-control" id="username" v-model="UserName" />
+          <input
+            type="uuid"
+            class="form-control"
+            id="username"
+            v-model="UserName"
+          />
         </div>
         <div class="col-md-12">
           <label for="TrueName" class="col-md-6 form-label">实名</label>
-          <input type="uuid" class="form-control" id="TrueName" v-model="TrueName" />
+          <input
+            type="uuid"
+            class="form-control"
+            id="TrueName"
+            v-model="TrueName"
+          />
         </div>
         <div class="col-md-12">
           <label for="Tel" class="col-md-6 form-label">手机号</label>
@@ -16,12 +26,17 @@
         </div>
         <div class="col-md-12">
           <label for="Email" class="col-md-6 form-label">邮箱</label>
-          <input type="uuid" class="form-control" id="Email" v-model="MailNum" />
+          <input
+            type="uuid"
+            class="form-control"
+            id="Email"
+            v-model="MailNum"
+          />
         </div>
         <div class="col-md-12">
           <label for="sex" class="col-md-6 form-label">性别</label>
           <select class="form-select" id="sex" v-model="sex">
-            <option >男</option>
+            <option>男</option>
             <option>女</option>
           </select>
         </div>
@@ -31,14 +46,29 @@
         </div>
         <div class="col-md-12">
           <label for="inputPassword1" class="form-label">密码</label>
-          <input type="password" class="form-control" id="inputPassword1" v-model="password" />
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword1"
+            v-model="password"
+          />
         </div>
         <div class="col-md-12">
           <label for="inputPassword2" class="form-label">确认密码</label>
-          <input type="password" class="form-control" id="inputPassword2" v-model="checkPassword" />
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword2"
+            v-model="checkPassword"
+          />
         </div>
-        <div class="col-md-12" style="text-align: center;vertical-align: middle;">
-            <button class="btn btn-primary col-md-6" @click="register">注册</button>
+        <div
+          class="col-md-12"
+          style="text-align: center; vertical-align: middle"
+        >
+          <button class="btn btn-primary col-md-6" @click="register">
+            注册
+          </button>
         </div>
       </div>
     </form>
@@ -112,12 +142,14 @@ export default {
   },
 };
 </script>
-<style lang ="scss" scoped>
+<style lang="scss" scoped>
 .RegisterForm {
   margin: 0 auto;
   margin-top: 3vmin;
   width: 60vmin;
-  input,select,button{
+  input,
+  select,
+  button {
     margin-bottom: 3vmin;
   }
 }

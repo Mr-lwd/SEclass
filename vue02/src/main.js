@@ -9,7 +9,8 @@ import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import VueLazyload from "vue-lazyload";
-
+import { Cell, CellGroup } from "vant";
+import 'vant/lib/index.css';
 import axios from "axios";
 import VueAxios from "vue-axios";
 axios.defaults.baseURL = "/api";
@@ -19,4 +20,6 @@ const app = createApp(App)
   .use(VueAxios, axios)
   .use(VueLazyload)
   .use(router)
+  .use(Cell)
+  .use(CellGroup)
   .mount("#app");

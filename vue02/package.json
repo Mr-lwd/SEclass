@@ -13,6 +13,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "core-js": "^3.8.3",
+    "vant": "^4.0.0",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-lazyload": "^3.0.0-rc.2",

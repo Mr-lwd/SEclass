@@ -112,7 +112,11 @@ export default {
       //     this.goodList = res.goodsList;
       //   })
     },
-    goToUserInfo() {},
+    goToUserInfo() {
+      this.$router.push({
+        name:"userInfo"
+      })
+    },
     getCartCount() {},
     logout() {},
     goToCart() {},
