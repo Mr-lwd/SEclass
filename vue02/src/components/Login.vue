@@ -11,8 +11,8 @@
         <label for="inputPassword4" class="form-label">Password</label>
         <input type="password" class="form-control" id="inputPassword4" v-model="password">
       </div>
-      <div class="col-md-12">
-        <button class="btn btn-primary" @click="login">Sign in</button>
+      <div class="col-md-12" style="text-align: center;">
+        <button class="btn btn-primary col-md-4" @click="login">Sign in</button>
       </div>
     </form>
   </div>
@@ -46,7 +46,6 @@ export default {
           this.$store.commit("setToken",token);
           this.$router.push('/index');
           alert("登录成功");
-
         }
       ).catch(res=>
       {
@@ -62,6 +61,6 @@ export default {
 .loginForm {
   margin: 0 auto;
   width: 60vmin;
-  
+
 }
 </style>
