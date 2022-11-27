@@ -20,6 +20,9 @@
 </script>
 <style lang="scss" scoped>
   .footer{
+    a{
+      text-decoration: none;
+    }
     height:234px;
     border-top:4px solid #FF6600;
     background-color:#333333;

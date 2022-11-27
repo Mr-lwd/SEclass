@@ -162,6 +162,9 @@
   @import './../assets/scss/mixin.scss';
   @import './../assets/scss/config.scss';
   .header{
+    a{
+      text-decoration: none;
+    }
     .nav-topbar{
       height:39px;
       line-height:39px;

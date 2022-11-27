@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 50vmin">
+  <div class="loginForm">
     <form class="row g-3" v-on:submit.prevent>
       <div class="col-md-6">
         <label for="inputEmail4" class="col-md-6 form-label">用户名</label>
@@ -16,7 +16,6 @@
       </div>
     </form>
   </div>
-
 </template>
 
 <script>
@@ -59,6 +58,10 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.loginForm {
+  margin: 0 auto;
+  width: 60vmin;
+  
+}
 </style>
