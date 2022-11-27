@@ -10,8 +10,11 @@
                 <ul v-for="(item, i) in menuList" v-bind:key="i">
                   <li v-for="(sub, j) in item" v-bind:key="j">
                     <a v-bind:href="sub ? '/#/product/' + sub.id : ''">
-                      <img v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'" alt="">
-                      {{ sub ? sub.name : '小米9' }}
+                      <img
+                        v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'"
+                        alt=""
+                      />
+                      {{ sub ? sub.name : "小米9" }}
                     </a>
                   </li>
                 </ul>
@@ -50,13 +53,17 @@
         </swiper> -->
       </div>
       <div class="ads-box">
-        <a v-bind:href="'/#/product/' + item.id" v-for="(item, index) in adsList" v-bind:key="index">
-          <img v-lazy="item.img" alt="">
+        <a
+          v-bind:href="'/#/product/' + item.id"
+          v-for="(item, index) in adsList"
+          v-bind:key="index"
+        >
+          <img v-lazy="item.img" alt="" />
         </a>
       </div>
       <div class="banner">
         <a href="/#/product/30">
-          <img v-lazy="'/imgs/banner-1.png'" alt="">
+          <img v-lazy="'/imgs/banner-1.png'" alt="" />
         </a>
       </div>
     </div>
@@ -65,19 +72,23 @@
         <h2>手机</h2>
         <div class="wrapper">
           <div class="banner-left">
-            <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""></a>
+            <a href="/#/product/35"
+              ><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""
+            /></a>
           </div>
           <div class="list-box">
             <div class="list" v-for="(arr, i) in phoneList" v-bind:key="i">
               <div class="item" v-for="(item, j) in arr" v-bind:key="j">
                 <span v-bind:class="{ 'new-pro': j % 2 == 0 }">新品</span>
                 <div class="item-img">
-                  <img v-lazy="item.mainImage" alt="">
+                  <img v-lazy="item.mainImage" alt="" />
                 </div>
                 <div class="item-info">
                   <h3>{{ item.name }}</h3>
                   <p>{{ item.subtitle }}</p>
-                  <p class="price" @click="addCart(item.id)">{{ item.price }}元</p>
+                  <p class="price" @click="addCart(item.id)">
+                    {{ item.price }}元
+                  </p>
                 </div>
               </div>
             </div>
@@ -95,53 +106,61 @@
   </div>
 </template>
 <script>
-
 export default {
-  name: 'myIndex',
-  components: {
-  },
+  name: "myIndex",
+  components: {},
   data() {
     return {
       menuList: [
         [
           {
             id: 30,
-            img: '../assets/logo.png',
-            name: '小米CC9',
-          }, {
+            img: "../assets/logo.png",
+            name: "小米CC9",
+          },
+          {
             id: 31,
-            img: '../assets/logo.png',
-            name: '小米8青春版',
-          }, {
+            img: "../assets/logo.png",
+            name: "小米8青春版",
+          },
+          {
             id: 32,
-            img: '../assets/logo.png',
-            name: 'Redmi K20 Pro',
-          }, {
+            img: "../assets/logo.png",
+            name: "Redmi K20 Pro",
+          },
+          {
             id: 33,
-            img: '../assets/logo.png',
-            name: '移动4G专区',
-          }
+            img: "../assets/logo.png",
+            name: "移动4G专区",
+          },
         ],
-        [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
       ],
       adsList: [
         {
           id: 33,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 48,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 45,
-          img: '../assets/logo.png'
-        }, {
+          img: "../assets/logo.png",
+        },
+        {
           id: 47,
-          img: '../assets/logo.png'
-        }
+          img: "../assets/logo.png",
+        },
       ],
       phoneList: [],
-      showModal: false
-    }
+      showModal: false,
+    };
   },
   mounted() {
     // this.init();
@@ -169,13 +188,13 @@ export default {
     },
     goToCart() {
       // this.$router.push('/cart');
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style lang="scss">
-@import './../assets/scss/config.scss';
-@import './../assets/scss/mixin.scss';
+@import "./../assets/scss/config.scss";
+@import "./../assets/scss/mixin.scss";
 
 .index {
   .swiper-box {
@@ -204,8 +223,8 @@ export default {
               position: absolute;
               right: 30px;
               top: 17.5px;
-              content: ' ';
-              @include bgImg(10px, 15px, '../assets/logo.png');
+              content: " ";
+              @include bgImg(10px, 15px, "../assets/logo.png");
             }
           }
 
@@ -334,11 +353,11 @@ export default {
               color: $colorG;
 
               &.new-pro {
-                background-color: #7ECF68;
+                background-color: #7ecf68;
               }
 
               &.kill-pro {
-                background-color: #E82626;
+                background-color: #e82626;
               }
             }
 
@@ -364,14 +383,14 @@ export default {
               }
 
               .price {
-                color: #F20A0A;
+                color: #f20a0a;
                 font-size: $fontJ;
                 font-weight: bold;
                 cursor: pointer;
 
                 &:after {
-                  @include bgImg(22px, 22px, '../assets/logo.png');
-                  content: ' ';
+                  @include bgImg(22px, 22px, "../assets/logo.png");
+                  content: " ";
                   margin-left: 5px;
                   vertical-align: middle;
                 }

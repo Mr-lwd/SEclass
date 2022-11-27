@@ -1,32 +1,32 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import home from '../views/HomeView'
-import index from '../views/index'
-import LoginPage from '../views/Login'
-import RegisterPage from '../views/Register'
+import home from "../views/HomeView";
+import index from "../views/index";
+import LoginPage from "../views/Login";
+import RegisterPage from "../views/Register";
 const routes = [
   {
     path: "/",
     name: "home",
     component: home,
-    redirect:'/index',
-    children:[
+    redirect: "/index",
+    children: [
       {
-        path: '/index',
-        name: 'index',
+        path: "/index",
+        name: "index",
         component: index,
       },
       {
-        path: '/login',
-        name: 'login',
+        path: "/login",
+        name: "login",
         component: LoginPage,
       },
       {
-        path: '/register',
-        name: 'register',
+        path: "/register",
+        name: "register",
         component: RegisterPage,
-      }
-    ]
+      },
+    ],
   },
   {
     // path: "/about",

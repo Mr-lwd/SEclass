@@ -11,55 +11,82 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="!username" @click="register">注册</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
-          <a href="javascript:;" v-if="username" @click="goToUserInfo">{{username}}</a>
+          <a href="javascript:;" v-if="username" @click="goToUserInfo">{{
+            username
+          }}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="/#/order/list" v-if="username">我的订单</a>
-          <a href="javascript:;" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
-              class="badge bg-secondary">1111</span></a>
+          <a href="javascript:;" class="my-cart" @click="goToCart"
+            ><i class="bi bi-cart-fill"></i>购物车<span
+              class="badge bg-secondary"
+              >1111</span
+            ></a
+          >
         </div>
       </div>
-    </div>        
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" style="padding: 0 40vmin 0 40vmin;">
-    <i class="bi bi-shop" style="font-size: 6vmin;color: #FF6600;"></i>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" style= "font-size: 2vmin;margin-left: 2vmin;" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">首页</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">个人中心</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">消息列表</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="输入商品名称" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" style="background-color: #FF6600;">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
     </div>
-  </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid" style="padding: 0 40vmin 0 40vmin">
+        <i class="bi bi-shop" style="font-size: 6vmin; color: #ff6600"></i>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse"
+          style="font-size: 2vmin; margin-left: 2vmin"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">首页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">个人中心</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">消息列表</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="输入商品名称"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              style="background-color: #ff6600"
+            >
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
   </div>
 </template>
 <script>
 // import {mapState} from 'vuex'
 export default {
-  name: 'nav-header',
+  name: "nav-header",
   data() {
     return {
-      goodList: []
-    }
+      goodList: [],
+    };
   },
   computed: {
-    username(){
-     return this.$store.state.username;
+    username() {
+      return this.$store.state.username;
     },
     // // cartCount(){
     // //   return this.$store.state.cartCount;
@@ -67,62 +94,35 @@ export default {
     // ...mapState(['username'])
   },
 
-  mounted() {
-  },
+  mounted() {},
   methods: {
     login() {
       this.$router.push({
-        name: "login"
-      })
+        name: "login",
+      });
     },
-    computed:{
-      username(){
-        return this.$store.getters.myName;
-      },
-      /*cartCount(){
-        return this.$store.state.cartCount;
-      }*/
-      // ...mapState(['username','cartCount'])
+    register() {
+      this.$router.push({
+        name: "register",
+      });
     },
-    
-    mounted(){
-    },
-    methods:{
-      login(){
-        this.$router.push({
-          name: "login"
-        })
-      },
-      register()
-      {
-        this.$router.push({
-          name: "register"
-        })
-      },
-      getProductList(){
+    getProductList() {
       //   this.getProductList();
       //   this.axios.get('goods/list').then((res)=>{
       //     this.goodList = res.goodsList;
       //   })
-       },
-      goToUserInfo()
-      {
-
-      },
-      getCartCount(){
-      },
-      logout(){
-      },
-      goToCart(){
-      }
-    }
-  }
-}
+    },
+    goToUserInfo() {},
+    getCartCount() {},
+    logout() {},
+    goToCart() {},
+  },
+};
 </script>
 <style lang="scss">
-@import './../assets/scss/base.scss';
-@import './../assets/scss/mixin.scss';
-@import './../assets/scss/config.scss';
+@import "./../assets/scss/base.scss";
+@import "./../assets/scss/mixin.scss";
+@import "./../assets/scss/config.scss";
 
 .header {
   a {
@@ -133,26 +133,26 @@ export default {
     height: 39px;
     line-height: 39px;
     background-color: #333333;
-    color: #B0B0B0;
+    color: #b0b0b0;
 
     .container {
       @include flex();
 
       a {
         display: inline-block;
-        color: #B0B0B0;
+        color: #b0b0b0;
         margin-right: 17px;
       }
 
       .my-cart {
         width: 110px;
-        background-color: #FF6600;
+        background-color: #ff6600;
         text-align: center;
         color: #ffffff;
         margin-right: 0;
 
         .icon-cart {
-          @include bgImg(16px, 12px, '../assets/logo.png');
+          @include bgImg(16px, 12px, "../assets/logo.png");
           margin-right: 4px;
         }
       }
@@ -199,10 +199,10 @@ export default {
             height: 0;
             opacity: 0;
             overflow: hidden;
-            border-top: 1px solid #E5E5E5;
+            border-top: 1px solid #e5e5e5;
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
             z-index: 10;
-            transition: all .5s;
+            transition: all 0.5s;
             background-color: #ffffff;
 
             .product {
@@ -240,7 +240,7 @@ export default {
               }
 
               &:before {
-                content: ' ';
+                content: " ";
                 position: absolute;
                 top: 28px;
                 right: 0;
@@ -262,21 +262,21 @@ export default {
 
         .wrapper {
           height: 50px;
-          border: 1px solid #E0E0E0;
+          border: 1px solid #e0e0e0;
           display: flex;
           align-items: center;
 
           input {
             border: none;
             box-sizing: border-box;
-            border-right: 1px solid #E0E0E0;
+            border-right: 1px solid #e0e0e0;
             width: 264px;
             height: 50px;
             padding-left: 14px;
           }
 
           a {
-            @include bgImg(18px, 18px, '../assets/logo.png');
+            @include bgImg(18px, 18px, "../assets/logo.png");
             margin-left: 17px;
           }
         }

@@ -1,56 +1,57 @@
-@import './mixin.scss';
-.container{
+@import "./mixin.scss";
+.container {
   position: relative;
-  width:1226px;
-  margin-right:auto;
-  margin-left:auto;
+  width: 1226px;
+  margin-right: auto;
+  margin-left: auto;
 }
-a{
-  img{
-    width:100%;
+a {
+  img {
+    width: 100%;
     height: 100%;
   }
 }
-input{
+input {
   outline: none;
   box-sizing: border-box;
   font-size: 14px;
 }
-.fl{
+.fl {
   float: left;
 }
-.fr{
+.fr {
   float: right;
 }
-.clearfix:before,.clearfix:after{
-  content:' ';
-  display:table;
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
 }
-.clearfix:after{
+.clearfix:after {
   clear: both;
 }
 // 公共logo
-.header-logo{
-  display:inline-block;
-  width:55px;
-  height:55px;
-  background-color:#FF6600;
-  a{
-    display:inline-block;
-    width:110px;
-    height:55px;
-    &:before{
-      content:' ';
-      @include bgImg(55px,55px,'../assets/logo.png',55px);
-      transition:margin .2s;
+.header-logo {
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  background-color: #ff6600;
+  a {
+    display: inline-block;
+    width: 110px;
+    height: 55px;
+    &:before {
+      content: " ";
+      @include bgImg(55px, 55px, "../assets/logo.png", 55px);
+      transition: margin 0.2s;
     }
-    &:after{
-      content:' ';
-      @include bgImg(55px,55px,'../assets/logo.png',55px);
+    &:after {
+      content: " ";
+      @include bgImg(55px, 55px, "../assets/logo.png", 55px);
     }
-    &:hover:before{
-      margin-left:-55px;
-      transition:margin .2s;
+    &:hover:before {
+      margin-left: -55px;
+      transition: margin 0.2s;
     }
   }
 }

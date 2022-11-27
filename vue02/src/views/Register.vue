@@ -6,10 +6,8 @@
 import UserRegister from "@/components/Register";
 export default {
   name: "RegisterPage",
-  components: { UserRegister }
+  components: { UserRegister },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
