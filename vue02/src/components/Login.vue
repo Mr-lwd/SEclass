@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 50vmin">  <form class="row g-3">
+  <div style="width: 50vmin">  <form class="row g-3"  v-on:submit.prevent>
     <div class="col-md-6">
       <label for="inputEmail4" class="col-md-6 form-label">用户名</label>
       <div class="col-md-12">
@@ -31,11 +31,16 @@ export default {
   methods:{
     login()
     {
-      axios.post('/user/login',
-        {
-            nickname: this.username,
-            pwd: this.password
-        }).then(
+      var data = new FormData()
+      console.log(this.username)
+      data.append('nickName', this.username);
+      data.append('pwd', this.password);
+      let config = {
+        headers: {
+          'Content-Type': 'multipart/form-data '
+        }
+      }
+      axios.post('/user/login',data, config).then(
         (res)=>{
           console.log(res);
         }
