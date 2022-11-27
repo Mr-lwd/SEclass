@@ -9,8 +9,9 @@
           <a href="javascript:;">协议规则</a>
         </div>
         <div class="topbar-user">
-          <a href="javascript:;" v-if="username">{{ username }}</a>
+          <a href="javascript:;" v-if="!username" @click="register">注册</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" v-if="username" @click="goToUserInfo">{{username}}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="/#/order/list" v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
@@ -74,18 +75,46 @@ export default {
         name: "login"
       })
     },
-    getProductList() {
+    computed:{
+      username(){
+        return this.$store.getters.myName;
+      },
+      /*cartCount(){
+        return this.$store.state.cartCount;
+      }*/
+      // ...mapState(['username','cartCount'])
+    },
+    
+    mounted(){
+    },
+    methods:{
+      login(){
+        this.$router.push({
+          name: "login"
+        })
+      },
+      register()
+      {
+        this.$router.push({
+          name: "register"
+        })
+      },
+      getProductList(){
       //   this.getProductList();
       //   this.axios.get('goods/list').then((res)=>{
       //     this.goodList = res.goodsList;
       //   })
-    },
+       },
+      goToUserInfo()
+      {
 
-    getCartCount() {
-    },
-    logout() {
-    },
-    goToCart() {
+      },
+      getCartCount(){
+      },
+      logout(){
+      },
+      goToCart(){
+      }
     }
   }
 }

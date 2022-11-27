@@ -95,59 +95,13 @@
   </div>
 </template>
 <script>
-// import ServiceBar from './../components/ServiceBar'
-// import Modal from './../components/Modal'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper'
-// import 'swiper/swiper.min.css'
 
 export default {
   name: 'myIndex',
   components: {
-    // swiper,
-    // swiperSlide,
-    // ServiceBar,
-    // Modal
   },
   data() {
     return {
-      // swiperOption: {
-      //   autoplay: true,
-      //   loop: true,
-      //   effect: 'cube',
-      //   cubeEffect: {
-      //     shadowOffset: 100,
-      //     shadowScale: 0.6
-      //   },
-      //   pagination: {
-      //     clickable: true
-      //   },
-      //   navigation: {
-      //     nextEl: '.swiper-button-next',
-      //     prevEl: '.swiper-button-prev',
-      //   }
-      // },
-      // slideList: [
-      //   {
-      //     id: '42',
-      //     img: '../assets/logo.png'
-      //   },
-      //   {
-      //     id: '45',
-      //     img: '../assets/logo.png'
-      //   },
-      //   {
-      //     id: '46',
-      //     img: '../assets/logo.png'
-      //   },
-      //   {
-      //     id: '',
-      //     img: '../assets/logo.png'
-      //   },
-      //   {
-      //     id: '',
-      //     img: '../assets/logo.png'
-      //   }
-      // ],
       menuList: [
         [
           {

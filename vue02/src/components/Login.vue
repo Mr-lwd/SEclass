@@ -11,8 +11,8 @@
         <label for="inputPassword4" class="form-label">Password</label>
         <input type="password" class="form-control" id="inputPassword4" v-model="password">
       </div>
-      <div class="col-md-12" style="text-align: center;">
-        <button class="btn btn-primary col-md-4" @click="login">Sign in</button>
+      <div class="col-md-12" style="text-align: center; ">
+        <button class="btn btn-primary col-md-6" @click="login">Sign in</button>
       </div>
     </form>
   </div>
@@ -43,7 +43,13 @@ export default {
       axios.post('/user/login', data, config).then(
         (res) => {
          let token = res.data.data.Authorization;
-          this.$store.commit("setToken",token);
+         let name = res.data.data.nickName;
+         console.log(name)
+          this.$store.commit("setmyToken",token, name);
+         console.log(this.$store.getters.myName);
+         console.log(this.$store.state.username);
+          console.log(this.$store.state.token);
+          console.log(this.$store.getters.myToken);
           this.$router.push('/index');
           alert("登录成功");
         }
