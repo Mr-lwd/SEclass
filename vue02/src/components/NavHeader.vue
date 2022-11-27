@@ -120,7 +120,7 @@
     name:'nav-header',
     data(){
       return {
-        // phoneList:[]
+        goodList:[]
       }
     },
     computed:{
@@ -139,7 +139,12 @@
       login(){
       },
       getProductList(){
-      },
+      //   this.getProductList();
+      //   this.axios.get('goods/list').then((res)=>{
+      //     this.goodList = res.goodsList;
+      //   })
+       },
+
       getCartCount(){
       },
       logout(){
