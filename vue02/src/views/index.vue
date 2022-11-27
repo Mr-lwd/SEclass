@@ -40,29 +40,6 @@
             </li>
           </ul>
         </div>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="../assets/logo.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../assets/logo.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../assets/logo.png" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
         <!-- <swiper v-bind:options="swiperOption">
           <swiper-slide v-for="(item, index) in slideList" v-bind:key="index">
             <a v-bind:href="'/#/product/' + item.id"><img v-bind:src="item.img"></a>
@@ -108,18 +85,18 @@
         </div>
       </div>
     </div>
-    <service-bar></service-bar>
+    <!-- <service-bar></service-bar>
     <modal title="提示" sureText="查看购物车" btnType="1" modalType="middle" v-bind:showModal="showModal"
       v-on:submit="goToCart" v-on:cancel="showModal = false">
       <template v-slot:body>
         <p>商品添加成功！</p>
       </template>
-    </modal>
+    </modal> -->
   </div>
 </template>
 <script>
-import ServiceBar from './../components/ServiceBar'
-import Modal from './../components/Modal'
+// import ServiceBar from './../components/ServiceBar'
+// import Modal from './../components/Modal'
 // import { swiper, swiperSlide } from 'vue-awesome-swiper'
 // import 'swiper/swiper.min.css'
 
@@ -128,8 +105,8 @@ export default {
   components: {
     // swiper,
     // swiperSlide,
-    ServiceBar,
-    Modal
+    // ServiceBar,
+    // Modal
   },
   data() {
     return {
