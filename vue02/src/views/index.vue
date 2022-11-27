@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="container">
-      <div class="swiper-box">
+      <!-- <div class="swiper-box">
         <div class="nav-menu">
           <ul class="menu-wrap">
             <li class="menu-item">
@@ -40,44 +40,35 @@
             </li>
           </ul>
         </div>
-        <!-- <swiper v-bind:options="swiperOption">
-          <swiper-slide v-for="(item, index) in slideList" v-bind:key="index">
-            <a v-bind:href="'/#/product/' + item.id"><img v-bind:src="item.img"></a>
-          </swiper-slide>
-          <div class="swiper-scrollbar"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </swiper> -->
-      </div>
-      <div class="ads-box">
+      </div> -->
+      <!-- <div class="ads-box">
         <a v-bind:href="'/#/product/' + item.id" v-for="(item, index) in adsList" v-bind:key="index">
           <img v-lazy="item.img" alt="">
         </a>
-      </div>
-      <div class="banner">
+      </div> -->
+      <!-- <div class="banner">
         <a href="/#/product/30">
           <img v-lazy="'/imgs/banner-1.png'" alt="">
         </a>
-      </div>
+      </div> -->
     </div>
     <div class="product-box">
       <div class="container">
-        <h2>手机</h2>
-        <div class="wrapper">
+        <h2>热销商品</h2>
+        <div class="wrapper" v-if="goodList">
           <div class="banner-left">
-            <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""></a>
+            <a href="javascript:;"><img src="../assets/logo.png" alt=""></a>
           </div>
           <div class="list-box">
-            <div class="list" v-for="(arr, i) in phoneList" v-bind:key="i">
+            <div class="list" v-for="(arr, i) in goodList" v-bind:key="i" >
               <div class="item" v-for="(item, j) in arr" v-bind:key="j">
-                <span v-bind:class="{ 'new-pro': j % 2 == 0 }">新品</span>
-                <div class="item-img">
-                  <img v-lazy="item.mainImage" alt="">
+                <div class="item-img" v-if = "item.photos[0]?.url">
+                  <img src="{{item.photos[0].url}}" alt="">
                 </div>
                 <div class="item-info">
-                  <h3>{{ item.name }}</h3>
-                  <p>{{ item.subtitle }}</p>
-                  <p class="price" @click="addCart(item.id)">{{ item.price }}元</p>
+                  <h3>{{ item.goods.name }}</h3>
+                  <p>{{ item.goods.detail }}</p>
+                  <p class="price" @click="addCart(item.goods.id)">{{ item.goods.price }}元</p>
                 </div>
               </div>
             </div>
@@ -102,28 +93,6 @@ export default {
   },
   data() {
     return {
-      menuList: [
-        [
-          {
-            id: 30,
-            img: '../assets/logo.png',
-            name: '小米CC9',
-          }, {
-            id: 31,
-            img: '../assets/logo.png',
-            name: '小米8青春版',
-          }, {
-            id: 32,
-            img: '../assets/logo.png',
-            name: 'Redmi K20 Pro',
-          }, {
-            id: 33,
-            img: '../assets/logo.png',
-            name: '移动4G专区',
-          }
-        ],
-        [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]
-      ],
       adsList: [
         {
           id: 33,
@@ -139,24 +108,21 @@ export default {
           img: '../assets/logo.png'
         }
       ],
-      phoneList: [],
+      goodList: [],
       showModal: false
     }
   },
   mounted() {
-    // this.init();
+      this.init()
   },
   methods: {
     init() {
-      // this.axios.get('/products',{
-      //   params:{
-      //     categoryId:100012,
-      //     pageSize:14
-      //   }
-      // }).then((res)=>{
-      //   res.list = res.list.slice(6,14);
-      //   this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
-      // })
+      this.axios.get('/goods/list?pageNum=1&pageSize=10').then((res) => {
+        console.log(res.data.data.goodsList);
+        this.goodList = [res.data.data.goodsList.slice(0, 4), res.data.data.goodsList.slice(4, 8)];
+        console.log(this.goodList[1]);
+        // console.log(this.goodList[1][2].photos);
+      }).catch((e) => {})
     },
     addCart(id) {
       // this.axios.post('/carts',{
