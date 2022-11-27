@@ -23,7 +23,7 @@ export default createStore({
     },
     setmyName(state, myName)
     {
-      state.token = myName;
+      state.username = myName;
     },
     logout(state)
     {

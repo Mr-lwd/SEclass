@@ -58,13 +58,13 @@ export default {
     }
   },
   computed: {
-    // is_login(){
-    //   return this.$store.state.is_login;
-    // },
+    username(){
+     return this.$store.state.username;
+    },
     // // cartCount(){
     // //   return this.$store.state.cartCount;
 
-    // ...mapState(['is_login'])
+    // ...mapState(['username'])
   },
 
   mounted() {

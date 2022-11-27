@@ -42,13 +42,13 @@ export default {
       }
       axios.post('/user/login', data, config).then(
         (res) => {
-         let token = res.data.data.Authorization;
-         let name = res.data.data.nickName;
-         console.log(name)
+          let token = res.data.data.Authorization;
+          let name = res.data.data.nickName;
+          console.log(name)
           this.$store.commit("setmyToken",token);
           this.$store.commit("setmyName",name);
-         console.log(this.$store.getters.myName);
-         console.log(this.$store.state.username);
+          console.log(this.$store.getters.myName);
+          console.log(this.$store.state.username);
           console.log(this.$store.state.token);
           console.log(this.$store.getters.myToken);
           this.$router.push('/index');
