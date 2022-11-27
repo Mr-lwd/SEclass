@@ -53,7 +53,6 @@ export default {
           console.log(this.$store.getters.myToken);
           this.$router.push('/index');
           alert("登录成功");
-
         }
       ).catch(res=>
       {
@@ -69,6 +68,6 @@ export default {
 .loginForm {
   margin: 0 auto;
   width: 60vmin;
-  
+
 }
 </style>
