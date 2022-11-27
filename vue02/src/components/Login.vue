@@ -3,14 +3,12 @@
     <form class="row g-3" v-on:submit.prevent>
       <div class="col-md-6">
         <label for="inputEmail4" class="col-md-6 form-label">用户名</label>
-        <div class="col-md-12">
           <input
             type="uuid"
             class="form-control"
             id="inputEmail4"
             v-model="username"
           />
-        </div>
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Password</label>

@@ -1,89 +1,45 @@
 <template>
-  <div class="RegisterForm">
-    <form class="row g-3" v-on:submit.prevent>
-      <div class="col-md-6">
-        <label for="username" class="col-md-6 form-label">用户名</label>
+  <div>
+    <form class="row g-3"  v-on:submit.prevent>
+      <div class="col-md-3 RegisterForm">
         <div class="col-md-12">
-          <input
-            type="uuid"
-            class="form-control"
-            id="username"
-            v-model="UserName"
-          />
+          <label for="username" class="col-md-6 form-label">用户名</label>
+          <input type="uuid" class="form-control" id="username" v-model="UserName" />
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="TrueName" class="col-md-6 form-label">实名</label>
         <div class="col-md-12">
-          <input
-            type="uuid"
-            class="form-control"
-            id="TrueName"
-            v-model="TrueName"
-          />
+          <label for="TrueName" class="col-md-6 form-label">实名</label>
+          <input type="uuid" class="form-control" id="TrueName" v-model="TrueName" />
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="Tel" class="col-md-6 form-label">手机号</label>
         <div class="col-md-12">
+          <label for="Tel" class="col-md-6 form-label">手机号</label>
           <input type="uuid" class="form-control" id="Tel" v-model="TelNum" />
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="Email" class="col-md-6 form-label">邮箱</label>
         <div class="col-md-12">
-          <input
-            type="uuid"
-            class="form-control"
-            id="Email"
-            v-model="MailNum"
-          />
+          <label for="Email" class="col-md-6 form-label">邮箱</label>
+          <input type="uuid" class="form-control" id="Email" v-model="MailNum" />
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="sex" class="col-md-6 form-label">性别</label>
         <div class="col-md-12">
-          <select class="form-control" id="sex" v-model="sex">
-            <option>男</option>
+          <label for="sex" class="col-md-6 form-label">性别</label>
+          <select class="form-select" id="sex" v-model="sex">
+            <option >男</option>
             <option>女</option>
           </select>
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="model" class="col-md-6 form-label">角色</label>
         <div class="col-md-12">
-          <select class="form-control" id="model" v-model="model">
-            <option>用户</option>
-            <option>商家</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="IDNum" class="col-md-6 form-label">身份证号</label>
-        <div class="col-md-12">
+          <label for="IDNum" class="col-md-6 form-label">身份证号</label>
           <input type="uuid" class="form-control" id="IDNum" v-model="IDNum" />
         </div>
-      </div>
-      <div class="col-md-6">
-        <label for="inputPassword1" class="form-label">密码</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inputPassword1"
-          v-model="password"
-        />
-      </div>
-      <div class="col-md-6">
-        <label for="inputPassword2" class="form-label">确认密码</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inputPassword2"
-          v-model="checkPassword"
-        />
-      </div>
-      <div class="col-md-12" style="text-align: center">
-        <button class="btn btn-primary col-md-6" @click="register">注册</button>
+        <div class="col-md-12">
+          <label for="inputPassword1" class="form-label">密码</label>
+          <input type="password" class="form-control" id="inputPassword1" v-model="password" />
+        </div>
+        <div class="col-md-12">
+          <label for="inputPassword2" class="form-label">确认密码</label>
+          <input type="password" class="form-control" id="inputPassword2" v-model="checkPassword" />
+        </div>
+        <div class="col-md-12" style="text-align: center;vertical-align: middle;">
+            <button class="btn btn-primary col-md-6" @click="register">注册</button>
+        </div>
       </div>
     </form>
   </div>
@@ -156,5 +112,13 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
+<style lang ="scss" scoped>
+.RegisterForm {
+  margin: 0 auto;
+  margin-top: 3vmin;
+  width: 60vmin;
+  input,select,button{
+    margin-bottom: 3vmin;
+  }
+}
+</style>
