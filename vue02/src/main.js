@@ -13,6 +13,7 @@ import { Cell, CellGroup } from "vant";
 import 'vant/lib/index.css';
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VueCookies from 'vue-cookies'
 axios.defaults.baseURL = "/api";
 
 const app = createApp(App)
@@ -22,4 +23,5 @@ const app = createApp(App)
   .use(router)
   .use(Cell)
   .use(CellGroup)
+  .use(VueCookies)
   .mount("#app");

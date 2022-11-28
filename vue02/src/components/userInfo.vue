@@ -32,10 +32,44 @@ export default {
   methods:{
   },
   mounted(){
-    if(this.$store.getters.myToken != null)
+    console.log(this.$cookies.get("token"))
+    if(this.$store.getters.myToken == '' && this.$cookies.get("token") != null)
+    {
+      let tokenx = this.$cookies.get("token");
+      this.$store.commit("setmyToken", tokenx);
+      let data = new FormData();
+      let ttoken = this.$store.getters.myToken;
+      console.log("aaa")
+      console.log(tokenx)
+      console.log(ttoken)
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.post("/user/info",data,config).then(res=>{
+        console.log(res.data.data.user);
+        let tmp = res.data.data.user;
+        this.UserName = tmp.nickName;
+        this.$store.commit("setmyName", this.UserName);
+        this.TrueName = tmp.name;
+        this.password = tmp.pwd;
+        this.sex = tmp.sex == 1?"男":"女";
+        this.TelNum = tmp.phone;
+        this.MailNum = tmp.mail;
+        this.model = tmp.role == 2?"用户":"商家";
+        this.IDNum = tmp.idCard;
+      }).catch(err=>{
+        console.log(err);
+      })
+    }
+    if(this.$store.getters.myToken != '')
     {
       let data = new FormData();
       let ttoken = this.$store.getters.myToken;
+      console.log("test");
+      console.log(this.$store.getters.myToken);
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
@@ -43,9 +77,8 @@ export default {
         },
       };
       axios.post("/user/info",data,config).then(res=>{
-        console.log(res.data.data.user);
+        console.log(res);
         let tmp = res.data.data.user;
-
         this.UserName = tmp.nickName;
         this.TrueName = tmp.name;
         this.password = tmp.pwd;

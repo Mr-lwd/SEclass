@@ -55,10 +55,8 @@ export default {
           console.log(name);
           this.$store.commit("setmyToken", token);
           this.$store.commit("setmyName", name);
-          console.log(this.$store.getters.myName);
-          console.log(this.$store.state.username);
-          console.log(this.$store.state.token);
-          console.log(this.$store.getters.myToken);
+          this.$cookies.set("token", token, "1D");
+          console.log(token);
           this.$router.push("/index");
           alert("登录成功");
         })

@@ -16,6 +16,7 @@
     "vant": "^4.0.0",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
+    "vue-cookies": "^1.8.2",
     "vue-lazyload": "^3.0.0-rc.2",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
