@@ -18,6 +18,8 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 axios.defaults.baseURL = "/api";
 
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+
 const app = createApp(App)
   .use(store)
   .use(ElementPlus)
@@ -26,5 +28,10 @@ const app = createApp(App)
   .use(router)
   .use(Cell)
   .use(CellGroup)
-  .use(VueCookies)
-  .mount("#app");
+  .use(VueCookies);
+
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
+
+  app.mount("#app");
