@@ -42,7 +42,8 @@ const routes = [
         path: "/ShopCar",
         name:"shopCar",
         component: shopCart
-      }
+      },
+
     ],
   },
   {
