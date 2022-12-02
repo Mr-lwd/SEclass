@@ -14,10 +14,13 @@ import 'vant/lib/index.css';
 import axios from "axios";
 import VueAxios from "vue-axios";
 import VueCookies from 'vue-cookies'
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 axios.defaults.baseURL = "/api";
 
 const app = createApp(App)
   .use(store)
+  .use(ElementPlus)
   .use(VueAxios, axios)
   .use(VueLazyload)
   .use(router)

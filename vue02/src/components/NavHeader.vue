@@ -124,7 +124,9 @@ export default {
     },
     getCartCount() {},
     logout() {},
-    goToCart() {},
+    goToCart() {
+      this.$router.push("/ShopCar");
+    },
   },
 };
 </script>
