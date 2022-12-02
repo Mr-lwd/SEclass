@@ -5,7 +5,7 @@
                        :before-upload="beforeUpload" :file-list="fileList" :http-request="Myupload" list-type="picture-card"
                        action="#" limit="4" :class="{ disabled: fileComputed }">
                 <el-icon>
-                    <Plus/>
+                    <Plus />
                 </el-icon>
             </el-upload>
             <!-- 进度条 -->
@@ -21,25 +21,25 @@
             <el-form label-width="120px" style="width: 70%;margin: 0 auto;">
                 <el-form-item label="商品名称">
                     <el-col :span="18">
-                        <el-input v-model="good.goodname" />
+                        <el-input v-model="good.name" />
                     </el-col>
                 </el-form-item>
                 <el-form-item label="商品价格">
-                    <el-input-number v-model="good.price" :precision="2" :step="2" :min="0" :max="9000" />
+                    <el-input-number v-model="good.price" :precision="2" :step="20" :min="0" :max="999999" />
                 </el-form-item>
                 <el-form-item label="销量">
                     <el-col :span="12">
-                        <el-input-number v-model="good.sale" :step="2" :min="0" :max="9000" />
+                        <el-input-number v-model="good.sale" :step="10" :min="0" :max="9999" />
                     </el-col>
                 </el-form-item>
                 <el-form-item label="库存">
-                    <el-input-number v-model="good.store" :step="2" :min="0" :max="9000" />
+                    <el-input-number v-model="good.store" :step="10" :min="1" :max="9999" />
                 </el-form-item>
                 <el-form-item style="width: 60vmin;" label="详细描述">
                     <el-input v-model="good.detail" type="textarea" autosize />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">发布</el-button>
+                    <el-button type="primary" @click="addGood">发布</el-button>
                     <el-button>取消</el-button>
                 </el-form-item>
             </el-form>
@@ -59,17 +59,26 @@ export default {
     data() {
         return {
             good: {
-                goodname: '',
-                price: '',
-                detail: ''
+                name: '',
+                price: 0,
+                detail: '',
+                store: 0,
+                sale: 0,
             },
             fileList: [],
             showDialog: false, // 控制图片的显示或者隐藏
             imgUrl: '', // 存储点击的图片地址
             currentFileUid: '', // 用一个变量 记住当前上传的图片id
             percent: 0,
-            showPercent: false // 默认不显示进度条
+            showPercent: false, // 默认不显示进度条
+            tokenx: '',
         };
+    },
+    mounted() {
+        let tokenx = this.$cookies.get("token");
+        this.$store.commit("setmyToken", tokenx);
+        let ttoken = this.$store.getters.myToken;
+        console.log(ttoken)
     },
     computed: {
         // 设定一个计算属性 判断是否已经上传完了一张
@@ -168,6 +177,19 @@ export default {
             this.showPercent = true
             return true
         },
+        addGood() {
+            let config = {
+                headers: {
+                    "Content-Type": "multipart/form-data ",
+                    "Authorization": this.tokenx,
+                },
+            };
+            this.axios.post('/goods/add', this.good, config).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 }
 </script>

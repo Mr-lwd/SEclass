@@ -46,10 +46,13 @@
         >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" @click="gotoIndex" aria-current="page" href="#">首页</a>
+              <a class="nav-link" @click="gotoIndex" aria-current="page" href="#">首页</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">个人中心</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">消息列表</a>
@@ -94,7 +97,9 @@ export default {
     // ...mapState(['username'])
   },
 
-  mounted() {},
+  mounted() {
+    
+  },
   methods: {
     login() {
       this.$router.push({
@@ -121,6 +126,9 @@ export default {
       this.$router.push({
         name:"home"
       })
+    },
+    gotoUpload(){
+      this.$router.push('/upload')
     },
     getCartCount() {},
     logout() {},
