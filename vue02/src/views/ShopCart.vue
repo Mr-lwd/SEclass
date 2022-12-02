@@ -3,16 +3,21 @@
   <div>
     <el-table
       ref="multipleTableRef"
-      :data="tableData"
+      :data="resList"
       style="width: 100%"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" />
-      <el-table-column label="Date" width="120">
-        <template #default="scope">{{ scope.row.date }}</template>
+      <el-table-column property="goodsId" label="商品ID" width="120" />
+      <el-table-column property="num" label="商品数" show-overflow-tooltip />
+      <el-table-column property="num" label="商品单价" show-overflow-tooltip />
+      <el-table-column property="num" label="总价" show-overflow-tooltip />
+      <el-table-column label="选择" >
+        <template #default="scope">
+          <el-button @click="console.log(scope.row)">详细</el-button>
+          <el-button @click="console.log(scope.row)">删除</el-button>
+        </template>
       </el-table-column>
-      <el-table-column property="name" label="Name" width="120" />
-      <el-table-column property="address" label="Address" show-overflow-tooltip />
     </el-table>
   </div>
 </template>
@@ -89,7 +94,7 @@ export default {
       },
     };
     axios.get(url,data,config).then(res=>{
-      console.log(res.data.data.shopList);
+      console.log(res.data.data);
       let tmp = [];
       let Myreslist = res.data.data.shopList
       let len = Myreslist.length;
