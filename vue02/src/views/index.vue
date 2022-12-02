@@ -22,6 +22,7 @@
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
+                  <el-icon @click="goToCart(item.goods.id)"><ShoppingCart /></el-icon>
                 </div>
               </div>
             </div>
@@ -32,6 +33,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "myIndex",
   components: {},
@@ -80,7 +83,29 @@ export default {
     addCart(id) {
 
     },
-    goToCart() {
+    goToCart(id) {
+      console.log(id);
+      let url = "shop/add"
+      let data = new FormData();
+      data.append("goodsId",id);
+      //后面加一个加减
+      data.append("num",1);
+      let tokenx = this.$cookies.get("token");
+      this.$store.commit("setmyToken", tokenx);
+      let ttoken = this.$store.getters.myToken;
+      console.log(ttoken)
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.post(url,data,config).then(res=>{
+        console.log(res);
+      }).catch(err=>{
+        console.log(err);
+      })
+
     },
   },
 };

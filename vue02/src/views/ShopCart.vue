@@ -94,9 +94,9 @@ export default {
       },
     };
     axios.get(url,data,config).then(res=>{
-      console.log(res.data.data);
+      console.log(res);
       let tmp = [];
-      let Myreslist = res.data.data.shopList
+      let Myreslist = res.data.data.shopList;
       let len = Myreslist.length;
       for (let i = 0; i < len; i++) {
         tmp.push(Myreslist[i]);
