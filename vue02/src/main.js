@@ -17,7 +17,6 @@ import VueCookies from 'vue-cookies'
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 axios.defaults.baseURL = "/api";
-
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 const app = createApp(App)
