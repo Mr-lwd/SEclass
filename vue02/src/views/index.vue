@@ -1,60 +1,5 @@
 <template>
   <div class="index">
-    <div class="container">
-      <!-- <div class="swiper-box">
-        <div class="nav-menu">
-          <ul class="menu-wrap">
-            <li class="menu-item">
-              <a href="javascript:;">手机 电话卡</a>
-              <div class="children">
-                <ul v-for="(item, i) in menuList" v-bind:key="i">
-                  <li v-for="(sub, j) in item" v-bind:key="j">
-                    <a v-bind:href="sub ? '/#/product/' + sub.id : ''">
-                      <img
-                        v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'"
-                        alt=""
-                      />
-                      {{ sub ? sub.name : "小米9" }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">电视 盒子</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">笔记本 平板</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">家电 插线板</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">出行 穿戴</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">智能 路由器</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">电源 配件</a>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:;">生活 箱包</a>
-            </li>
-          </ul>
-        </div>
-      </div> -->
-      <!-- <div class="ads-box">
-        <a v-bind:href="'/#/product/' + item.id" v-for="(item, index) in adsList" v-bind:key="index">
-          <img v-lazy="item.img" alt="">
-        </a>
-      </div> -->
-      <!-- <div class="banner">
-        <a href="/#/product/30">
-          <img v-lazy="'/imgs/banner-1.png'" alt="" />
-        </a>
-      </div> -->
-    </div>
     <div class="product-box">
       <div class="container">
         <h2>热销商品</h2>
@@ -84,13 +29,6 @@
         </div>
       </div>
     </div>
-    <!-- <service-bar></service-bar>
-    <modal title="提示" sureText="查看购物车" btnType="1" modalType="middle" v-bind:showModal="showModal"
-      v-on:submit="goToCart" v-on:cancel="showModal = false">
-      <template v-slot:body>
-        <p>商品添加成功！</p>
-      </template>
-    </modal> -->
   </div>
 </template>
 <script>
@@ -99,24 +37,24 @@ export default {
   components: {},
   data() {
     return {
-      adsList: [
-        {
-          id: 33,
-          img: "../assets/logo.png",
-        },
-        {
-          id: 48,
-          img: "../assets/logo.png",
-        },
-        {
-          id: 45,
-          img: "../assets/logo.png",
-        },
-        {
-          id: 47,
-          img: "../assets/logo.png",
-        },
-      ],
+      // adsList: [
+      //   {
+      //     id: 33,
+      //     img: "../assets/logo.png",
+      //   },
+      //   {
+      //     id: 48,
+      //     img: "../assets/logo.png",
+      //   },
+      //   {
+      //     id: 45,
+      //     img: "../assets/logo.png",
+      //   },
+      //   {
+      //     id: 47,
+      //     img: "../assets/logo.png",
+      //   },
+      // ],
       goodList: [],
       showModal: false,
     };
@@ -140,16 +78,9 @@ export default {
         .catch((e) => {});
     },
     addCart(id) {
-      // this.axios.post('/carts',{
-      //   productId:id,
-      //   selected: true
-      // }).then((res)=>{
-      //   this.showModal = true;
-      //   this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
-      // });
+
     },
     goToCart() {
-      // this.$router.push('/cart');
     },
   },
 };

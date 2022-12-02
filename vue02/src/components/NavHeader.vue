@@ -46,7 +46,7 @@
         >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">首页</a>
+              <a class="nav-link active" @click="gotoIndex" aria-current="page" href="#">首页</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">个人中心</a>
@@ -115,6 +115,11 @@ export default {
     goToUserInfo() {
       this.$router.push({
         name:"userInfo"
+      })
+    },
+    gotoIndex(){
+      this.$router.push({
+        name:"home"
       })
     },
     getCartCount() {},

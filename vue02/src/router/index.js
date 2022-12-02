@@ -4,7 +4,7 @@ import home from "../views/HomeView";
 import index from "../views/index";
 import LoginPage from "../views/Login";
 import RegisterPage from "../views/Register";
-import UserInfoPage from "@/views/userInfoPage";
+import UserInfoPage from "../views/userInfoPage";
 const routes = [
   {
     path: "/",
@@ -35,12 +35,6 @@ const routes = [
     ],
   },
   {
-    // path: "/about",
-    // name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: About
   },
 ];
 
