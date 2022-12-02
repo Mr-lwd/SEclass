@@ -29,6 +29,11 @@ const routes = [
         component: RegisterPage,
       },
       {
+        path: "/upload",
+        name: "upload",
+        component: () => import("@/components/upload.vue"),
+      },
+      {
         path: "/userInfo",
         name: "userInfo",
         component:UserInfoPage,
