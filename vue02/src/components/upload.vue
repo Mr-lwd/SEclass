@@ -2,8 +2,8 @@
     <div style="padding-top:5vmin;margin: 0 auto;width: 800px;">
         <div style="margin-bottom: 5vmin;text-align: center;">
             <el-upload :on-preview="preview" :on-remove="handleRemove" :on-change="changeFile"
-                :before-upload="beforeUpload" :file-list="fileList" :http-request="upload" list-type="picture-card"
-                action="#" limit="4" :class="{ disabled: fileComputed }">
+                       :before-upload="beforeUpload" :file-list="fileList" :http-request="Myupload" list-type="picture-card"
+                       action="#" limit="4" :class="{ disabled: fileComputed }">
                 <el-icon>
                     <Plus/>
                 </el-icon>
