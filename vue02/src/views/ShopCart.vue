@@ -14,20 +14,21 @@
       <el-table-column property="name" label="Name" width="120" />
       <el-table-column property="address" label="Address" show-overflow-tooltip />
     </el-table>
-    <el-button @click="getAllSelected">sss</el-button>
   </div>
 </template>
 
 <script>
 import { ElTable } from 'element-plus'
 import { getCurrentInstance, ref, toRefs } from "vue";
+import axios from "axios";
 
 export default {
   name: "ShopCart",
-  data(){
-    return{
-      multipleSelection:null,
-      tableData:[
+  data() {
+    return {
+      multipleSelection: null,
+      resList : null,
+      tableData: [
         {
           date: '2016-05-03',
           name: 'Tom',
@@ -72,21 +73,41 @@ export default {
     console.log(internalInstance);
     let ultipleTabInstance = toRefs(internalInstance.refs.multipleTableRef);
     console.log(ultipleTabInstance);
-    this.tableData.forEach(row=>{
-      ultipleTabInstance.toggleRowSelection.value(row,undefined);
+    this.tableData.forEach(row => {
+      ultipleTabInstance.toggleRowSelection.value(row, undefined);
+    })
+    let url = "shop/list"
+    let data = new FormData();
+    let tokenx = this.$cookies.get("token");
+    this.$store.commit("setmyToken", tokenx);
+    let ttoken = this.$store.getters.myToken;
+    console.log(ttoken)
+    let config = {
+      headers: {
+        "Content-Type": "multipart/form-data ",
+        "Authorization": tokenx,
+      },
+    };
+    axios.get(url,data,config).then(res=>{
+      console.log(res.data.data.shopList);
+      let tmp = [];
+      let Myreslist = res.data.data.shopList
+      let len = Myreslist.length;
+      for (let i = 0; i < len; i++) {
+        tmp.push(Myreslist[i]);
+      }
+      this.resList = tmp;
+    }).catch(err=>{
+      console.log(err);
     })
   },
-  methods:{
-    handleSelectionChange(val){
+  methods: {
+    handleSelectionChange(val) {
       this.multipleSelection = val;
       console.log(val);
-    },
-    getAllSelected()
-    {
-
     }
-    }
-  };
+  }
+}
 </script>
 
 <style scoped>
