@@ -6,6 +6,7 @@ import LoginPage from "../views/Login";
 import RegisterPage from "../views/Register";
 import UserInfoPage from "../views/userInfoPage";
 import shopCart from "@/views/ShopCart";
+import test from "@/views/test";
 const routes = [
   {
     path: "/",
@@ -37,6 +38,11 @@ const routes = [
         path: "/ShopCar",
         name:"shopCar",
         component: shopCart
+      },
+      {
+        path: "/test",
+        name:"test",
+        component: test
       }
     ],
   },
