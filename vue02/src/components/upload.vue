@@ -2,8 +2,8 @@
     <div style="padding-top:5vmin;margin: 0 auto;width: 800px;">
         <div style="margin-bottom: 5vmin;text-align: center;">
             <el-upload :on-preview="preview" :on-remove="handleRemove" :on-change="changeFile"
-                       :before-upload="beforeUpload" :file-list="fileList" :http-request="Myupload" list-type="picture-card"
-                       action="#" limit="4" :class="{ disabled: fileComputed }">
+                       :before-upload="beforeUpload" :file-list="fileList" :http-request="upload" list-type="picture-card"
+                       action="#" :class="{ disabled: fileComputed }">
                 <el-icon>
                     <Plus />
                 </el-icon>
@@ -68,6 +68,7 @@ export default {
             fileList: [],
             showDialog: false, // 控制图片的显示或者隐藏
             imgUrl: '', // 存储点击的图片地址
+            imgUrls:[],
             currentFileUid: '', // 用一个变量 记住当前上传的图片id
             percent: 0,
             showPercent: false, // 默认不显示进度条
@@ -97,6 +98,7 @@ export default {
         // http-request属性的回调函数有一个默认的参数,content 是一个对象,这个形参不用传实参
         upload(params) {
             if (params.file) {
+                this.imgUrls.push(params.file)
                 //  上传文件到腾讯云
                 cos.putObject({
                     // 配置
@@ -119,12 +121,13 @@ export default {
                         // 仍然有个小问题， 比如此时我们正在上传，但是调用了保存，保存在上传过程中进行，
                         // 此时上传还没有完成  此时可以这样做 ： 给所有上传成功的图片 加一个属性 upload: true
                         this.fileList = this.fileList.map(item => {
-                            if (item.uid === this.currentFileUid) {
-                                //   upload为true表示 该图片已经成功上传到服务器，地址已经是腾讯云的地址了  就不可以执行保存了
-                                return { url: 'http://' + data.Location, upload: true } // 将本地的地址换成腾讯云地址
-                            }
+                            // if (item.uid === this.currentFileUid) {
+                            //     //   upload为true表示 该图片已经成功上传到服务器，地址已经是腾讯云的地址了  就不可以执行保存了
+                            //     return { url: 'http://' + data.Location, upload: true } // 将本地的地址换成腾讯云地址
+                            // }
                             return item
                         })
+                        console.log("afterUpload");
                         console.log(this.fileList);
                         setTimeout(() => {
                             this.showPercent = false // 隐藏进度条
@@ -142,7 +145,6 @@ export default {
             // file是点击删除的文件
             //   将原来的文件给排除掉了 剩下的就是最新的数组了
             this.fileList = this.fileList.filter(item => item.uid !== file.uid)
-            // console.log(this.fileList);
         },
         preview(file) {
             // 这里应该弹出一个层 层里是点击的图片地址
@@ -156,7 +158,6 @@ export default {
         // 上传成功之后 还会进来 需要实现上传代码的逻辑 这里才会成功
         changeFile(file, fileList) {
             this.fileList = fileList.map(item => item)
-            console.log(this.fileList);
         },
         beforeUpload(file) {
             // 要开始做文件上传的检查了
@@ -178,13 +179,17 @@ export default {
             return true
         },
         addGood() {
+            console.log(this.fileList);
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
                     "Authorization": this.tokenx,
                 },
+                params:this.good
             };
-            this.axios.post('/goods/add', this.good, config).then(res => {
+            let data = new FormData();
+            this.imgUrls.forEach((item) => data.append('files', item));
+            this.axios.post('/goods/add', data, config).then(res => {
                 console.log(res);
             }).catch(err => {
                 console.log(err);
