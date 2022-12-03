@@ -1,11 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import home from "../views/HomeView";
-import index from "../views/index";
-import LoginPage from "../views/Login";
-import RegisterPage from "../views/Register";
-import UserInfoPage from "../views/userInfoPage";
-import shopCart from "@/views/ShopCart";
 import GoodInfo from "@/views/GoodInfo";
 const routes = [
   {
@@ -20,28 +14,18 @@ const routes = [
         component: () => import("@/views/index.vue"),
       },
       {
-        path: "/login",
-        name: "login",
-        component: () => import("@/views/Login.vue"),
-      },
-      {
         path: "/register",
         name: "register",
         component: () => import("@/views/Register.vue"),
       },
       {
-        path: "/upload",
-        name: "upload",
-        component: () => import("@/components/upload.vue"),
-      },
-      {
         path: "/userInfo",
         name: "userInfo",
-        component:  () => import("@/views/userInfoPage.vue"),
+        component: () => import("@/views/userInfoPage.vue"),
       },
       {
         path: "/ShopCar",
-        name:"shopCar",
+        name: "shopCar",
         component: () => import("@/views/ShopCart.vue"),
       },
       {
@@ -52,7 +36,23 @@ const routes = [
     ],
   },
   {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/Login.vue"),
   },
+  {
+    path: "/manage",
+    name: "manage",
+    redirect:"/addgood",
+    component: () => import("@/views/Manage.vue"),
+    children: [
+    {
+      path: "/addgood",
+      name: "addgood",
+      component: () => import("@/components/upload.vue"),
+    },
+    ]
+  }
 ];
 
 const router = createRouter({
