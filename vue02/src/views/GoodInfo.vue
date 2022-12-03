@@ -1,5 +1,5 @@
 <template>
-  <div style="display:flex; align-items: center">
+  <div style="display:flex; align-items: center;">
     <div style="width: 500px; margin-left: 300px">
     <img :src="img[0].url" alt="" style="width: 100%;"/>
     </div>
