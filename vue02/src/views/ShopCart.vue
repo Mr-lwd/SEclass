@@ -84,6 +84,7 @@ export default {
     let url = "shop/list"
     let data = new FormData();
     let tokenx = this.$cookies.get("token");
+    console.log(tokenx);
     this.$store.commit("setmyToken", tokenx);
     let ttoken = this.$store.getters.myToken;
     console.log(ttoken)
