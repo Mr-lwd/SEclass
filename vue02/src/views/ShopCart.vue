@@ -75,7 +75,7 @@ export default {
         sumall += price;
         tmp.push(Myreslist[i]);
       }
-      this.sumAll = sumall;
+      this.sumAll = 0;
       this.resList = tmp;
       console.log(tmp)
     }).catch(err=>{
@@ -94,7 +94,12 @@ export default {
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val;
-      console.log(val);
+      let sum = 0;
+      for(let i = 0; i < val.length; i++)
+      {
+        sum += val[i].sum;
+      }
+      this.sumAll = sum;
     },
     handleChange(row)
     {
@@ -107,11 +112,9 @@ export default {
       for (let i = 0; i < len; i++) {
         price = Myreslist[i].goodsVo.goods.price * Myreslist[i].shop.num;
         Myreslist[i].sum = price;
-        sumall += price;
         tmp.push(Myreslist[i]);
       }
       this.resList = tmp;
-      this.sumAll = sumall;
     }
   }
 }
