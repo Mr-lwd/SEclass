@@ -10,8 +10,12 @@
       <el-table-column type="selection" width="55" />
       <el-table-column property="goodsVo.goods.name" label="商品" width="120" />
       <el-table-column property="goodsVo.goods.price" label="商品单价" show-overflow-tooltip />
-      <el-table-column property="shop.num" label="商品数" show-overflow-tooltip />
-      <el-table-column  property="shop.num" label="总价" show-overflow-tooltip />
+      <el-table-column property="shop.num" label="商品数" show-overflow-tooltip >
+        <template #default="scope">
+          <el-input-number v-model="scope.row.shop.num" :min="1" :max="10" @change="handleChange(scope.row)" />
+        </template>
+      </el-table-column>
+      <el-table-column  property="sum" label="总价" show-overflow-tooltip />
       <el-table-column label="选择" >
         <template #default="scope">
           <el-button @click="console.log(scope.row)">详细</el-button>
@@ -19,6 +23,12 @@
         </template>
       </el-table-column>
     </el-table>
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 30px">
+      总价格：{{sumAll}}
+      <div style="margin-top: 20px">
+        <el-button>结算</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,6 +44,7 @@ export default {
       multipleSelection: null,
       resList: null,
       sum: null,
+      sumAll: 0
     }
   },
   mounted() {
@@ -54,16 +65,17 @@ export default {
       console.log(res);
       let tmp = [];
       let price = 0;
-
+      let sumall = 0;
       let Myreslist = res.data.data.shopVoList;
       let len = Myreslist.length;
       for (let i = 0; i < len; i++) {
         let ttmp = [];
-        ttmp.push(Myreslist[i].shop);
         price = Myreslist[i].goodsVo.goods.price * Myreslist[i].shop.num;
-        ttmp.push({"sum": price});
-        tmp.push(ttmp);
+        Myreslist[i].sum = price;
+        sumall += price;
+        tmp.push(Myreslist[i]);
       }
+      this.sumAll = sumall;
       this.resList = tmp;
       console.log(tmp)
     }).catch(err=>{
@@ -83,6 +95,23 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
       console.log(val);
+    },
+    handleChange(row)
+    {
+      console.log(row);
+      let price = 0;
+      let sumall = 0;
+      let tmp =[];
+      let Myreslist = this.resList;
+      let len = Myreslist.length;
+      for (let i = 0; i < len; i++) {
+        price = Myreslist[i].goodsVo.goods.price * Myreslist[i].shop.num;
+        Myreslist[i].sum = price;
+        sumall += price;
+        tmp.push(Myreslist[i]);
+      }
+      this.resList = tmp;
+      this.sumAll = sumall;
     }
   }
 }
