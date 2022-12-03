@@ -1,7 +1,9 @@
 <template>
-    <navHeader></navHeader>
-    <router-view></router-view>
-    <navFooter></navFooter>
+    <div style="display: flex; flex-direction: column">
+      <navHeader></navHeader>
+      <router-view></router-view>
+      <navFooter></navFooter>
+    </div>
 </template>
 
 <script>
