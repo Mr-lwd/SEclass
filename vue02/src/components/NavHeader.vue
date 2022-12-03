@@ -12,64 +12,40 @@
           <a href="javascript:;" v-if="!username" @click="register">注册</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username" @click="goToUserInfo">{{
-            username
+              username
           }}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="/#/order/list" v-if="username">我的订单</a>
-          <a href="javascript:;" class="my-cart" @click="goToCart"
-            ><i class="bi bi-cart-fill"></i>购物车<span
-              class="badge bg-secondary"
-              >1111</span
-            ></a
-          >
+          <a href="javascript:;" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
+              class="badge bg-secondary">1111</span></a>
         </div>
       </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid" style="padding: 0 40vmin 0 40vmin">
         <i class="bi bi-shop" style="font-size: 6vmin; color: #ff6600"></i>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-          class="collapse navbar-collapse"
-          style="font-size: 2vmin; margin-left: 2vmin"
-          id="navbarSupportedContent"
-        >
+        <div class="collapse navbar-collapse" style="font-size: 2vmin; margin-left: 2vmin" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" @click="gotoIndex" aria-current="page" href="#">首页</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">个人中心</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">消息列表</a>
-            </li>
+              <li class="nav-item" v-if="(role != null)">
+                <a class="nav-link" href="#" >个人中心</a>
+              </li>
+              <li class="nav-item" v-if="(role == 2)">
+                <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
+              </li>
+              <li class="nav-item" v-if="(role != null)">
+                <a class="nav-link" href="#">消息列表</a>
+              </li>
           </ul>
           <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="输入商品名称"
-              aria-label="Search"
-            />
-            <button
-              class="btn btn-outline-success"
-              type="submit"
-              style="background-color: #ff6600"
-            >
+            <input class="form-control me-2" type="search" placeholder="输入商品名称" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit" style="background-color: #ff6600">
               <i class="bi bi-search"></i>
             </button>
           </form>
@@ -89,16 +65,17 @@ export default {
   },
   computed: {
     username() {
-      return this.$store.state.username;
+      // return this.$store.state.username;
+      return this.$cookies.get("username");
     },
-    // // cartCount(){
-    // //   return this.$store.state.cartCount;
-
-    // ...mapState(['username'])
+    role() {
+      console.log(this.$cookies.get("role"))
+      return this.$cookies.get("role");
+    }
   },
 
   mounted() {
-    
+
   },
   methods: {
     login() {
@@ -119,19 +96,25 @@ export default {
     },
     goToUserInfo() {
       this.$router.push({
-        name:"userInfo"
+        name: "userInfo"
       })
     },
-    gotoIndex(){
+    gotoIndex() {
       this.$router.push({
-        name:"home"
+        name: "home"
       })
     },
-    gotoUpload(){
+    gotoUpload() {
       this.$router.push('/upload')
     },
-    getCartCount() {},
-    logout() {},
+    getCartCount() { },
+    logout() {
+      this.$store.commit("logout");
+      this.$cookies.remove("token");
+      this.$cookies.remove("role");
+      this.$cookies.remove("username");
+      this.$route.push("/login");
+    },
     goToCart() {
       this.$router.push("/ShopCar");
     },

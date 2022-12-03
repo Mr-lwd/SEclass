@@ -52,9 +52,12 @@ export default {
         .then((res) => {
           let token = res.data.data.Authorization;
           let name = res.data.data.nickName;
+          let role = res.data.data.role;
           console.log(name);
           this.$store.commit("setmyToken", token);
           this.$store.commit("setmyName", name);
+          this.$cookies.set("role", role, "1D");
+          this.$cookies.set("username", name, "1D");
           this.$cookies.set("token", token, "1D");
           console.log(token);
           this.$router.push("/index");
