@@ -70,11 +70,6 @@ export default {
     this.setusername();
     this.setrole();
   },
-  watch: {
-    $route() {
-      location.reload();
-    },
-  },
 
   methods: {
     setusername() {
