@@ -36,7 +36,7 @@
               <li class="nav-item" v-if="(role != null)">
                 <a class="nav-link" href="#" >个人中心</a>
               </li>
-              <li class="nav-item" v-if="(role == 2)">
+              <li class="nav-item" v-if="(role == 1)">
                 <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
               </li>
               <li class="nav-item" v-if="(role != null)">
@@ -61,6 +61,8 @@ export default {
   data() {
     return {
       goodList: [],
+      username:'',
+      role: null,
     };
   },
   computed: {
