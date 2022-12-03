@@ -65,21 +65,20 @@ export default {
       role: null,
     };
   },
-  computed: {
-    username() {
-      // return this.$store.state.username;
-      return this.$cookies.get("username");
-    },
-    role() {
-      console.log(this.$cookies.get("role"))
-      return this.$cookies.get("role");
-    }
-  },
-
   mounted() {
-
+    this.setusername();
+    this.setrole();
   },
   methods: {
+    setusername() {
+      // return this.$store.state.username;
+      this.username = this.$cookies.get("username");
+      return this.$cookies.get("username");
+    },
+    setrole() {
+      this.role = this.$cookies.get("role");
+      return this.$cookies.get("role");
+    },
     login() {
       this.$router.push({
         name: "login",
@@ -111,11 +110,13 @@ export default {
     },
     getCartCount() { },
     logout() {
+      // localStorage.clear()
+			// window.sessionStorage.clear()
       this.$store.commit("logout");
       this.$cookies.remove("token");
       this.$cookies.remove("role");
       this.$cookies.remove("username");
-      this.$route.push("/login");
+      this.$router.push("/login");
     },
     goToCart() {
       this.$router.push("/ShopCar");

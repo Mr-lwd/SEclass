@@ -10,23 +10,23 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: home,
+    component: () => import("@/views/HomeView.vue"),
     redirect: "/index",
     children: [
       {
         path: "/index",
         name: "index",
-        component: index,
+        component: () => import("@/views/index.vue"),
       },
       {
         path: "/login",
         name: "login",
-        component: LoginPage,
+        component: () => import("@/views/Login.vue"),
       },
       {
         path: "/register",
         name: "register",
-        component: RegisterPage,
+        component: () => import("@/views/Register.vue"),
       },
       {
         path: "/upload",
@@ -36,14 +36,13 @@ const routes = [
       {
         path: "/userInfo",
         name: "userInfo",
-        component:UserInfoPage,
+        component:  () => import("@/views/userInfoPage.vue"),
       },
       {
         path: "/ShopCar",
         name:"shopCar",
-        component: shopCart
+        component: () => import("@/views/ShopCart.vue"),
       },
-
     ],
   },
   {
