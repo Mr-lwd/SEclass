@@ -43,11 +43,10 @@ const routes = [
   {
     path: "/manage",
     name: "manage",
-    redirect:"/addgood",
     component: () => import("@/views/Manage.vue"),
     children: [
     {
-      path: "/addgood",
+      path: "/manage/addgood",
       name: "addgood",
       component: () => import("@/components/upload.vue"),
     },

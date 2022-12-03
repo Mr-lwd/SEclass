@@ -1,15 +1,17 @@
 <template>
-  <van-cell-group inset>
-    <van-cell title="用户名" :value="UserName" label="用户名" />
-    <van-cell title="密码" :value="password" label="密码" />
-    <van-cell title="实名" :value="TrueName" label="实名"/>
-    <van-cell title="电话号" :value="TelNum" label="电话号" />
-    <van-cell title="邮箱" :value="MailNum" label="邮箱"/>
-    <van-cell title="身份证号" :value="IDNum" label="身份证号" />
-    <van-cell title="性别" :value="sex" label="性别"/>
-    <van-cell title="角色" :value="model" label="角色" />
+  <div style="width: 50vmin;margin:0 auto;margin-bottom: 10vmin;">
+    <van-cell-group inset style>
+    <van-cell title="用户名" :value="UserName"  />
+    <van-cell title="密码" :value="password"/>
+    <van-cell title="实名" :value="TrueName"/>
+    <van-cell title="电话号" :value="TelNum"/>
+    <van-cell title="邮箱" :value="MailNum"/>
+    <van-cell title="身份证号" :value="IDNum" />
+    <van-cell title="性别" :value="sex" />
+    <van-cell title="角色" :value="model"/>
   </van-cell-group>
-
+  <el-button @click="">修改信息</el-button>
+  </div>
 </template>
 
 <script>

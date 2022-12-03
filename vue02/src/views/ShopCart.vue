@@ -1,22 +1,17 @@
 <template>
-<!--购物车-->
+  <!--购物车-->
   <div>
-    <el-table
-      ref="multipleTableRef"
-      :data="resList"
-      style="width: 100%"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table ref="multipleTableRef" :data="resList" style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" />
       <el-table-column property="goodsVo.goods.name" label="商品" width="120" />
       <el-table-column property="goodsVo.goods.price" label="商品单价" show-overflow-tooltip />
-      <el-table-column property="shop.num" label="商品数" show-overflow-tooltip >
+      <el-table-column property="shop.num" label="商品数" show-overflow-tooltip>
         <template #default="scope">
           <el-input-number v-model="scope.row.shop.num" :min="1" :max="10" @change="handleChange(scope.row)" />
         </template>
       </el-table-column>
-      <el-table-column  property="sum" label="总价" show-overflow-tooltip />
-      <el-table-column label="选择" >
+      <el-table-column property="sum" label="总价" show-overflow-tooltip />
+      <el-table-column label="选择">
         <template #default="scope">
           <el-button @click="console.log(scope.row)">详细</el-button>
           <el-button @click="console.log(scope.row)">删除</el-button>
@@ -24,7 +19,7 @@
       </el-table-column>
     </el-table>
     <div style="text-align: center; margin-top: 30px; margin-bottom: 30px">
-      总价格：{{sumAll}}
+      总价格：{{ sumAll }}
       <div style="margin-top: 20px">
         <el-button>结算</el-button>
       </div>
@@ -61,7 +56,7 @@ export default {
         "Authorization": tokenx,
       },
     };
-    axios.get(url,config).then(res=>{
+    axios.get(url, config).then(res => {
       console.log(res);
       let tmp = [];
       let price = 0;
@@ -78,7 +73,7 @@ export default {
       this.sumAll = 0;
       this.resList = tmp;
       console.log(tmp)
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err);
     })
 
@@ -101,12 +96,11 @@ export default {
       }
       this.sumAll = sum;
     },
-    handleChange(row)
-    {
+    handleChange(row) {
       console.log(row);
       let price = 0;
       let sumall = 0;
-      let tmp =[];
+      let tmp = [];
       let Myreslist = this.resList;
       let len = Myreslist.length;
       for (let i = 0; i < len; i++) {
@@ -119,7 +113,8 @@ export default {
   }
 }
 </script>
-
+  
 <style scoped>
 
 </style>
+  
