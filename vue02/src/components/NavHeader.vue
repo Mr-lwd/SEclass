@@ -1,3 +1,4 @@
+
 <template>
   <div class="header">
     <div class="nav-topbar">
@@ -33,15 +34,15 @@
             <li class="nav-item">
               <a class="nav-link" @click="gotoIndex" aria-current="page" href="#">首页</a>
             </li>
-              <li class="nav-item" v-if="(role != null)" @click="goToUserInfo">
-                <a class="nav-link" href="#" >个人中心</a>
-              </li>
-              <li class="nav-item" v-if="(role == 1)">
-                <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
-              </li>
-              <li class="nav-item" v-if="(role != null)">
-                <a class="nav-link" href="#">消息列表</a>
-              </li>
+            <li class="nav-item" v-if="(role != null)">
+              <a class="nav-link" href="#">个人中心</a>
+            </li>
+            <li class="nav-item" v-if="(role == 2)">
+              <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
+            </li>
+            <li class="nav-item" v-if="(role != null)">
+              <a class="nav-link" href="#">消息列表</a>
+            </li>
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="输入商品名称" aria-label="Search" />
@@ -61,7 +62,7 @@ export default {
   data() {
     return {
       goodList: [],
-      username:'',
+      username: '',
       role: null,
     };
   },
@@ -69,15 +70,21 @@ export default {
     this.setusername();
     this.setrole();
   },
+  watch: {
+    $route() {
+      location.reload();
+    },
+  },
+
   methods: {
     setusername() {
       // return this.$store.state.username;
       this.username = this.$cookies.get("username");
-      return this.$cookies.get("username");
+      console.log("username:" + this.username)
     },
     setrole() {
       this.role = this.$cookies.get("role");
-      return this.$cookies.get("role");
+      console.log("role:" + this.role)
     },
     login() {
       this.$router.push({
@@ -101,9 +108,7 @@ export default {
       })
     },
     gotoIndex() {
-      this.$router.push({
-        name: "home"
-      })
+      this.$router.push('/index')
     },
     gotoUpload() {
       this.$router.push('/upload')
@@ -111,7 +116,7 @@ export default {
     getCartCount() { },
     logout() {
       // localStorage.clear()
-			// window.sessionStorage.clear()
+      // window.sessionStorage.clear()
       this.$store.commit("logout");
       this.$cookies.remove("token");
       this.$cookies.remove("role");
