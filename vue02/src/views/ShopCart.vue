@@ -84,16 +84,16 @@ export default {
     let url = "shop/list"
     let data = new FormData();
     let tokenx = this.$cookies.get("token");
-    this.$store.commit("setmyToken", tokenx);
-    let ttoken = this.$store.getters.myToken;
-    console.log(ttoken)
+    // this.$store.commit("setmyToken", tokenx);
+    // let ttoken = this.$store.getters.myToken;
+    // console.log(ttoken)
     let config = {
       headers: {
         "Content-Type": "multipart/form-data ",
         "Authorization": tokenx,
       },
     };
-    axios.get(url,data,config).then(res=>{
+    axios.get(url,config).then(res=>{
       console.log(res);
       let tmp = [];
       let Myreslist = res.data.data.shopList;
