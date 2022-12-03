@@ -22,7 +22,7 @@
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
-                  <el-icon @click="goToCart(item.goods.id)"><ShoppingCart /></el-icon>
+                  <div><el-icon @click="goToCart(item.goods.id)"><ShoppingCart /></el-icon></div>
                 </div>
               </div>
             </div>

@@ -58,7 +58,7 @@ export default {
         this.sex = tmp.sex == 1?"男":"女";
         this.TelNum = tmp.phone;
         this.MailNum = tmp.mail;
-        this.model = tmp.role == 2?"用户":"商家";
+        this.model = tmp.role == 1?"用户":"商家";
         this.IDNum = tmp.idCard;
       }).catch(err=>{
         console.log(err);
