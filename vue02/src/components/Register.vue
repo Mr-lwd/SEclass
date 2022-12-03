@@ -41,6 +41,13 @@
           </select>
         </div>
         <div class="col-md-12">
+          <label for="sex" class="col-md-6 form-label">角色</label>
+          <select class="form-select" id="model" v-model="model">
+            <option>用户</option>
+            <option>商家</option>
+          </select>
+        </div>
+        <div class="col-md-12">
           <label for="IDNum" class="col-md-6 form-label">身份证号</label>
           <input type="uuid" class="form-control" id="IDNum" v-model="IDNum" />
         </div>

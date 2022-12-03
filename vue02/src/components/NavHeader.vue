@@ -33,7 +33,7 @@
             <li class="nav-item">
               <a class="nav-link" @click="gotoIndex" aria-current="page" href="#">首页</a>
             </li>
-              <li class="nav-item" v-if="(role != null)">
+              <li class="nav-item" v-if="(role != null)" @click="goToUserInfo">
                 <a class="nav-link" href="#" >个人中心</a>
               </li>
               <li class="nav-item" v-if="(role == 1)">
