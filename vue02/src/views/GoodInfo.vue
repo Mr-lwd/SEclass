@@ -1,6 +1,7 @@
 <template>
   <div>
     {{item.id}}
+    {{img}}
   </div>
 </template>
 
@@ -19,11 +20,15 @@ export default {
         "gmtCreate":"2022-12-03T11:26:07",
         "gmtModify":null,
         "deleted":false
+      },
+      img:{
+
       }
     }
   },
   mounted() {
     this.item =  JSON.parse(this.$route.query.item);
+    this.img = JSON.parse(this.$route.query.img);
   }
 };
 </script>

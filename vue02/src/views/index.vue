@@ -22,7 +22,7 @@
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
-                  <div><el-icon @click="goToCart(item.goods)"><ShoppingCart /></el-icon></div>
+                  <div><el-icon @click="goToCart(item)"><ShoppingCart /></el-icon></div>
                 </div>
               </div>
             </div>
@@ -107,7 +107,8 @@ export default {
       // })
       this.$router.push({
           path: '/GoodInfo',
-          query: {item: JSON.stringify(id)}
+          query: {item: JSON.stringify(id.goods),
+                    img: JSON.stringify(id.photos)}
         }
       )
     },
