@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{id}}
+    {{item.id}}
   </div>
 </template>
 
@@ -9,11 +9,21 @@ export default {
   name: "GoodInfo",
   data(){
     return{
-      id: null
+      item: {
+        "id":23,
+        "name":"jzh",
+        "detail":"jzh",
+        "price":40,
+        "store":11,
+        "sale":10,
+        "gmtCreate":"2022-12-03T11:26:07",
+        "gmtModify":null,
+        "deleted":false
+      }
     }
   },
   mounted() {
-    this.id =  JSON.parse(this.$route.query.id);
+    this.item =  JSON.parse(this.$route.query.item);
   }
 };
 </script>
