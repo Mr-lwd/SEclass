@@ -38,7 +38,7 @@
               <a class="nav-link" href="#">个人中心</a>
             </li>
             <li class="nav-item" v-if="(role == 2)">
-              <a class="nav-link" @click="gotoUpload" href="#">添加商品</a>
+              <a class="nav-link" @click="gotoControl" href="#">管理中心</a>
             </li>
             <li class="nav-item" v-if="(role != null)">
               <a class="nav-link" href="#">消息列表</a>
@@ -105,8 +105,8 @@ export default {
     gotoIndex() {
       this.$router.push('/index')
     },
-    gotoUpload() {
-      this.$router.push('/upload')
+    gotoControl() {
+      this.$router.push('/manage')
     },
     getCartCount() { },
     logout() {

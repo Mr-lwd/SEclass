@@ -48,6 +48,8 @@
 </template>
   
 <script>
+import { thisExpression } from '@babel/types';
+
 const COS = require('cos-js-sdk-v5');
 
 // SECRETID 和 SECRETKEY请登录 https://console.cloud.tencent.com/cam/capi 进行查看和管理
@@ -121,10 +123,6 @@ export default {
                         // 仍然有个小问题， 比如此时我们正在上传，但是调用了保存，保存在上传过程中进行，
                         // 此时上传还没有完成  此时可以这样做 ： 给所有上传成功的图片 加一个属性 upload: true
                         this.fileList = this.fileList.map(item => {
-                            // if (item.uid === this.currentFileUid) {
-                            //     //   upload为true表示 该图片已经成功上传到服务器，地址已经是腾讯云的地址了  就不可以执行保存了
-                            //     return { url: 'http://' + data.Location, upload: true } // 将本地的地址换成腾讯云地址
-                            // }
                             return item
                         })
                         console.log("afterUpload");
@@ -145,6 +143,7 @@ export default {
             // file是点击删除的文件
             //   将原来的文件给排除掉了 剩下的就是最新的数组了
             this.fileList = this.fileList.filter(item => item.uid !== file.uid)
+            this.imgUrls = this.imgUrls.filter(item => item.uid !== file.uid)
         },
         preview(file) {
             // 这里应该弹出一个层 层里是点击的图片地址
