@@ -51,6 +51,7 @@ export default {
       axios.post("/user/info",data,config).then(res=>{
         console.log(res.data.data.user);
         let tmp = res.data.data.user;
+        console.log(tmp.role + "role")
         this.UserName = tmp.nickName;
         this.$store.commit("setmyName", this.UserName);
         this.TrueName = tmp.name;
@@ -58,7 +59,11 @@ export default {
         this.sex = tmp.sex == 1?"男":"女";
         this.TelNum = tmp.phone;
         this.MailNum = tmp.mail;
-        this.model = tmp.role == 1?"用户":"商家";
+        if(tmp.role == 1)
+        {
+          console.log("yes!!")
+        }
+        this.model = tmp.role == 1? "用户":"商家";
         this.IDNum = tmp.idCard;
       }).catch(err=>{
         console.log(err);
@@ -85,7 +90,7 @@ export default {
         this.sex = tmp.sex == 1?"男":"女";
         this.TelNum = tmp.phone;
         this.MailNum = tmp.mail;
-        this.model = tmp.role == 2?"用户":"商家";
+        this.model = tmp.role == 1?"用户":"商家";
         this.IDNum = tmp.idCard;
       }).catch(err=>{
         console.log(err);
