@@ -1,11 +1,21 @@
 <template>
-$END$
+  <div>
+    {{id}}
+  </div>
 </template>
 
 <script>
 export default {
-name: "GoodInfo"
-}
+  name: "GoodInfo",
+  data(){
+    return{
+      id: null
+    }
+  },
+  mounted() {
+    this.id =  JSON.parse(this.$route.query.id);
+  }
+};
 </script>
 
 <style scoped>

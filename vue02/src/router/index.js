@@ -6,6 +6,7 @@ import LoginPage from "../views/Login";
 import RegisterPage from "../views/Register";
 import UserInfoPage from "../views/userInfoPage";
 import shopCart from "@/views/ShopCart";
+import GoodInfo from "@/views/GoodInfo";
 const routes = [
   {
     path: "/",
@@ -43,6 +44,11 @@ const routes = [
         name:"shopCar",
         component: shopCart
       },
+      {
+        path: "/GoodInfo",
+        name: "GoodInfo",
+        component: GoodInfo
+      }
 
     ],
   },
