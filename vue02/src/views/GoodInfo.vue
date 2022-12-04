@@ -15,7 +15,6 @@
 
               <el-descriptions-item label="商品名" class="detail">{{item.name}}</el-descriptions-item>
 
-
               <el-descriptions-item label="商品细节" class="detail">{{item.detail}}</el-descriptions-item>
 
               <el-descriptions-item label="商品价格" class="detail">{{item.price}}</el-descriptions-item>
@@ -44,9 +43,22 @@
 
 <script>
 import axios from "axios";
-
+import { Swiper } from "swiper";
+import { SwiperSlide } from "swiper/vue";
+import 'swiper/css'
+import 'swiper/css/pagination' // 轮播图底面的小圆点
+import 'swiper/css/navigation' // 轮播图两边的左右箭头
+import 'swiper/css/scrollbar'  // 轮播图的滚动条
+// 引入swiper核心和所需模块
+import { Autoplay, Pagination, Navigation, Scrollbar } from 'swiper'
+// 在modules加入要使用的模块
+const modules = [Autoplay, Pagination, Navigation, Scrollbar]
 export default {
   name: "GoodInfo",
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data(){
     return{
       num:1,
@@ -88,7 +100,7 @@ export default {
       data.append("goodsId",id);
       //后面加一个加减
       data.append("num",this.num);
-      // console.log(this.num);
+      console.log(this.num);
       let tokenx = this.$cookies.get("token");
       this.$store.commit("setmyToken", tokenx);
       let Mytoken = this.$store.getters.myToken;
@@ -101,9 +113,14 @@ export default {
       };
       axios.post(url,data,config).then(res=>{
         console.log(res);
+        if(res.data.code == 100)
         alert("添加成功");
+        else {
+          alert("添加失败");
+        }
       }).catch(err=>{
         console.log(err);
+        alert("添加失败");
       })
     },
   }
