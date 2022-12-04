@@ -1,7 +1,20 @@
 <template>
   <div style="display:flex; align-items: center;">
     <div style="width: 500px; margin-left: 300px">
-    <img :src="img[0].url" alt="" style="width: 100%;"/>
+      <swiper
+        :modules="modules"
+        :loop="true"
+        :slides-per-view="1"
+        :space-between="50"
+        :autoplay="{ autoplay: true, delay: 4000, disableOnInteraction: false }"
+        navigation
+        :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }"
+      >
+        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i">
+          <img :src="item.url" alt="" style="width: 100%;"/>
+        </swiper-slide>
+      </swiper>
     </div>
     <div style="width: 500px; margin-left: 100px">
       <el-card class="box-card">
@@ -43,21 +56,19 @@
 
 <script>
 import axios from "axios";
-import { Swiper } from "swiper";
+import { Swiper } from "swiper/vue";
 import { SwiperSlide } from "swiper/vue";
-import 'swiper/css'
-import 'swiper/css/pagination' // 轮播图底面的小圆点
-import 'swiper/css/navigation' // 轮播图两边的左右箭头
-import 'swiper/css/scrollbar'  // 轮播图的滚动条
-// 引入swiper核心和所需模块
-import { Autoplay, Pagination, Navigation, Scrollbar } from 'swiper'
-// 在modules加入要使用的模块
-const modules = [Autoplay, Pagination, Navigation, Scrollbar]
+import 'swiper/css';
+import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
 export default {
   name: "GoodInfo",
-  components: {
+  components:{
     Swiper,
     SwiperSlide,
+    Autoplay,
+    Pagination,
+    Navigation,
+    Scrollbar
   },
   data(){
     return{
@@ -77,6 +88,18 @@ export default {
       imglist: null,
     }
   },
+  setup() {
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+    return {
+      onSwiper,
+      onSlideChange,
+    };
+  },
   mounted() {
     this.item =  JSON.parse(this.$route.query.item);
     if(JSON.parse(this.$route.query.img).length > 0)
@@ -91,6 +114,26 @@ export default {
     }
     console.log(immg);
     console.log(this.img[0].url)
+    // let mySwiper = new Swiper ('.swiper', {
+    //   direction: 'vertical', // 垂直切换选项
+    //   loop: true, // 循环模式选项
+    //
+    //   // 如果需要分页器
+    //   pagination: {
+    //     el: '.swiper-pagination',
+    //   },
+    //
+    //   // 如果需要前进后退按钮
+    //   navigation: {
+    //     nextEl: '.swiper-button-next',
+    //     prevEl: '.swiper-button-prev',
+    //   },
+    //
+    //   // 如果需要滚动条
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //   },
+    // })
   },
   methods:{
     goToCart(id) {
@@ -135,6 +178,9 @@ export default {
 {
   width: 200px;
 }
-
+.swiper {
+  width: 600px;
+  height: 300px;
+}
 
 </style>

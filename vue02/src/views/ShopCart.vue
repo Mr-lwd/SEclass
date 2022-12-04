@@ -14,7 +14,7 @@
       <el-table-column label="选择">
         <template #default="scope">
           <el-button @click="gotoInFo(scope.row.goodsVo)">详细</el-button>
-          <el-button @click="console.log('jj')">删除</el-button>
+          <el-button @click="deleteCart(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -96,6 +96,32 @@ export default {
             img: JSON.stringify(id.photos)}
         }
       )
+    },
+    deleteCart(id)
+    {
+      console.log(id);
+      console.log(id.shop.id);
+      let data = new FormData();
+      data.append("id",id.shop.id);
+      let url = "shop/del";
+      let tokenx = this.$store.getters.myToken;
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.delete(url,data,config).then(
+        res=>{
+          console.log(res);
+          alert("删除成功");
+        }
+      ).catch(err=>
+      {
+        console.log(err);
+        alert("删除失败")
+      })
+
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
