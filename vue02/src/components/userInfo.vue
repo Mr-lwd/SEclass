@@ -10,7 +10,9 @@
     <van-cell title="性别" :value="sex" />
     <van-cell title="角色" :value="model"/>
   </van-cell-group>
-  <el-button @click="">修改信息</el-button>
+    <div style="display:flex;justify-content: center">
+      <el-button @click="" style="margin-top: 30px">修改信息</el-button>
+    </div>
   </div>
 </template>
 

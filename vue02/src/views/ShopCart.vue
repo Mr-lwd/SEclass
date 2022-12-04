@@ -13,8 +13,8 @@
       <el-table-column property="sum" label="总价" show-overflow-tooltip />
       <el-table-column label="选择">
         <template #default="scope">
-          <el-button @click="console.log(scope.row)">详细</el-button>
-          <el-button @click="console.log(scope.row)">删除</el-button>
+          <el-button @click="gotoInFo(scope.row.goodsVo)">详细</el-button>
+          <el-button @click="console.log('jj')">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -87,6 +87,16 @@ export default {
 
   },
   methods: {
+    gotoInFo(id)
+    {
+      console.log(id);
+      this.$router.push({
+          path: '/GoodInfo',
+          query: {item: JSON.stringify(id.goods),
+            img: JSON.stringify(id.photos)}
+        }
+      )
+    },
     handleSelectionChange(val) {
       this.multipleSelection = val;
       let sum = 0;
@@ -117,4 +127,3 @@ export default {
 <style scoped>
 
 </style>
-  
