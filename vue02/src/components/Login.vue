@@ -1,33 +1,29 @@
 <template>
-  <div class="loginForm">
-    <form class="row g-3" v-on:submit.prevent>
-      <div class="col-md-6">
-        <label for="inputEmail4" class="col-md-6 form-label">用户名</label>
-        <input
-          type="uuid"
-          class="form-control"
-          id="inputEmail4"
-          v-model="username"
-        />
-      </div>
-      <div class="col-md-6">
-        <label for="inputPassword4" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inputPassword4"
-          v-model="password"
-        />
-      </div>
-      <div class="col-md-12" style="text-align: center">
-        <button class="btn btn-primary col-md-6" @click="login">Sign in</button>
-      </div>
-    </form>
+  <div class="wrapper">
+    <div class="frame">
+      <div class="title"><b>登录</b></div>
+      <form method="POST" v-on:submit.prevent>
+        <el-form :model="user" :rules="rules" ref="userForm">
+          <el-form-item prop="username">
+            <el-input prefix-icon="user-filled" v-model="username" placeholder="请输入用户名"></el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input prefix-icon="lock" v-model="password" show-password placeholder="请输入密码"></el-input>
+          </el-form-item>
+        </el-form>
+
+        <div class="buttonGroup">
+          <button type="submit" class="btn btn-primary" @click="login" style="margin-right: 20px;">提交</button>
+          <button type="submit" class="btn btn-success" @click="$router.push('/index')">返回</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { ElMessage } from "element-plus";
 
 export default {
   name: "UserLogin",
@@ -62,20 +58,50 @@ export default {
           this.$cookies.set("token", token, "1D");
           console.log(token);
           this.$router.push("/index");
-          alert("登录成功");
+          ElMessage({
+            message: '登录成功',
+            type: 'success',
+            duration: 1000,
+            onClose: () => {
+              this.$router.push('/index')
+            }
+          })
         })
         .catch((res) => {
-          console.log(res);
-          alert("登录失败");
+          ElMessage.error("用户名密码错误");
         });
     },
   },
 };
 </script>
-
 <style lang="scss" scoped>
-.loginForm {
-  margin: 0 auto;
-  width: 60vmin;
+.wrapper {
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, #e8bac7, #003cff);
+  overflow: hidden;
+
+  .frame {
+    margin: 20vh auto;
+    background-color: white;
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    border-radius: 10px;
+
+    .title {
+      margin: 20px 0;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    .buttonGroup {
+      margin: 10px 0;
+      text-align: right;
+    }
+  }
 }
 </style>
