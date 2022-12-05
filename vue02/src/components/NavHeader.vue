@@ -42,8 +42,8 @@
             </li>
           </ul>
           <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="输入商品名称" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit" style="background-color: #ff6600">
+            <input class="form-control me-2" type="search" v-model = "search" placeholder="输入商品名称" aria-label="Search" />
+            <button class="btn btn-outline-success" @click="findGoods" style="background-color: #ff6600">
               <i class="bi bi-search"></i>
             </button>
           </form>
@@ -61,6 +61,7 @@ export default {
       goodList: [],
       username: '',
       role: null,
+      search:'',
     };
   },
   mounted() {
@@ -118,6 +119,15 @@ export default {
     goToCart() {
       this.$router.push("/ShopCar");
     },
+    findGoods(){
+      console.log("search:"+this.search)
+      this.$router.push({
+        path:"/FindGood",
+        query: {
+          findStr : this.search
+        }
+      });
+    }
   },
 };
 </script>

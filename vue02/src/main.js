@@ -18,6 +18,9 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 axios.defaults.baseURL = "/api";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// 引入swiper样式（按需导入）
+
 
 const app = createApp(App)
   .use(store)

@@ -45,7 +45,7 @@
     </template>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="dialogFormVisible = false;this.load()">取 消</el-button>
         <el-button type="primary" @click="save">修改</el-button>
       </div>
     </template>
@@ -107,39 +107,30 @@ export default {
           cancelButtonText: '取消',
           type: 'warning',
         }
-      ).then(() => {
+      )
+      .then(() => {
         let tokenx = this.$cookies.get("token");
-        // this.$store.commit("setmyToken", tokenx);
-        // console.log("aaa")
-        console.log("end.tokenx");
-        console.log(tokenx)
-        // console.log(ttoken)
-        this.form.sex = this.form.sexNum;
         let config = {
           headers: {
             "Content-Type": "multipart/form-data",
             "Authorization": tokenx,
-            params: this.tempform,
           },
         };
-        axios.post("user/modify", config).then(res => {
+        axios.post("user/modify", this.tempform, config).then(res => {
           console.log(res);
           this.load();
-        }).catch(err => {
+          ElMessage.success("修改成功");
+        }
+        ).catch(err => {
           console.log(err);
         })
-      }).catch(() => {
-        this.tempform.nickName = tmp.nickName;
-        this.tempform.name = tmp.name;
-        this.tempform.sex = tmp.sex;
-        this.tempform.phone = tmp.phone;
-        this.tempform.mail = tmp.mail;
-        this.tempform.idCard = tmp.idCard;
+      })
+      .catch(() => {
+        this.load();
         ElMessage.info("取消修改");
       })
     },
     load() {
-      console.log(this.$cookies.get("token"))
       if (this.$cookies.get("token") == null) {
         ElMessage({
           message: '请先登录',
@@ -156,9 +147,6 @@ export default {
         this.$store.commit("setmyToken", tokenx);
         let data = new FormData();
         let ttoken = this.$store.getters.myToken;
-        console.log("aaa")
-        console.log(tokenx)
-        console.log(ttoken)
         let config = {
           headers: {
             "Content-Type": "multipart/form-data ",
@@ -166,9 +154,7 @@ export default {
           },
         };
         axios.post("/user/info", data, config).then(res => {
-          console.log(res.data.data.user);
           let tmp = res.data.data.user;
-          console.log(tmp.role + "role")
           this.form.UserName = tmp.nickName;
           this.tempform.nickName = tmp.nickName;
           this.$store.commit("setmyName", this.UserName);
@@ -182,9 +168,6 @@ export default {
           this.tempform.phone = tmp.phone;
           this.form.MailNum = tmp.mail;
           this.tempform.mail = tmp.mail;
-          // if (tmp.role == 1) {
-          //   console.log("yes!!")
-          // }
           this.form.modelNum = tmp.role;
           this.form.model = tmp.role == 1 ? "用户" : "商家";
           this.form.IDNum = tmp.idCard;

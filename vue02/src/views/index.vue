@@ -28,6 +28,9 @@
             </div>
           </div>
         </div>
+        <div style="display: flex; justify-content: center; margin-top: 20px">
+          <el-pagination background layout="prev, pager, next" :total="1000" :page-size="100"/>
+        </div>
       </div>
     </div>
   </div>

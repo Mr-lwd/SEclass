@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import GoodInfo from "@/views/GoodInfo";
+import FindGood from "@/components/FindGood";
 const routes = [
   {
     path: "/",
@@ -32,6 +33,11 @@ const routes = [
         path: "/GoodInfo",
         name: "GoodInfo",
         component: GoodInfo
+      },
+      {
+        path: "/FindGood",
+        name: "FindGood",
+        component: FindGood
       }
     ],
   },
@@ -39,6 +45,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: () => import("@/views/test.vue"),
   },
   {
     path: "/manage",
