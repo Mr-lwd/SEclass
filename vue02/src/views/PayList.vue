@@ -150,7 +150,7 @@ export default {
         data.append("goodsId", t[i].shop.goodsId);
         data.append("num", t[i].shop.num)
         data.append("state", 1)
-        data.append("gmtPay", new Date());
+        //data.append("gmtPay", new Date());
         data.append("totalPrice", t[i].sum);
         // console.log(t[i].sum)
         axios.post(url,data,config).catch(res=>{
