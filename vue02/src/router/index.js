@@ -37,7 +37,7 @@ const routes = [
       {
         path: "/FindGood",
         name: "FindGood",
-        component: FindGood
+        component: () => import("@/components/FindGood.vue")
       }
     ],
   },

@@ -11,6 +11,7 @@
 import navFooter from "@/components/NavFooter.vue";
 import navHeader from "@/components/NavHeader.vue";
 
+
 export default {
   name: "HomeView",
   components: {

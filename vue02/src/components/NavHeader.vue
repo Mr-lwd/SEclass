@@ -38,15 +38,9 @@
               <a class="nav-link" @click="gotoControl" href="#">管理中心</a>
             </li>
             <li class="nav-item" v-if="(role != null)">
-              <a class="nav-link" href="#">消息列表</a>
+              <a class="nav-link" @click="findGoods" href="#">搜索商品</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" v-model = "search" placeholder="输入商品名称" aria-label="Search" />
-            <button class="btn btn-outline-success" @click="findGoods" style="background-color: #ff6600">
-              <i class="bi bi-search"></i>
-            </button>
-          </form>
         </div>
       </div>
     </nav>
@@ -120,12 +114,8 @@ export default {
       this.$router.push("/ShopCar");
     },
     findGoods(){
-      console.log("search:"+this.search)
       this.$router.push({
         path:"/FindGood",
-        query: {
-          findStr : this.search
-        }
       });
     }
   },
