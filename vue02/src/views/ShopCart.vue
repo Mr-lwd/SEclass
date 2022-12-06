@@ -21,7 +21,7 @@
     <div style="text-align: center; margin-top: 30px; margin-bottom: 30px">
       总价格：{{ sumAll }}
       <div style="margin-top: 20px">
-        <el-button>结算</el-button>
+        <el-button @click="gotoPay">结算</el-button>
       </div>
     </div>
   </div>
@@ -100,6 +100,16 @@ export default {
       }
       )
     },
+    gotoPay()
+    {
+      this.$router.push({
+        path:'/pay',
+      query:{
+        money: JSON.stringify(this.sumAll),
+        select: JSON.stringify(this.multipleSelection)
+      }
+      });
+    },
     deleteCart(id) {
       console.log(id);
       console.log(id.shop.id);
@@ -131,6 +141,8 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
+      console.log("val")
+      console.log(val);
       let sum = 0;
       for (let i = 0; i < val.length; i++) {
         sum += val[i].sum;
