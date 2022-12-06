@@ -11,7 +11,7 @@
       <van-cell title="角色" :value="form.model" />
     </van-cell-group>
     <el-button @click="(dialogFormVisible = true)">修改信息</el-button>
-    <el-button @click="(dialogFormVisible2 = true);getAddress()">地址管理</el-button>
+    <el-button @click="(dialogFormVisible2 = true); getAddress()">地址管理</el-button>
   </div>
   <el-dialog title="用户信息" v-model="dialogFormVisible" style="max-width: 60vmin;">
     <template #default>
@@ -37,22 +37,17 @@
             <el-radio :label="2">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <!-- <el-form-item label="角色">
-          <el-select v-model="form.modelNum" class="m-2" placeholder="Select" size="small">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
-        </el-form-item> -->
       </el-form>
     </template>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible = false;this.load()">取 消</el-button>
+        <el-button @click="dialogFormVisible = false; this.load()">取 消</el-button>
         <el-button type="primary" @click="save">修改</el-button>
       </div>
     </template>
   </el-dialog>
 
-  <el-dialog title="用户信息" v-model="dialogFormVisible2" style="max-width: 60vmin;">
+  <el-dialog title="添加地址" v-model="dialogFormVisible2" style="max-width: 60vmin;">
     <template #default>
       <el-table :data="addressList">
         <!-- <el-table-column type="selection" width="40px"/> -->
@@ -60,12 +55,40 @@
         </el-table-column>
         <el-table-column prop="detail" label="详细地址" align="center">
         </el-table-column>
-    </el-table>
+        <el-table-column label="删除地址">
+          <template #default="scope">
+            <el-button style="width: 8vmin" type="danger" @click.prevent="handleDelete(scope.row.id)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </template>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible2 = false;this.load()">取 消</el-button>
-        <el-button type="primary" @click="save">修改</el-button>
+        <el-button @click="dialogFormVisible2 = false; this.load()">取 消</el-button>
+        <el-button type="success" @click="dialogFormVisible3 = true"><el-icon>
+            <CirclePlus />
+          </el-icon>新 增</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+  <el-dialog title="输入地址" v-model="dialogFormVisible3" style="max-width: 60vmin;">
+    <template #default>
+      <el-form :model="addressForm" ref="userForm">
+        <el-form-item prop="province">
+          <el-select v-model="addressForm.province" placeholder="选择省份">
+            <el-option v-for="item in provinces" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="detail">
+          <el-input type="textarea" v-model="addressForm.detail"  placeholder="请输入详细地址"></el-input>
+        </el-form-item>
+      </el-form>
+    </template>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogFormVisible3 = false;this.addressForm=[];">取 消</el-button>
+        <el-button type="success" @click="addAddress">确 定</el-button>
       </div>
     </template>
   </el-dialog>
@@ -103,7 +126,11 @@ export default {
         phone: '',
         sex: '',
       },
-      addressList:[],
+      addressList: [],
+      addressForm: {
+        province: '',
+        detail:'',
+      },
 
       options: [
         {
@@ -115,8 +142,43 @@ export default {
           label: '商家',
         }
       ],
+      provinces: [{ label: "北京市", value: "北京市" },
+      { label: "天津市", value: "天津市" },
+      { label: "河北省", value: "河北省" },
+      { label: "山西省", value: "山西省" },
+      { label: "内蒙古自治区", value: "内蒙古自治区" },
+      { label: "辽宁省", value: "辽宁省" },
+      { label: "吉林省", value: "吉林省" },
+      { label: "黑龙江省", value: "黑龙江省" },
+      { label: "上海市", value: "上海市" },
+      { label: "江苏省", value: "江苏省" },
+      { label: "浙江省", value: "浙江省" },
+      { label: "安徽省", value: "安徽省" },
+      { label: "福建省", value: "福建省" },
+      { label: "江西省", value: "江西省" },
+      { label: "山东省", value: "山东省" },
+      { label: "河南省", value: "河南省" },
+      { label: "湖北省", value: "湖北省" },
+      { label: "湖南省", value: "湖南省" },
+      { label: "广东省", value: "广东省" },
+      { label: "广西壮族自治区", value: "广西壮族自治区" },
+      { label: "海南省", value: "海南省" },
+      { label: "重庆市", value: "重庆市" },
+      { label: "四川省", value: "四川省" },
+      { label: "贵州省", value: "贵州省" },
+      { label: "云南省", value: "云南省" },
+      { label: "西藏自治区", value: "西藏自治区" },
+      { label: "陕西省", value: "陕西省" },
+      { label: "甘肃省", value: "甘肃省" },
+      { label: "青海省", value: "青海省" },
+      { label: "宁夏回族自治区", value: "宁夏回族自治区" },
+      { label: "新疆维吾尔自治区", value: "新疆维吾尔自治区" },
+      { label: "台湾省", value: "台湾省" },
+      { label: "香港特别行政区", value: "香港特别行政区" },
+      { label: "澳门特别行政区", value: "澳门特别行政区" }],
       dialogFormVisible: false,
-      dialogFormVisible2:false,
+      dialogFormVisible2: false,
+      dialogFormVisible3: false,
     }
   },
   methods: {
@@ -130,28 +192,28 @@ export default {
           type: 'warning',
         }
       )
-      .then(() => {
-        let tokenx = this.$cookies.get("token");
-        let config = {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Authorization": tokenx,
-          },
-        };
-        axios.post("user/modify", this.tempform, config).then(res => {
-          console.log(res);
-          this.load();
-          ElMessage.success("修改成功");
-          this.dialogFormVisible = false;
-        }
-        ).catch(err => {
-          console.log(err);
+        .then(() => {
+          let tokenx = this.$cookies.get("token");
+          let config = {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "Authorization": tokenx,
+            },
+          };
+          axios.post("user/modify", this.tempform, config).then(res => {
+            console.log(res);
+            this.load();
+            ElMessage.success("修改成功");
+            this.dialogFormVisible = false;
+          }
+          ).catch(err => {
+            console.log(err);
+          })
         })
-      })
-      .catch(() => {
-        this.load();
-        ElMessage.info("取消修改");
-      })
+        .catch(() => {
+          this.load();
+          ElMessage.info("取消修改");
+        })
     },
     load() {
       if (this.$cookies.get("token") == null) {
@@ -200,20 +262,71 @@ export default {
         })
       }
     },
-    getAddress(){
+    getAddress() {
       let tokenx = this.$cookies.get("token");
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.get("/addr/list", config).then(res => {
+        this.addressList = res.data.data.addrList
+        console.log(this.addressList);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    addAddress(){
+      let tokenx = this.$cookies.get("token");
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      console.log(this.addressForm)
+      this.axios.get("/addr/add", this.addressForm,config).then(res => {
+        console.log(res)
+        this.dialogFormVisible3 = false;
+        this.addressForm = [];
+        ElMessage.success("添加成功");
+        this.load()
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    handleDelete(deleteid) {
+      ElMessageBox.confirm(
+        '删除后无法恢复',
+        '警告',
+        {
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      ).then(() => {
+        let tokenx = this.$cookies.get("token");
+        console.log(tokenx)
         let config = {
           headers: {
             "Content-Type": "multipart/form-data ",
             "Authorization": tokenx,
           },
         };
-        axios.get("/addr/list", config).then(res => {
-          this.addressList = res.data.data.addrList
-          console.log(this.addressList);
+        this.axios.delete("/addr/del", {
+          params: {
+            "id": deleteid
+          }
+        }, config).then(res => {
+          this.dialogFormVisible2 = false
+          ElMessage.success("删除成功")
+          console.log(res);
+          this.load()
         }).catch(err => {
           console.log(err);
         })
+      })
     }
   },
   mounted() {
