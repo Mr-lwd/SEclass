@@ -132,8 +132,9 @@ export default {
           .post("/user/sign", data, config)
           .then((res) => {
             if (res.data.code == 100) {
+              console.log(res)
               alert("注册成功");
-              this.$router.push("/login");
+              // this.$router.push("/login");
             } else {
               alert(res.data.message);
             }
