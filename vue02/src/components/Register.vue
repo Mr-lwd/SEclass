@@ -118,7 +118,7 @@ export default {
         data.append("idCard", this.IDNum);
         data.append("mall", this.MailNum);
         data.append("name", this.TrueName);
-        data.append("nickname", this.UserName);
+        data.append("nickName", this.UserName);
         data.append("phone", this.TelNum);
         data.append("pwd", this.password);
         data.append("role", this.model == "用户" ? 1 : 2);

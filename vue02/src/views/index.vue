@@ -71,7 +71,7 @@ export default {
   methods: {
     init() {
       this.axios
-        .get("/goods/list?pageNum=1&pageSize=10")
+        .get("/goods/list?pageNum=1&pageSize=10&order=4")
         .then((res) => {
           console.log(res.data.data.goodsList);
           this.goodList = [
