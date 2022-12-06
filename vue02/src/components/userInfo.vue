@@ -11,6 +11,7 @@
       <van-cell title="角色" :value="form.model" />
     </van-cell-group>
     <el-button @click="(dialogFormVisible = true)">修改信息</el-button>
+    <el-button @click="(dialogFormVisible2 = true);getAddress()">地址管理</el-button>
   </div>
   <el-dialog title="用户信息" v-model="dialogFormVisible" style="max-width: 60vmin;">
     <template #default>
@@ -50,6 +51,24 @@
       </div>
     </template>
   </el-dialog>
+
+  <el-dialog title="用户信息" v-model="dialogFormVisible2" style="max-width: 60vmin;">
+    <template #default>
+      <el-table :data="addressList">
+        <!-- <el-table-column type="selection" width="40px"/> -->
+        <el-table-column prop="province" label="省份" align="center">
+        </el-table-column>
+        <el-table-column prop="detail" label="详细地址" align="center">
+        </el-table-column>
+    </el-table>
+    </template>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogFormVisible2 = false;this.load()">取 消</el-button>
+        <el-button type="primary" @click="save">修改</el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script>
@@ -84,6 +103,8 @@ export default {
         phone: '',
         sex: '',
       },
+      addressList:[],
+
       options: [
         {
           value: 1,
@@ -95,6 +116,7 @@ export default {
         }
       ],
       dialogFormVisible: false,
+      dialogFormVisible2:false,
     }
   },
   methods: {
@@ -120,6 +142,7 @@ export default {
           console.log(res);
           this.load();
           ElMessage.success("修改成功");
+          this.dialogFormVisible = false;
         }
         ).catch(err => {
           console.log(err);
@@ -176,6 +199,21 @@ export default {
           console.log(err);
         })
       }
+    },
+    getAddress(){
+      let tokenx = this.$cookies.get("token");
+        let config = {
+          headers: {
+            "Content-Type": "multipart/form-data ",
+            "Authorization": tokenx,
+          },
+        };
+        axios.get("/addr/list", config).then(res => {
+          this.addressList = res.data.data.addrList
+          console.log(this.addressList);
+        }).catch(err => {
+          console.log(err);
+        })
     }
   },
   mounted() {

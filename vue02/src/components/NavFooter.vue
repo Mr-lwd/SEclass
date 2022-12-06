@@ -1,24 +1,17 @@
 <template>
   <div class="footer">
     <div class="footer-logo">
-      <img src="../assets/logo.png" alt="" />
-      <p>小米商城</p>
+      <el-icon style="color: #ff6600;font-size: 5vmin;"><GoodsFilled /></el-icon>
+      <p>0元购商城</p>
     </div>
     <div class="footer-link">
-      <a href="https://www.imooc.com/u/1343480" target="_blank">河畔一角主页</a
-      ><span>|</span>
-      <a href="https://coding.imooc.com/class/113.html" target="_blank"
-        >Vue全栈课程</a
-      ><span>|</span>
-      <a href="https://coding.imooc.com/class/236.html" target="_blank"
-        >React全家桶课程</a
-      ><span>|</span>
-      <a href="https://coding.imooc.com/class/343.html" target="_blank"
-        >微信支付专项课程（H5+小程序+Node+Mongo）</a
-      >
+      JZH<span>|</span>
+      YYK<span>|</span>
+      LWD<span>|</span>
+      MYX
     </div>
     <div class="copyright">
-      Copyright ©2022 <span class="domain">mi.futurefe.com</span> All Rights
+      Copyright ©2022 <span class="domain">课设商城</span> All Rights
       Reserved.
     </div>
   </div>

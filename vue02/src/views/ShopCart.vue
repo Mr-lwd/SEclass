@@ -42,39 +42,7 @@ export default {
     }
   },
   mounted() {
-    let url = "shop/list"
-    let data = new FormData();
-    let tokenx = this.$cookies.get("token");
-    console.log(tokenx);
-    this.$store.commit("setmyToken", tokenx);
-    let ttoken = this.$store.getters.myToken;
-    console.log(ttoken)
-    let config = {
-      headers: {
-        "Content-Type": "multipart/form-data ",
-        "Authorization": tokenx,
-      },
-    };
-    axios.get(url, config).then(res => {
-      console.log(res);
-      let tmp = [];
-      let price = 0;
-      let sumall = 0;
-      let Myreslist = res.data.data.shopVoList;
-      let len = Myreslist.length;
-      for (let i = 0; i < len; i++) {
-        let ttmp = [];
-        price = Myreslist[i].goodsVo.goods.price * Myreslist[i].shop.num;
-        Myreslist[i].sum = price;
-        sumall += price;
-        tmp.push(Myreslist[i]);
-      }
-      this.sumAll = 0;
-      this.resList = tmp;
-      console.log(tmp)
-    }).catch(err => {
-      console.log(err);
-    })
+    this.load()
 
     // const internalInstance = getCurrentInstance(); // 有效
     // console.log(internalInstance);
@@ -86,18 +54,53 @@ export default {
 
   },
   methods: {
-    gotoInFo(id)
-    {
+    load() {
+      let url = "shop/list"
+      let data = new FormData();
+      let tokenx = this.$cookies.get("token");
+      console.log(tokenx);
+      this.$store.commit("setmyToken", tokenx);
+      let ttoken = this.$store.getters.myToken;
+      console.log(ttoken)
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.get(url, config).then(res => {
+        console.log(res);
+        let tmp = [];
+        let price = 0;
+        let sumall = 0;
+        let Myreslist = res.data.data.shopVoList;
+        let len = Myreslist.length;
+        for (let i = 0; i < len; i++) {
+          let ttmp = [];
+          price = Myreslist[i].goodsVo.goods.price * Myreslist[i].shop.num;
+          Myreslist[i].sum = price;
+          sumall += price;
+          tmp.push(Myreslist[i]);
+        }
+        this.sumAll = 0;
+        this.resList = tmp;
+        console.log(tmp)
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    gotoInFo(id) {
       console.log(id);
       this.$router.push({
-          path: '/GoodInfo',
-          query: {item: JSON.stringify(id.goods),
-            img: JSON.stringify(id.photos)}
+        path: '/GoodInfo',
+        query: {
+          item: JSON.stringify(id.goods),
+          img: JSON.stringify(id.photos)
         }
+      }
       )
     },
-    deleteCart(id)
-    {
+    deleteCart(id) {
       console.log(id);
       console.log(id.shop.id);
       // let data = {
@@ -110,17 +113,17 @@ export default {
           "Authorization": tokenx,
         },
       };
-      axios.delete("/shop/del",{
-        params:{
-            "id": id.shop.id
-          }
-      },config).then(
-        res=>{
+      axios.delete("/shop/del", {
+        params: {
+          "id": id.shop.id
+        }
+      }, config).then(
+        res => {
           console.log(res);
+          this.load()
           alert("删除成功");
         }
-      ).catch(err=>
-      {
+      ).catch(err => {
         console.log(err);
         alert("删除失败")
       })
@@ -129,8 +132,7 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
       let sum = 0;
-      for(let i = 0; i < val.length; i++)
-      {
+      for (let i = 0; i < val.length; i++) {
         sum += val[i].sum;
       }
       this.sumAll = sum;

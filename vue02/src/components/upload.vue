@@ -48,7 +48,7 @@
 </template>
   
 <script>
-import { thisExpression } from '@babel/types';
+import { ElMessage, ElMessageBox } from "element-plus";
 
 const COS = require('cos-js-sdk-v5');
 
@@ -80,6 +80,7 @@ export default {
     mounted() {
         let tokenx = this.$cookies.get("token");
         this.$store.commit("setmyToken", tokenx);
+        this.tokenx = tokenx;
         let ttoken = this.$store.getters.myToken;
         console.log(ttoken)
     },
@@ -189,6 +190,10 @@ export default {
             let data = new FormData();
             this.imgUrls.forEach((item) => data.append('files', item));
             this.axios.post('/goods/add', data, config).then(res => {
+                ElMessageBox({
+                    message: "上传成功",
+                    confirmButtonText: '确认',
+                })
                 console.log(res);
             }).catch(err => {
                 console.log(err);

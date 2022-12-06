@@ -2,7 +2,7 @@
   <el-container>
     <el-container>
       <asideMenu style="max-width: 20vmin;"></asideMenu>
-      <el-main>
+      <el-main style="min-height: 100vmin;">
         <router-view></router-view>
       </el-main>
     </el-container>

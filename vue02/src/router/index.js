@@ -56,11 +56,21 @@ const routes = [
     name: "manage",
     component: () => import("@/views/Manage.vue"),
     children: [
-    {
-      path: "/manage/addgood",
-      name: "addgood",
-      component: () => import("@/components/upload.vue"),
-    },
+      {
+        path: "/manage/addgood",
+        name: "addgood",
+        component: () => import("@/components/upload.vue"),
+      },
+      {
+        path: "/manage/changegood",
+        name: "changegood",
+        component: () => import("@/components/ChangeGood.vue"),
+      },
+      {
+        path: "/manage/orderlist",
+        name: "orderlist",
+        component: () => import("@/components/upload.vue"),
+      }
     ]
   }
 ];

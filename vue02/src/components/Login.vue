@@ -58,13 +58,14 @@ export default {
           this.$cookies.set("token", token, "1D");
           console.log(token);
           this.$router.push("/index");
+          console.log(res)
           ElMessage({
             message: '登录成功',
             type: 'success',
             duration: 1000,
-            onClose: () => {
-              this.$router.push('/index')
-            }
+            // onClose: () => {
+            //   this.$router.push('/index')
+            // }
           })
         })
         .catch((res) => {
