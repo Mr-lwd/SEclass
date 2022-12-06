@@ -81,13 +81,13 @@
           </el-select>
         </el-form-item>
         <el-form-item prop="detail">
-          <el-input type="textarea" v-model="addressForm.detail"  placeholder="请输入详细地址"></el-input>
+          <el-input type="textarea" v-model="addressForm.detail" placeholder="请输入详细地址"></el-input>
         </el-form-item>
       </el-form>
     </template>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogFormVisible3 = false;this.addressForm=[];">取 消</el-button>
+        <el-button @click="dialogFormVisible3 = false; this.addressForm = [];">取 消</el-button>
         <el-button type="success" @click="addAddress">确 定</el-button>
       </div>
     </template>
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import { RESOLVE_COMPONENT } from "@vue/compiler-core";
 import axios from "axios";
 import { ElMessage, ElMessageBox } from 'element-plus'
 
@@ -129,7 +130,7 @@ export default {
       addressList: [],
       addressForm: {
         province: '',
-        detail:'',
+        detail: '',
       },
 
       options: [
@@ -194,6 +195,7 @@ export default {
       )
         .then(() => {
           let tokenx = this.$cookies.get("token");
+          console.log(token)
           let config = {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -277,21 +279,32 @@ export default {
         console.log(err);
       })
     },
-    addAddress(){
-      let tokenx = this.$cookies.get("token");
+    addAddress() {
+      let tokenx = this.$store.getters.myToken;
+      console.log(this.addressForm)
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
           "Authorization": tokenx,
         },
+        params:{
+          "province":this.addressForm.province,
+          "detail":this.addressForm.detail
+        }
       };
-      console.log(this.addressForm)
-      this.axios.get("/addr/add", this.addressForm,config).then(res => {
-        console.log(res)
+      this.axios.get("/addr/add",config).then(res => {
+        this.dialogFormVisible2 = false;
         this.dialogFormVisible3 = false;
+        console.log(res)
         this.addressForm = [];
-        ElMessage.success("添加成功");
-        this.load()
+        if(res.data.code === 100){
+          ElMessage.success("添加成功");
+          this.load()
+        }else{
+          ElMessage.success("添加失败");
+          this.load()
+        }
+
       }).catch(err => {
         console.log(err);
       })
