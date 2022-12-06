@@ -16,12 +16,27 @@
           </el-table>
 
         </div>
+
         <el-divider>
           <el-icon><star-filled /></el-icon>
         </el-divider>
         <div class="sumall">
           总价格：{{sumall}}
         </div>
+        <el-divider>
+          <el-icon><star-filled /></el-icon>
+        </el-divider>
+        <div>
+          <div>
+          <el-button text @click="getAddress">
+            选择收货地址
+          </el-button>
+          </div>
+          <div>
+            地址:{{address}}
+          </div>
+        </div>
+
         <el-divider>
           <el-icon><star-filled /></el-icon>
         </el-divider>
@@ -37,12 +52,27 @@
         </div>
       </div>
     </el-card>
-
   </div>
+  <el-dialog v-model="dialogTableVisible" title="收货地址">
+    <el-table :data="addressList">
+      <!-- <el-table-column type="selection" width="40px"/> -->
+      <el-table-column prop="province" label="省份" align="center">
+      </el-table-column>
+      <el-table-column prop="detail" label="详细地址" align="center">
+      </el-table-column>
+      <el-table-column label="选择">
+        <template #default="scope">
+          <el-radio v-model="addressid" :label="scope.row.id">选择</el-radio>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-button @click="selectAddrID">确认</el-button>
+  </el-dialog>
 </template>
 
 <script>
 import axios from "axios";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 export default {
   name: "PayList",
@@ -51,8 +81,13 @@ export default {
       ERCodeUrl : "https://api.qrserver.com/v1/create-qr-code/?size=150×150&data={'money':0,'username':'test'}",
       baseUrl : "https://api.qrserver.com/v1/create-qr-code/?size=150×150&data=",
       sumall : 0,
-      select : null
-    }
+      select : null,
+      address : "北京",
+      addressid: 0,
+      dialogTableVisible: false,
+      addressList: [],
+      selectAddId: 0,
+  }
   },
   mounted() {
       this.sumall = JSON.parse(this.$route.query.money);
@@ -62,6 +97,34 @@ export default {
       this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) +"  detail:"+ JSON.stringify(this.select);
   },
   methods:{
+    selectAddrID()
+    {
+      console.log(this.addressid);
+      for(let i = 0; i < this.addressList.length; i++)
+      {
+        if(this.addressList[i].id == this.addressid)
+        {
+          this.address = this.addressList[i].detail;
+        }
+      }
+      this.dialogTableVisible = false;
+    },
+    getAddress() {
+      this.dialogTableVisible = true
+      let tokenx = this.$cookies.get("token");
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.get("/addr/list", config).then(res => {
+        this.addressList = res.data.data.addrList
+        console.log(this.addressList);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     goback()
     {
       this.$router.push("/ShopCar");
@@ -82,7 +145,7 @@ export default {
       {
         console.log(t[i]);
         let data = new FormData();
-        data.append("addrId", t[i].shop.userId);
+        data.append("addrId", this.addressid);
         // console.log(t[i].shop.userId)
         data.append("goodsId", t[i].shop.goodsId);
         data.append("num", t[i].shop.num)
