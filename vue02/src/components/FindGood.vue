@@ -5,7 +5,8 @@
             <button class="btn btn-outline-success" @click="load" style="background-color: #ff6600">
                 <i class="bi bi-search"></i>
             </button>
-            <el-button style="margin-left: 3vmin;" type="info" @click="getOrder = 4; strLike = ''; load()">重置</el-button>
+            <el-button style="margin-left: 3vmin;" type="info"
+                @click="getOrder = 4; strLike = ''; load()">重置</el-button>
             <el-select style="margin-left: 3vmin;" v-model="orders.value" placeholder="请选择" @change="orderChange()">
                 <el-option v-for="item in orders" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
@@ -27,7 +28,7 @@
                         <p class="price" @click="addCart(item.goods.id)">
                             {{ item.goods.price }}元
                         </p>
-                        <div><el-icon @click="goToCart(item)">
+                        <div><el-icon @click="goToCart(item)" style="font-size: 28px;">
                                 <ShoppingCart />
                             </el-icon></div>
                     </div>
@@ -96,13 +97,21 @@ export default {
             this.axios.get("/goods/search", config).then(res => {
                 console.log(res)
                 this.goodList = [
-                    res.data.data.result.slice(0, 6),
-                    res.data.data.result.slice(6, 12),
+                    res.data.data.result.slice(0, 5),
+                    res.data.data.result.slice(5, 10),
                 ];
             }).catch(err => {
                 console.log(err)
             })
+        },
+        goToCart(item) {
+            this.$router.push({
+            path: '/GoodInfo',
+            query: {item: JSON.stringify(item.goods),
+                    img: JSON.stringify(item.photos)}
         }
+      )
+    },
     }
 }
 </script>
@@ -136,24 +145,24 @@ export default {
         @include flex();
         width: 100%;
         margin-bottom: 14px;
-        vertical-align: middle;
 
         &:last-child {
             margin-bottom: 0;
         }
 
         .item {
-            width: 10vmin;
-            height: 302px;
+            border: 1px solid;
+            width: 18%;
+            height: 360px;
             background-color: $colorG;
             text-align: center;
 
             span {
                 display: inline-block;
                 width: 67px;
-                height: 24px;
-                font-size: 14px;
-                line-height: 24px;
+                height: 28px;
+                font-size: 28px;
+                line-height: 28px;
                 color: $colorG;
 
                 &.new-pro {
@@ -174,21 +183,22 @@ export default {
 
             .item-info {
                 h3 {
-                    font-size: $fontJ;
+                    font-size: 20px;
                     color: $colorB;
-                    line-height: $fontJ;
+                    line-height: 20px;
                     font-weight: bold;
                 }
 
                 p {
                     color: $colorD;
-                    line-height: 13px;
+                    line-height: 26px;
                     margin: 6px auto 13px;
+                    font-size: 16px;
                 }
 
                 .price {
                     color: #f20a0a;
-                    font-size: $fontJ;
+                    font-size: 18px;
                     font-weight: bold;
                     cursor: pointer;
 
