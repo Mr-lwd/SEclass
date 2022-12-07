@@ -7,7 +7,7 @@
       <el-table-column property="goodsVo.goods.price" label="商品单价" show-overflow-tooltip />
       <el-table-column property="shop.num" label="商品数" show-overflow-tooltip>
         <template #default="scope">
-          <el-input-number v-model="scope.row.shop.num" :min="1" :max="10" @change="handleChange(scope.row)" />
+          <el-input-number v-model="scope.row.shop.num" :min="1" :max="scope.row.goodsVo.goods.store" @change="handleChange(scope.row)" />
         </template>
       </el-table-column>
       <el-table-column property="sum" label="总价" show-overflow-tooltip />
@@ -21,7 +21,7 @@
     <div style="text-align: center; margin-top: 30px; margin-bottom: 30px">
       总价格：{{ sumAll }}
       <div style="margin-top: 20px">
-        <el-button>结算</el-button>
+        <el-button @click="gotoPay">结算</el-button>
       </div>
     </div>
   </div>
@@ -100,6 +100,17 @@ export default {
       }
       )
     },
+    gotoPay()
+    {
+      this.$router.push({
+        path:'/pay',
+      query:{
+        money: JSON.stringify(this.sumAll),
+        select: JSON.stringify(this.multipleSelection),
+        from: JSON.stringify(1)
+      }
+      });
+    },
     deleteCart(id) {
       console.log(id);
       console.log(id.shop.id);
@@ -131,11 +142,14 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
+      console.log("val")
+      console.log(val);
       let sum = 0;
       for (let i = 0; i < val.length; i++) {
         sum += val[i].sum;
       }
       this.sumAll = sum;
+
     },
     handleChange(row) {
       console.log(row);
@@ -150,6 +164,28 @@ export default {
         tmp.push(Myreslist[i]);
       }
       this.resList = tmp;
+      let url = "shop/modify";
+      let data = new FormData();
+      data.append("num", row.shop.num);
+      console.log( row.shop.num);
+      data.append("shopId", row.shop.id);
+      let tokenx = this.$store.getters.myToken;
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data ",
+          "Authorization": tokenx,
+        },
+      };
+      axios.post(url, data, config).then(
+        res=>{
+          console.log("okk");
+          console.log(res);
+      }
+      ).catch(
+        err=>{
+          console.log(err);
+        }
+      )
     }
   }
 }

@@ -9,8 +9,10 @@
       <van-cell title="性别" :value="form.sex" />
       <van-cell title="角色" :value="form.model" />
     </van-cell-group>
+    <div class="button">
     <el-button @click="(dialogFormVisible = true)">修改信息</el-button>
     <el-button @click="(dialogFormVisible2 = true); getAddress()">地址管理</el-button>
+    </div>
   </div>
   <el-dialog title="用户信息" v-model="dialogFormVisible" style="max-width: 60vmin;">
     <template #default>
@@ -347,5 +349,8 @@ export default {
 </script>
 
 <style scoped>
-
+.button{
+  display: flex;
+  justify-content: center;
+}
 </style>

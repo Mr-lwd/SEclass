@@ -47,7 +47,7 @@
         </div>
         <div style="text-align: center;margin-top: 20px">
           <el-button @click="goToCart(item.id)">加入购物车</el-button>
-          <el-button>立即购买</el-button>
+          <el-button @click="buybuybuy">立即购买</el-button>
         </div>
       </el-card>
     </div>
@@ -166,6 +166,19 @@ export default {
         alert("添加失败");
       })
     },
+    buybuybuy()
+    {
+      console.log(this.item.price * this.num);
+      console.log(this.item);
+      this.$router.push({
+        path:'/pay',
+        query:{
+          money: JSON.stringify(this.item.price * this.num),
+          select: JSON.stringify(this.item),
+          from: JSON.stringify(0)
+        }
+      });
+    }
   }
 };
 </script>
