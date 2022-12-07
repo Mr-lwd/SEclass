@@ -2,7 +2,6 @@
   <div style="width: 50vmin;margin:0 auto;margin-bottom: 10vmin;">
     <van-cell-group inset style>
       <van-cell title="用户名" :value="form.UserName" />
-      <van-cell title="密码" :value="form.password" />
       <van-cell title="实名" :value="form.TrueName" />
       <van-cell title="电话" :value="form.TelNum" />
       <van-cell title="邮箱" :value="form.MailNum" />
@@ -42,7 +41,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="dialogFormVisible = false; this.load()">取 消</el-button>
-        <el-button type="primary" @click="save">修改</el-button>
+        <el-button type="primary" @click="save" >修改</el-button>
       </div>
     </template>
   </el-dialog>
@@ -192,16 +191,15 @@ export default {
           cancelButtonText: '取消',
           type: 'warning',
         }
-      )
-        .then(() => {
+      ).then(() => {
           let tokenx = this.$cookies.get("token");
-          console.log(token)
+          console.log(tokenx)
           let config = {
             headers: {
               "Content-Type": "multipart/form-data",
               "Authorization": tokenx,
             },
-          };
+          };  
           axios.post("user/modify", this.tempform, config).then(res => {
             console.log(res);
             this.load();
@@ -241,6 +239,7 @@ export default {
           },
         };
         axios.post("/user/info", data, config).then(res => {
+          console.log(res)
           let tmp = res.data.data.user;
           this.form.UserName = tmp.nickName;
           this.tempform.nickName = tmp.nickName;
