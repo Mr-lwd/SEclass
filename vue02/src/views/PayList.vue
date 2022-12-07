@@ -27,13 +27,14 @@
           <el-icon><star-filled /></el-icon>
         </el-divider>
         <div>
-          <div>
-          <el-button text @click="getAddress">
-            选择收货地址
-          </el-button>
-          </div>
-          <div>
+
+          <div style="text-align: center">
             地址:{{address}}
+          </div>
+          <div style="text-align: center">
+            <el-button text @click="getAddress">
+              选择收货地址
+            </el-button>
           </div>
         </div>
 
@@ -66,7 +67,9 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-button @click="selectAddrID">确认</el-button>
+    <div style="display: flex; justify-content: center">
+    <el-button @click="selectAddrID" style="margin: 20px 0;">确认</el-button>
+    </div>
   </el-dialog>
 </template>
 
@@ -82,8 +85,8 @@ export default {
       baseUrl : "https://api.qrserver.com/v1/create-qr-code/?size=150×150&data=",
       sumall : 0,
       select : null,
-      address : "北京",
-      addressid: 0,
+      address : "未选择地址",
+      addressid: -1,
       dialogTableVisible: false,
       addressList: [],
       selectAddId: 0,
@@ -133,6 +136,7 @@ export default {
     {
       let url = "orders/add";
       let tokenx = this.$cookies.get("token");
+      console.log(tokenx)
       let config = {
           headers: {
             "Content-Type": "multipart/form-data ",
@@ -146,14 +150,17 @@ export default {
         console.log(t[i]);
         let data = new FormData();
         data.append("addrId", this.addressid);
-        // console.log(t[i].shop.userId)
+        // console.log(this.addressid);
         data.append("goodsId", t[i].shop.goodsId);
+        // console.log(t[i].shop.goodsId)
         data.append("num", t[i].shop.num)
+        // console.log(t[i].shop.num)
         data.append("state", 1)
-        //data.append("gmtPay", new Date());
+        // console.log(1)
         data.append("totalPrice", t[i].sum);
         // console.log(t[i].sum)
-        axios.post(url,data,config).catch(res=>{
+        // console.log(t[i].sum)
+        axios.post(url,data,config).then(res=>{
           console.log(res);
           console.log("添加成功");
         }).catch(err=>{
