@@ -8,13 +8,18 @@
       </template>
       <div class="card-body">
         <div class="orderList">
-          <el-table ref="multipleTableRef" :data="select" style="width: 100%">
+          <el-table ref="multipleTableRef" :data="select" style="width: 100%" v-if="fromPage == 1">
             <el-table-column property="goodsVo.goods.name" label="商品" width="120" />
             <el-table-column property="goodsVo.goods.price" label="商品单价" show-overflow-tooltip />
             <el-table-column property="shop.num" label="商品数" show-overflow-tooltip></el-table-column>
             <el-table-column property="sum" label="价格" show-overflow-tooltip></el-table-column>
           </el-table>
-
+          <div class="buybuybuy" v-if="fromPage == 0">
+            <div>商品名字：{{item.name}}</div>
+            <div>商品信息：{{item.detail}}</div>
+            <div>单价:{{item.price}}</div>
+            <div>购买数量:{{this.sumall/this.item.price}}</div>
+          </div>
         </div>
 
         <el-divider>
@@ -90,14 +95,28 @@ export default {
       dialogTableVisible: false,
       addressList: [],
       selectAddId: 0,
+      fromPage : -1,
+      item: null
   }
   },
   mounted() {
-      this.sumall = JSON.parse(this.$route.query.money);
-      this.select = JSON.parse(this.$route.query.select);
-      console.log(this.sumall);
-      console.log(this.select);
-      this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) +"  detail:"+ JSON.stringify(this.select);
+      this.fromPage = JSON.parse(this.$route.query.from);
+      console.log(this.fromPage);
+      if(this.fromPage == 1) {
+        this.sumall = JSON.parse(this.$route.query.money);
+        this.select = JSON.parse(this.$route.query.select);
+        console.log(this.sumall);
+        console.log(this.select);
+        this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) + "  detail:" + JSON.stringify(this.select);
+      }
+      else
+      {
+        this.sumall = JSON.parse(this.$route.query.money);
+        this.item = JSON.parse(this.$route.query.select);
+        this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) + "  detail:" + JSON.stringify(this.item);
+        console.log("xx");
+        console.log(this.item)
+      }
   },
   methods:{
     selectAddrID()
@@ -134,40 +153,91 @@ export default {
     },
     addOrderList()
     {
-      let url = "orders/add";
-      let tokenx = this.$cookies.get("token");
-      console.log(tokenx)
-      let config = {
-          headers: {
-            "Content-Type": "multipart/form-data ",
-            "Authorization": tokenx,
-          },
-        };
-      let t = this.select;
-      let len = t.length;
-      for(let i = 0; i < len; i++)
-      {
-        console.log(t[i]);
-        let data = new FormData();
-        data.append("addrId", this.addressid);
-        // console.log(this.addressid);
-        data.append("goodsId", t[i].shop.goodsId);
-        // console.log(t[i].shop.goodsId)
-        data.append("num", t[i].shop.num)
-        // console.log(t[i].shop.num)
-        data.append("state", 1)
-        // console.log(1)
-        data.append("totalPrice", t[i].sum);
-        // console.log(t[i].sum)
-        // console.log(t[i].sum)
-        axios.post(url,data,config).then(res=>{
-          console.log(res);
-          console.log("添加成功");
-        }).catch(err=>{
-          console.log(err);
-        })
+      if(this.select != null || this.item != null) {
+        if(this.addressid != -1) {
+          if(this.fromPage == 1) {
+            let url = "orders/add";
+            let tokenx = this.$cookies.get("token");
+            console.log(tokenx)
+            let config = {
+              headers: {
+                "Content-Type": "multipart/form-data ",
+                "Authorization": tokenx,
+              },
+            };
+            let t = this.select;
+            let len = t.length;
+            for (let i = 0; i < len; i++) {
+              console.log(t[i]);
+              let data = new FormData();
+              data.append("addrId", this.addressid);
+              // console.log(this.addressid);
+              data.append("goodsId", t[i].shop.goodsId);
+              // console.log(t[i].shop.goodsId)
+              data.append("num", t[i].shop.num)
+              // console.log(t[i].shop.num)
+              data.append("state", 1)
+              // console.log(1)
+              data.append("totalPrice", t[i].sum);
+              // console.log(t[i].sum)
+              // console.log(t[i].sum)
+              axios.post(url, data, config).then(res => {
+                console.log(res);
+                console.log("添加成功");
+              }).catch(err => {
+                console.log(err);
+              })
+              let url2 = "shop/del"
+              let config2 = {
+                headers: {
+                  "Content-Type": "multipart/form-data ",
+                  "Authorization": tokenx
+                },
+                params: {
+                  id: this.select[i].shop.id
+                }
+              };
+              axios.delete(url2, config2).then(
+                res => {
+                  console.log(res);
+                  console.log("ok");
+                }
+              ).catch(err => {
+                console.log(err);
+              })
+              // console.log(this.select.shop.id);
+              // console.log(this.select[i].shop.id)
+            }
+          }
+          else {
+            let data = new FormData();
+            console.log(this.item);
+            data.append("addrId", this.addressid);
+            // console.log(this.addressid);
+            data.append("goodsId",this.item.id);
+            // console.log(t[i].shop.goodsId)
+            data.append("num", this.sumall/this.item.price);
+            // console.log(t[i].shop.num)
+            data.append("state", 1)
+            // console.log(1)
+            data.append("totalPrice", this.sumall);
+            // console.log(t[i].sum)
+            // console.log(t[i].sum)
+            // axios.post(url, data, config).then(res => {
+            //   console.log(res);
+            //   console.log("添加成功");
+            // }).catch(err => {
+            //   console.log(err);
+            // })
+          }
+        }
+        else {
+          alert("请选择地址");
+        }
       }
-
+      else {
+        alert("请添加商品");
+      }
     }
   }
 };
@@ -192,6 +262,13 @@ export default {
     .orderList{
       text-align: center;
       margin-bottom: 20px;
+      width: 430px;
+      .buybuybuy{
+        font-size: 15px;
+        div{
+          margin: 10px 0;
+        }
+      }
     }
     .sumall{
       font-size: large;
