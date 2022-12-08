@@ -10,9 +10,9 @@
         navigation
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
-
+        style="height: 540px;width:100%"
       >
-        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i">
+        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%">
           <img :src="item.url" alt="" style="width: 100%;"/>
         </swiper-slide>
       </swiper>
