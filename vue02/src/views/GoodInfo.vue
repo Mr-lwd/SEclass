@@ -1,15 +1,16 @@
 <template>
   <div style="display:flex; align-items: center;">
-    <div style="width: 500px; margin-left: 300px">
+    <div style="width: 500px;  margin-left: 300px">
       <swiper
         :modules="modules"
         :loop="true"
         :slides-per-view="1"
         :space-between="50"
-        :autoplay="{ autoplay: true, delay: 4000, disableOnInteraction: false }"
+        :autoplay="{ autoplay: true, delay: 1000, disableOnInteraction: false }"
         navigation
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
+
       >
         <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i">
           <img :src="item.url" alt="" style="width: 100%;"/>
@@ -24,7 +25,7 @@
           </div>
         </template>
         <div>
-          <el-descriptions title="商品信息" class="info">
+          <el-descriptions title="商品信息" class="info"  :column="1">
 
               <el-descriptions-item label="商品名" class="detail">{{item.name}}</el-descriptions-item>
 
@@ -59,6 +60,7 @@ import axios from "axios";
 import { Swiper } from "swiper/vue";
 import { SwiperSlide } from "swiper/vue";
 import 'swiper/css';
+import 'swiper/css/bundle'
 import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
 export default {
   name: "GoodInfo",
@@ -86,20 +88,22 @@ export default {
       },
       img: ['https://slynium-mall.oss-cn-hangzhou.aliyuncs.com/202cd611-3a0d-485d-a596-d2fd18c63df0.png'],
       imglist: null,
+      modules: [Pagination, Navigation,Autoplay],
     }
   },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log('slide change');
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-    };
-  },
+  // setup() {
+  //   // const onSwiper = (swiper) => {
+  //   //   console.log(swiper);
+  //   // };
+  //   // const onSlideChange = () => {
+  //   //   console.log('slide change');
+  //   // };
+  //   // return {
+  //   //   onSwiper,
+  //   //   onSlideChange,
+  //   // };
+  //
+  // },
   mounted() {
     this.item =  JSON.parse(this.$route.query.item);
     if(JSON.parse(this.$route.query.img).length > 0)
