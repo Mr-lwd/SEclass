@@ -11,6 +11,7 @@
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
         style="height: 540px;width:100%"
+        effect="cards"
       >
         <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%">
           <img :src="item.url" alt="" style="width: 100%;"/>
@@ -60,8 +61,9 @@ import axios from "axios";
 import { Swiper } from "swiper/vue";
 import { SwiperSlide } from "swiper/vue";
 import 'swiper/css';
-import 'swiper/css/bundle'
-import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import 'swiper/css/bundle';
+import "swiper/css/effect-cards";
+import { Autoplay, Navigation, Pagination, Scrollbar,EffectCards} from "swiper";
 export default {
   name: "GoodInfo",
   components:{
@@ -70,7 +72,8 @@ export default {
     Autoplay,
     Pagination,
     Navigation,
-    Scrollbar
+    Scrollbar,
+    EffectCards
   },
   data(){
     return{
@@ -88,7 +91,7 @@ export default {
       },
       img: ['https://slynium-mall.oss-cn-hangzhou.aliyuncs.com/202cd611-3a0d-485d-a596-d2fd18c63df0.png'],
       imglist: null,
-      modules: [Pagination, Navigation,Autoplay],
+      modules: [Pagination, Navigation,Autoplay,EffectCards],
     }
   },
   // setup() {
