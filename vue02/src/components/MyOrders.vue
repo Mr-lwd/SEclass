@@ -1,7 +1,5 @@
 <template>
     <el-table :data="list">
-        <el-table-column prop="goodsVo.goods.id" label="商品ID" align="center">
-        </el-table-column>
         <el-table-column prop="goodsVo.goods.name" label="商品名称" align="center">
         </el-table-column>
         <el-table-column prop="orders.totalPrice" label="价格" align="center">
@@ -21,32 +19,27 @@
         </el-table-column>
         <el-table-column label="操作" align="center">
             <template #default="scope">
-                <el-button style="width: 6vmin;" type="default" @click.prevent="handleEdit(scope.row)">修改</el-button>
-                <el-button style="width: 6vmin" type="danger" @click.prevent="handleDelete(scope.row.orders.id)">删除</el-button>
+                <el-button style="width: 6vmin;" type="default" @click.prevent="handleEdit(scope.row)">更改</el-button>
             </template>
         </el-table-column>
     </el-table>
     <el-dialog title="详细信息" v-model="dialogFormVisible" style="max-width: 60vmin;">
         <template #default>
             <el-form label-width="10vmin" style="margin: 3vmin;" label-position="right" size="default">
-                <el-form-item label="商品ID">
-                    <el-input disabled v-model="form.goodsVo.goods.id" autocomplete="off"></el-input>
-                </el-form-item>
                 <el-form-item label="商品名称">
                     <el-input disabled v-model="form.goodsVo.goods.name" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="价格">
-                    <el-input disabled v-model="form.orders.totalPrice" autocomplete="off"></el-input>
+                    <el-input disabled  v-model="form.orders.totalPrice" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="快递单号">
-                    <el-input v-model="form.orders.exNum" autocomplete="off"></el-input>
+                    <el-input disabled v-model="form.orders.exNum" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="发货时间">
-                    <el-date-picker v-model="form.orders.gmtDeliver" type="datetime" placeholder="暂无"
-                        format="YYYY/MM/DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" />
+                    <el-date-picker disabled v-model="form.orders.gmtDeliver" type="datetime" placeholder="暂无"/>
                 </el-form-item>
                 <el-form-item label="收货时间">
-                    <el-date-picker disabled v-model="form.orders.gmtReceive" type="datetime" placeholder="暂无"/>
+                    <el-date-picker  v-model="form.orders.gmtReceive" type="datetime" placeholder="暂无"/>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-select v-model="form.orders.state" placeholder="Select">
@@ -82,12 +75,12 @@ export default {
             },
             states: [
                 {
-                    value: 1,
-                    label: '配送中',
+                    value: 3,
+                    label: '收货成功',
                 },
                 {
-                    value: 4,
-                    label: '退货完成',
+                    value: 2,
+                    label: '退货',
                 },
                 {
                     value: 0,
@@ -95,16 +88,15 @@ export default {
                     disabled:true,
                 },
                 {
-                    value: 2,
-                    label: '退货中',
+                    value: 1,
+                    label: '配送中',
                     disabled:true,
                 },
                 {
-                    value: 3,
-                    label: '收货成功',
+                    value: 4,
+                    label: '退货完成',
                     disabled:true,
                 },
-                
             ]
         }
     },
@@ -161,38 +153,37 @@ export default {
                 console.log(err);
             })
         },
-        handleDelete(deleteid) {
-
-            ElMessageBox.confirm(
-                '删除后无法恢复',
-                '警告',
-                {
-                    confirmButtonText: '确认',
-                    cancelButtonText: '取消',
-                    type: 'warning',
-                }
-            ).then(() => {
-                let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
-                let config = {
-                    headers: {
-                        "Content-Type": "multipart/form-data ",
-                        "Authorization": tokenx,
-                    },
-                };
-                this.axios.delete("/orders/del", {
-                    params: {
-                        "id": deleteid
-                    }
-                }, config).then(res => {
-                    ElMessage.success("删除成功")
-                    console.log(res);
-                    this.load()
-                }).catch(err => {
-                    console.log(err);
-                })
-            })
-        }
+        // handleDelete(deleteid) {
+        //     ElMessageBox.confirm(
+        //         '删除后无法恢复',
+        //         '警告',
+        //         {
+        //             confirmButtonText: '确认',
+        //             cancelButtonText: '取消',
+        //             type: 'warning',
+        //         }
+        //     ).then(() => {
+        //         let tokenx = this.$cookies.get("token");
+        //         console.log(tokenx)
+        //         let config = {
+        //             headers: {
+        //                 "Content-Type": "multipart/form-data ",
+        //                 "Authorization": tokenx,
+        //             },
+        //         };
+        //         this.axios.delete("/orders/del", {
+        //             params: {
+        //                 "id": deleteid
+        //             }
+        //         }, config).then(res => {
+        //             ElMessage.success("删除成功")
+        //             console.log(res);
+        //             this.load()
+        //         }).catch(err => {
+        //             console.log(err);
+        //         })
+        //     })
+        // }
     }
 }
 </script>

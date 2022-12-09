@@ -13,7 +13,7 @@
               username
           }}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
-          <a href="/#/order/list" v-if="username">我的订单</a>
+          <a href="javascript:;" v-if="username" @click="gotoMyOrder" >我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
               class="badge bg-secondary">1111</span></a>
         </div>
@@ -112,6 +112,9 @@ export default {
     },
     goToCart() {
       this.$router.push("/ShopCar");
+    },
+    gotoMyOrder(){
+      this.$router.push("/myorders");
     },
     findGoods(){
       this.$router.push({
