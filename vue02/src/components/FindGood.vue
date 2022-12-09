@@ -15,7 +15,7 @@
     <div>
         <div class="list-box" v-if="goodList">
             <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
-                <div class="item" v-for="(item, j) in arr" v-bind:key="j">
+                <div style="border: 2px solid #ff6600;overflow: hidden;" class="item" v-for="(item, j) in arr" v-bind:key="j">
                     <div class="item-img" v-if="item.photos[0]">
                         <img :src="item.photos[0].url" alt="" />
                     </div>
@@ -24,13 +24,14 @@
                     </div>
                     <div class="item-info">
                         <h3>{{ item.goods.name }}</h3>
-                        <p>{{ item.goods.detail }}</p>
                         <p class="price" @click="addCart(item.goods.id)">
                             {{ item.goods.price }}元
                         </p>
                         <div><el-icon @click="goToCart(item)" style="font-size: 28px;">
                                 <ShoppingCart />
                             </el-icon></div>
+                        <!-- <p>{{ item.goods.detail }}</p> -->
+
                     </div>
                 </div>
             </div>
@@ -104,17 +105,19 @@ export default {
                 ];
             }).catch(err => {
                 // console.log(err)
-              ElMessage.error("查询失败")
+                ElMessage.error("查询失败")
             })
         },
         goToCart(item) {
             this.$router.push({
-            path: '/GoodInfo',
-            query: {item: JSON.stringify(item.goods),
-                    img: JSON.stringify(item.photos)}
-        }
-      )
-    },
+                path: '/GoodInfo',
+                query: {
+                    item: JSON.stringify(item.goods),
+                    img: JSON.stringify(item.photos)
+                }
+            }
+            )
+        },
     }
 }
 </script>
@@ -154,7 +157,6 @@ export default {
         }
 
         .item {
-            border: 1px solid;
             width: 18%;
             height: 360px;
             background-color: $colorG;
@@ -204,7 +206,6 @@ export default {
                     font-size: 18px;
                     font-weight: bold;
                     cursor: pointer;
-
                 }
             }
         }

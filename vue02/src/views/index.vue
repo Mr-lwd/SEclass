@@ -9,20 +9,20 @@
           </div>
           <div class="list-box" v-if="goodList">
             <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
-              <div class="item" v-for="(item, j) in arr" v-bind:key="j">
+              <div @click="goToCart(item)" style="border: 2px solid #ff6600;overflow: hidden;" class="item" v-for="(item, j) in arr" v-bind:key="j">
                 <div class="item-img" v-if="item.photos[0]">
                   <img :src="item.photos[0].url" alt="" />
                 </div>
-                <div class="item-img" v-if="!item.photos[0]">
+                <div  class="item-img" v-if="!item.photos[0]">
                   <img src="../assets/logo.png" alt="" />
                 </div>
                 <div class="item-info">
-                  <h3>{{ item.goods.name }}</h3>
-                  <p>{{ item.goods.detail }}</p>
+                  <h3>{{ item.goods.name }}</h3>、
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
-                  <div><el-icon @click="goToCart(item)"><ShoppingCart /></el-icon></div>
+                  <p>{{ item.goods.detail }}</p>
+                  
                 </div>
               </div>
             </div>
@@ -315,7 +315,6 @@ export default {
                 cursor: pointer;
 
                 &:after {
-                  @include bgImg(22px, 22px, "../assets/logo.png");
                   content: " ";
                   margin-left: 5px;
                   vertical-align: middle;
