@@ -67,11 +67,11 @@ export default {
     setusername() {
       // return this.$store.state.username;
       this.username = this.$cookies.get("username");
-      console.log("username:" + this.username)
+      // console.log("username:" + this.username)
     },
     setrole() {
       this.role = this.$cookies.get("role");
-      console.log("role:" + this.role)
+      // console.log("role:" + this.role)
     },
     login() {
       this.$router.push({

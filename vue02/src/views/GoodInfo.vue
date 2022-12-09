@@ -64,6 +64,7 @@ import 'swiper/css';
 import 'swiper/css/bundle';
 import "swiper/css/effect-cards";
 import { Autoplay, Navigation, Pagination, Scrollbar,EffectCards} from "swiper";
+import { ElMessage } from "element-plus";
 export default {
   name: "GoodInfo",
   components:{
@@ -111,7 +112,7 @@ export default {
     this.item =  JSON.parse(this.$route.query.item);
     if(JSON.parse(this.$route.query.img).length > 0)
     this.img = JSON.parse(this.$route.query.img);
-    console.log(this.img);
+    // console.log(this.img);
     let immg  = [];
     if(this.img.length > 0) {
       for (let i = 0; i < this.img.length; i++) {
@@ -119,8 +120,8 @@ export default {
       }
       this.imglist = immg;
     }
-    console.log(immg);
-    console.log(this.img[0].url)
+    // console.log(immg);
+    // console.log(this.img[0].url)
     // let mySwiper = new Swiper ('.swiper', {
     //   direction: 'vertical', // 垂直切换选项
     //   loop: true, // 循环模式选项
@@ -144,17 +145,17 @@ export default {
   },
   methods:{
     goToCart(id) {
-      console.log(id);
+      // console.log(id);
       let url = "shop/add"
       let data = new FormData();
       data.append("goodsId",id);
       //后面加一个加减
       data.append("num",this.num);
-      console.log(this.num);
+      // console.log(this.num);
       let tokenx = this.$cookies.get("token");
       this.$store.commit("setmyToken", tokenx);
       let Mytoken = this.$store.getters.myToken;
-      console.log(Mytoken)
+      // console.log(Mytoken)
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
@@ -162,21 +163,24 @@ export default {
         },
       };
       axios.post(url,data,config).then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.data.code == 100)
-        alert("添加成功");
+        // alert("添加成功");
+        ElMessage.success("添加成功");
         else {
-          alert("添加失败");
+          // alert("添加失败");
+          ElMessage.error("添加失败");
         }
       }).catch(err=>{
-        console.log(err);
-        alert("添加失败");
+        // console.log(err);
+        // alert("添加失败");
+        ElMessage.error("添加失败");
       })
     },
     buybuybuy()
     {
-      console.log(this.item.price * this.num);
-      console.log(this.item);
+      // console.log(this.item.price * this.num);
+      // console.log(this.item);
       this.$router.push({
         path:'/pay',
         query:{

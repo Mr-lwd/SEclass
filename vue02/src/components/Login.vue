@@ -85,8 +85,10 @@ export default {
           });
       }
       else{
-        alert("验证码错误");
+        // alert("验证码错误");
+        ElMessage.error("验证码错误");
       }
+
     },
     draw(show_num) {
       var canvas_width =  document.querySelector("#canvas").clientWidth;

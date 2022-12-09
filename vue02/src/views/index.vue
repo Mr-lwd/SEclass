@@ -73,12 +73,12 @@ export default {
       this.axios
         .get("/goods/list?pageNum=1&pageSize=10&order=4")
         .then((res) => {
-          console.log(res.data.data.goodsList);
+          // console.log(res.data.data.goodsList);
           this.goodList = [
             res.data.data.goodsList.slice(0, 4),
             res.data.data.goodsList.slice(4, 8),
           ];
-          console.log(this.goodList[1]);
+          // console.log(this.goodList[1]);
           // console.log(this.goodList[1][2].photos);
         })
         .catch((e) => {});
@@ -87,7 +87,7 @@ export default {
 
     },
     goToCart(id) {
-      console.log(id);
+      // console.log(id);
       // let url = "shop/add"
       // let data = new FormData();
       // data.append("goodsId",id);

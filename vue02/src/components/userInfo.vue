@@ -195,7 +195,7 @@ export default {
         }
       ).then(() => {
           let tokenx = this.$cookies.get("token");
-          console.log(tokenx)
+          // console.log(tokenx)
           let config = {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -203,13 +203,14 @@ export default {
             },
           };  
           axios.post("user/modify", this.tempform, config).then(res => {
-            console.log(res);
+            // console.log(res);
             this.load();
             ElMessage.success("修改成功");
             this.dialogFormVisible = false;
           }
           ).catch(err => {
-            console.log(err);
+            // console.log(err);
+            ElMessage.error("修改失败");
           })
         })
         .catch(() => {
@@ -241,7 +242,7 @@ export default {
           },
         };
         axios.post("/user/info", data, config).then(res => {
-          console.log(res)
+          // console.log(res)
           let tmp = res.data.data.user;
           this.form.UserName = tmp.nickName;
           this.tempform.nickName = tmp.nickName;
@@ -261,7 +262,8 @@ export default {
           this.form.IDNum = tmp.idCard;
           this.tempform.idCard = tmp.idCard;
         }).catch(err => {
-          console.log(err);
+          // console.log(err);
+          ElMessage.error("查询失败")
         })
       }
     },
@@ -275,14 +277,14 @@ export default {
       };
       axios.get("/addr/list", config).then(res => {
         this.addressList = res.data.data.addrList
-        console.log(this.addressList);
+        // console.log(this.addressList);
       }).catch(err => {
-        console.log(err);
+        // console.log(err);
       })
     },
     addAddress() {
       let tokenx = this.$store.getters.myToken;
-      console.log(this.addressForm)
+      // console.log(this.addressForm)
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
@@ -296,7 +298,7 @@ export default {
       this.axios.get("/addr/add",config).then(res => {
         this.dialogFormVisible2 = false;
         this.dialogFormVisible3 = false;
-        console.log(res)
+        // console.log(res)
         this.addressForm = [];
         if(res.data.code === 100){
           ElMessage.success("添加成功");
@@ -306,7 +308,8 @@ export default {
           this.load()
         }
       }).catch(err => {
-        console.log(err);
+        // console.log(err);
+        ElMessage.success("添加失败");
       })
     },
     handleDelete(deleteid) {
@@ -320,7 +323,7 @@ export default {
         }
       ).then(() => {
         let tokenx = this.$cookies.get("token");
-        console.log(tokenx)
+        // console.log(tokenx)
         let config = {
           headers: {
             "Content-Type": "multipart/form-data ",
@@ -334,10 +337,11 @@ export default {
         }, config).then(res => {
           this.dialogFormVisible2 = false
           ElMessage.success("删除成功")
-          console.log(res);
+          // console.log(res);
           this.load()
         }).catch(err => {
-          console.log(err);
+          // console.log(err);
+          ElMessage.error("删除失败")
         })
       })
     }

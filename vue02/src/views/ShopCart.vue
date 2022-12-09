@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ElTable } from 'element-plus'
+import { ElMessage, ElTable } from "element-plus";
 import axios from "axios";
 
 export default {
@@ -58,10 +58,10 @@ export default {
       let url = "shop/list"
       let data = new FormData();
       let tokenx = this.$cookies.get("token");
-      console.log(tokenx);
+      // console.log(tokenx);
       this.$store.commit("setmyToken", tokenx);
       let ttoken = this.$store.getters.myToken;
-      console.log(ttoken)
+      // console.log(ttoken)
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
@@ -69,7 +69,7 @@ export default {
         },
       };
       axios.get(url, config).then(res => {
-        console.log(res);
+        // console.log(res);
         let tmp = [];
         let price = 0;
         let sumall = 0;
@@ -84,13 +84,14 @@ export default {
         }
         this.sumAll = 0;
         this.resList = tmp;
-        console.log(tmp)
+        // console.log(tmp)
       }).catch(err => {
-        console.log(err);
+        // console.log(err);
+        ElMessage.error("获取失败");
       })
     },
     gotoInFo(id) {
-      console.log(id);
+      // console.log(id);
       this.$router.push({
         path: '/GoodInfo',
         query: {
@@ -112,8 +113,8 @@ export default {
       });
     },
     deleteCart(id) {
-      console.log(id);
-      console.log(id.shop.id);
+      // console.log(id);
+      // console.log(id.shop.id);
       // let data = {
       //   "id": id.shop.id
       // }
@@ -130,20 +131,22 @@ export default {
         }
       }, config).then(
         res => {
-          console.log(res);
+          // console.log(res);
           this.load()
-          alert("删除成功");
+          // alert("删除成功");
+          ElMessage.success("删除成功");
         }
       ).catch(err => {
-        console.log(err);
-        alert("删除失败")
+        // console.log(err);
+        // alert("删除失败")
+        ElMessage.error("删除失败");
       })
 
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
-      console.log("val")
-      console.log(val);
+      // console.log("val")
+      // console.log(val);
       let sum = 0;
       for (let i = 0; i < val.length; i++) {
         sum += val[i].sum;
@@ -152,7 +155,7 @@ export default {
 
     },
     handleChange(row) {
-      console.log(row);
+      // console.log(row);
       let price = 0;
       let sumall = 0;
       let tmp = [];
@@ -167,7 +170,7 @@ export default {
       let url = "shop/modify";
       let data = new FormData();
       data.append("num", row.shop.num);
-      console.log( row.shop.num);
+      // console.log( row.shop.num);
       data.append("shopId", row.shop.id);
       let tokenx = this.$store.getters.myToken;
       let config = {
@@ -178,12 +181,13 @@ export default {
       };
       axios.post(url, data, config).then(
         res=>{
-          console.log("okk");
-          console.log(res);
+          // console.log("okk");
+          // console.log(res);
+          // ElMessage.success("修改成功")
       }
       ).catch(
         err=>{
-          console.log(err);
+          // console.log(err);
         }
       )
     }
