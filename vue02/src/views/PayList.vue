@@ -101,12 +101,12 @@ export default {
   },
   mounted() {
       this.fromPage = JSON.parse(this.$route.query.from);
-      console.log(this.fromPage);
+      // console.log(this.fromPage);
       if(this.fromPage == 1) {
         this.sumall = JSON.parse(this.$route.query.money);
         this.select = JSON.parse(this.$route.query.select);
-        console.log(this.sumall);
-        console.log(this.select);
+        // console.log(this.sumall);
+        // console.log(this.select);
         this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) + "  detail:" + JSON.stringify(this.select);
       }
       else
@@ -114,14 +114,14 @@ export default {
         this.sumall = JSON.parse(this.$route.query.money);
         this.item = JSON.parse(this.$route.query.select);
         this.ERCodeUrl = this.baseUrl + "sum:" + JSON.stringify(this.sumall) + "  detail:" + JSON.stringify(this.item);
-        console.log("xx");
-        console.log(this.item)
+        // console.log("xx");
+        // console.log(this.item)
       }
   },
   methods:{
     selectAddrID()
     {
-      console.log(this.addressid);
+      // console.log(this.addressid);
       for(let i = 0; i < this.addressList.length; i++)
       {
         if(this.addressList[i].id == this.addressid)
@@ -142,9 +142,10 @@ export default {
       };
       axios.get("/addr/list", config).then(res => {
         this.addressList = res.data.data.addrList
-        console.log(this.addressList);
+        // console.log(this.addressList);
       }).catch(err => {
-        console.log(err);
+        // console.log(err);
+        ElMessage.error("获取信息失败");
       })
     },
     goback()
@@ -158,7 +159,7 @@ export default {
           if(this.fromPage == 1) {
             let url = "orders/add";
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
+            // console.log(tokenx)
             let config = {
               headers: {
                 "Content-Type": "multipart/form-data ",
@@ -168,7 +169,7 @@ export default {
             let t = this.select;
             let len = t.length;
             for (let i = 0; i < len; i++) {
-              console.log(t[i]);
+              // console.log(t[i]);
               let data = new FormData();
               data.append("addrId", this.addressid);
               // console.log(this.addressid);
@@ -182,10 +183,12 @@ export default {
               // console.log(t[i].sum)
               // console.log(t[i].sum)
               axios.post(url, data, config).then(res => {
-                console.log(res);
-                console.log("添加成功");
+                // console.log(res);
+                // console.log("添加成功");
+                ElMessage.success("添加成功");
               }).catch(err => {
-                console.log(err);
+                // console.log(err);
+                ElMessage.error("添加失败");
               })
               let url2 = "shop/del"
               let config2 = {
@@ -199,11 +202,13 @@ export default {
               };
               axios.delete(url2, config2).then(
                 res => {
-                  console.log(res);
-                  console.log("ok");
+                  // console.log(res);
+                  // console.log("ok");
+                  ElMessage.success("删除成功");
                 }
               ).catch(err => {
-                console.log(err);
+                // console.log(err);
+                ElMessage.error("删除失败");
               })
               // console.log(this.select.shop.id);
               // console.log(this.select[i].shop.id)
@@ -211,7 +216,7 @@ export default {
           }
           else {
             let data = new FormData();
-            console.log(this.item);
+            // console.log(this.item);
             data.append("addrId", this.addressid);
             // console.log(this.addressid);
             data.append("goodsId",this.item.id);
@@ -232,11 +237,14 @@ export default {
           }
         }
         else {
-          alert("请选择地址");
+          // alert("请选择地址");
+          ElMessage.info("请选择地址");
         }
       }
       else {
-        alert("请添加商品");
+        // alert("请添加商品");
+        ElMessage.info("请添加商品");
+
       }
     }
   }

@@ -82,7 +82,7 @@ export default {
         this.$store.commit("setmyToken", tokenx);
         this.tokenx = tokenx;
         let ttoken = this.$store.getters.myToken;
-        console.log(ttoken)
+        // console.log(ttoken)
     },
     computed: {
         // 设定一个计算属性 判断是否已经上传完了一张
@@ -117,7 +117,7 @@ export default {
                 }, (err, data) => {
                     // 需要判断错误与成功
                     if (!err && data.statusCode === 200) {
-                        console.log(err || data);
+                        // console.log(err || data);
                         // 如果没有失败表示成功了
                         // 此时认为上传成功了
                         // this.currentFileUid
@@ -126,8 +126,8 @@ export default {
                         this.fileList = this.fileList.map(item => {
                             return item
                         })
-                        console.log("afterUpload");
-                        console.log(this.fileList);
+                        // console.log("afterUpload");
+                        // console.log(this.fileList);
                         setTimeout(() => {
                             this.showPercent = false // 隐藏进度条
                             this.percent = 0 // 进度归0
@@ -194,9 +194,9 @@ export default {
                     message: "上传成功",
                     confirmButtonText: '确认',
                 })
-                console.log(res);
+                // console.log(res);
             }).catch(err => {
-                console.log(err);
+                // console.log(err);
             })
         }
     }

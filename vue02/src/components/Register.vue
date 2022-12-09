@@ -84,6 +84,7 @@
 
 <script>
 import axios from "axios";
+import { ElMessage } from "element-plus";
 
 export default {
   name: "UserRegister",
@@ -132,19 +133,23 @@ export default {
           .post("/user/sign", data, config)
           .then((res) => {
             if (res.data.code == 100) {
-              console.log(res)
-              alert("注册成功");
+              // console.log(res)
+              // alert("注册成功");
+              ElMessage.success("注册成功");
               // this.$router.push("/login");
             } else {
-              alert(res.data.message);
+              // alert(res.data.message);
+              ElMessage.info(res.data.message);
             }
           })
           .catch((res) => {
             console.log(res);
-            alert("请重新注册");
+            // alert("请重新注册");
+            ElMessage.error("请重新注册");
           });
       } else {
-        alert("请重新确认");
+        // alert("请重新确认");
+        ElMessage.error("请重新确认");
       }
     },
   },

@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { ElMessage } from "element-plus";
+
 export default {
     data() {
         return {
@@ -79,7 +81,7 @@ export default {
     methods: {
         orderChange() {
             this.getOrder = this.orders.value;
-            console.log("order:" + this.getOrder)
+            // console.log("order:" + this.getOrder)
             this.load()
         },
         load() {
@@ -95,13 +97,14 @@ export default {
                 }
             };
             this.axios.get("/goods/search", config).then(res => {
-                console.log(res)
+                // console.log(res)
                 this.goodList = [
                     res.data.data.result.slice(0, 5),
                     res.data.data.result.slice(5, 10),
                 ];
             }).catch(err => {
-                console.log(err)
+                // console.log(err)
+              ElMessage.error("查询失败")
             })
         },
         goToCart(item) {

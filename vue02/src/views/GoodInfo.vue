@@ -1,17 +1,19 @@
 <template>
   <div style="display:flex; align-items: center;">
-    <div style="width: 500px; margin-left: 300px">
+    <div style="width: 500px;  margin-left: 300px">
       <swiper
         :modules="modules"
         :loop="true"
         :slides-per-view="1"
         :space-between="50"
-        :autoplay="{ autoplay: true, delay: 4000, disableOnInteraction: false }"
+        :autoplay="{ autoplay: true, delay: 1000, disableOnInteraction: false }"
         navigation
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
+        style="height: 540px;width:100%"
+        effect="cards"
       >
-        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i">
+        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%">
           <img :src="item.url" alt="" style="width: 100%;"/>
         </swiper-slide>
       </swiper>
@@ -24,7 +26,7 @@
           </div>
         </template>
         <div>
-          <el-descriptions title="商品信息" class="info">
+          <el-descriptions title="商品信息" class="info"  :column="1">
 
               <el-descriptions-item label="商品名" class="detail">{{item.name}}</el-descriptions-item>
 
@@ -59,7 +61,10 @@ import axios from "axios";
 import { Swiper } from "swiper/vue";
 import { SwiperSlide } from "swiper/vue";
 import 'swiper/css';
-import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import 'swiper/css/bundle';
+import "swiper/css/effect-cards";
+import { Autoplay, Navigation, Pagination, Scrollbar,EffectCards} from "swiper";
+import { ElMessage } from "element-plus";
 export default {
   name: "GoodInfo",
   components:{
@@ -68,7 +73,8 @@ export default {
     Autoplay,
     Pagination,
     Navigation,
-    Scrollbar
+    Scrollbar,
+    EffectCards
   },
   data(){
     return{
@@ -86,25 +92,27 @@ export default {
       },
       img: ['https://slynium-mall.oss-cn-hangzhou.aliyuncs.com/202cd611-3a0d-485d-a596-d2fd18c63df0.png'],
       imglist: null,
+      modules: [Pagination, Navigation,Autoplay,EffectCards],
     }
   },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log('slide change');
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-    };
-  },
+  // setup() {
+  //   // const onSwiper = (swiper) => {
+  //   //   console.log(swiper);
+  //   // };
+  //   // const onSlideChange = () => {
+  //   //   console.log('slide change');
+  //   // };
+  //   // return {
+  //   //   onSwiper,
+  //   //   onSlideChange,
+  //   // };
+  //
+  // },
   mounted() {
     this.item =  JSON.parse(this.$route.query.item);
     if(JSON.parse(this.$route.query.img).length > 0)
     this.img = JSON.parse(this.$route.query.img);
-    console.log(this.img);
+    // console.log(this.img);
     let immg  = [];
     if(this.img.length > 0) {
       for (let i = 0; i < this.img.length; i++) {
@@ -112,8 +120,8 @@ export default {
       }
       this.imglist = immg;
     }
-    console.log(immg);
-    console.log(this.img[0].url)
+    // console.log(immg);
+    // console.log(this.img[0].url)
     // let mySwiper = new Swiper ('.swiper', {
     //   direction: 'vertical', // 垂直切换选项
     //   loop: true, // 循环模式选项
@@ -137,17 +145,17 @@ export default {
   },
   methods:{
     goToCart(id) {
-      console.log(id);
+      // console.log(id);
       let url = "shop/add"
       let data = new FormData();
       data.append("goodsId",id);
       //后面加一个加减
       data.append("num",this.num);
-      console.log(this.num);
+      // console.log(this.num);
       let tokenx = this.$cookies.get("token");
       this.$store.commit("setmyToken", tokenx);
       let Mytoken = this.$store.getters.myToken;
-      console.log(Mytoken)
+      // console.log(Mytoken)
       let config = {
         headers: {
           "Content-Type": "multipart/form-data ",
@@ -155,21 +163,24 @@ export default {
         },
       };
       axios.post(url,data,config).then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.data.code == 100)
-        alert("添加成功");
+        // alert("添加成功");
+        ElMessage.success("添加成功");
         else {
-          alert("添加失败");
+          // alert("添加失败");
+          ElMessage.error("添加失败");
         }
       }).catch(err=>{
-        console.log(err);
-        alert("添加失败");
+        // console.log(err);
+        // alert("添加失败");
+        ElMessage.error("添加失败");
       })
     },
     buybuybuy()
     {
-      console.log(this.item.price * this.num);
-      console.log(this.item);
+      // console.log(this.item.price * this.num);
+      // console.log(this.item);
       this.$router.push({
         path:'/pay',
         query:{
