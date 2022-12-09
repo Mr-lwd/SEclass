@@ -13,6 +13,11 @@
         <el-table-column prop="orders.gmtReceive" label="收货时间" align="center">
         </el-table-column>
         <el-table-column prop="orders.state" label="状态" align="center">
+            <template #default="scope">
+                <el-select v-model="scope.row.orders.state" disabled placeholder="Select">
+                    <el-option v-for="item in states" :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
+            </template>
         </el-table-column>
         <el-table-column label="操作" align="center">
             <template #default="scope">
@@ -36,7 +41,13 @@ export default {
             dialogFormVisible: false,
             form: {
 
-            }
+            },
+            states: [
+                {
+                    value: 1,
+                    label: '配送中',
+                }
+            ]
         }
     },
     mounted() {
