@@ -116,7 +116,7 @@ export default {
       ) {
         var data = new FormData();
         data.append("idCard", this.IDNum);
-        data.append("mall", this.MailNum);
+        data.append("mail", this.MailNum);
         data.append("name", this.TrueName);
         data.append("nickName", this.UserName);
         data.append("phone", this.TelNum);

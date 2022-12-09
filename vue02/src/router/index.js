@@ -74,7 +74,7 @@ const routes = [
       {
         path: "/manage/orderlist",
         name: "orderlist",
-        component: () => import("@/components/upload.vue"),
+        component: () => import("@/components/OrderList.vue"),
       }
     ]
   }
