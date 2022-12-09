@@ -69,7 +69,7 @@ export default {
     methods: {
         load() {
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
+            // console.log(tokenx)
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
@@ -77,23 +77,23 @@ export default {
                 },
             };
             this.axios.get("/goods/listByUserId", config).then(res => {
-                console.log(res.data.data.goodsList);
+                // console.log(res.data.data.goodsList);
                 let newArrVal = JSON.parse(JSON.stringify(res.data.data.goodsList))
                 newArrVal = newArrVal.map(e => { return e.goods }) //然后删除属性id
                 this.goodList = newArrVal
-                console.log(newArrVal);
+                // console.log(newArrVal);
             }).catch(err => {
-                console.log(err);
+                // console.log(err);
             })
         },
         handleEdit(good) {
             this.dialogFormVisible = true
             this.form = JSON.parse(JSON.stringify(good))
-            console.log(good)
+            // console.log(good)
         },
         save() {
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
+            // console.log(tokenx)
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
@@ -103,13 +103,13 @@ export default {
             this.axios.post("/goods/modify", this.form, config).then(res => {
                 this.dialogFormVisible = false;
                 ElMessage.success("修改成功")
-                console.log(res);
+                // console.log(res);
                 this.load()
             }).catch(err => {
                 ElMessage.info("取消修改")
-                console.log(err);
+                // console.log(err);
             })
-            console.log(this.form);
+            // console.log(this.form);
         },
         handleDelete(deleteid) {
             ElMessageBox.confirm(
@@ -122,7 +122,7 @@ export default {
                 }
             ).then(() => {
                 let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
+                // console.log(tokenx)
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data ",
@@ -135,10 +135,11 @@ export default {
                     }
                 }, config).then(res => {
                     ElMessage.success("删除成功")
-                    console.log(res);
+                    // console.log(res);
                     this.load()
                 }).catch(err => {
-                    console.log(err);
+                    // console.log(err);
+                  ElMessage.error("修改失败")
                 })
             })
         }
