@@ -12,14 +12,19 @@
         </el-table-column>
         <el-table-column prop="orders.state" label="状态" align="center">
             <template #default="scope">
-                <el-select v-model="scope.row.orders.state" disabled  placeholder="Select">
-                    <el-option v-for="item in states" :disabled="item.disabled" :key="item.value" :label="item.label" :value="item.value" />
+                <el-select v-model="scope.row.orders.state" disabled placeholder="Select">
+                    <el-option v-for="item in states" :disabled="item.disabled" :key="item.value" :label="item.label"
+                        :value="item.value" />
                 </el-select>
             </template>
         </el-table-column>
         <el-table-column label="操作" align="center">
             <template #default="scope">
-                <el-button style="width: 6vmin;" type="default" @click.prevent="handleEdit(scope.row)">更改</el-button>
+                <el-button style="width: 6vmin;" type="default" @click.prevent="checkDetail(scope.row)">详情</el-button>
+                <el-button style="width: 6vmin;" type="success" v-if="scope.row.orders.state == 2"
+                    @click.prevent="handleReceive(scope.row)">收货</el-button>
+                <el-button style="width: 6vmin;" type="danger" v-if="scope.row.orders.state != 3 && scope.row.orders.state != 5"
+                    @click.prevent="handleReturn(scope.row)">退货</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -29,33 +34,30 @@
                 <el-form-item label="商品名称">
                     <el-input disabled v-model="form.goodsVo.goods.name" autocomplete="off"></el-input>
                 </el-form-item>
+                <el-form-item label="数量">
+                    <el-input disabled v-model="form.orders.num" autocomplete="off"></el-input>
+                </el-form-item>
                 <el-form-item label="价格">
-                    <el-input disabled  v-model="form.orders.totalPrice" autocomplete="off"></el-input>
+                    <el-input disabled v-model="form.orders.totalPrice" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="快递单号">
                     <el-input disabled v-model="form.orders.exNum" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="发货时间">
-                    <el-date-picker disabled v-model="form.orders.gmtDeliver" type="datetime" placeholder="暂无"/>
+                    <el-date-picker disabled v-model="form.orders.gmtDeliver" type="datetime" placeholder="暂未发货" />
                 </el-form-item>
                 <el-form-item label="收货时间">
-                    <el-date-picker  v-model="form.orders.gmtReceive" type="datetime" placeholder="暂无"/>
+                    <el-date-picker disabled v-model="form.orders.gmtReceive" type="datetime" placeholder="暂未收货" />
                 </el-form-item>
                 <el-form-item label="状态">
-                    <el-select v-model="form.orders.state" placeholder="Select">
-                        <el-option v-for="item in states" :disabled="item.disabled" :key="item.value" :label="item.label" :value="item.value" />
+                    <el-select disabled v-model="form.orders.state" placeholder="Select">
+                        <el-option v-for="item in states" :disabled="item.disabled" :key="item.value"
+                            :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
             </el-form>
         </template>
-        <template #footer>
-            <div class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="save">确 定</el-button>
-            </div>
-        </template>
     </el-dialog>
-
 </template>
 
 <script>
@@ -75,27 +77,31 @@ export default {
             },
             states: [
                 {
-                    value: 3,
-                    label: '收货成功',
+                    value: 1,
+                    label: '待发货',
                 },
                 {
                     value: 2,
-                    label: '退货',
+                    label: '配送中',
+                },
+                {
+                    value: 5,
+                    label: '退货完成',
                 },
                 {
                     value: 0,
                     label: '未支付',
-                    disabled:true,
+                    disabled: true,
                 },
                 {
-                    value: 1,
-                    label: '配送中',
-                    disabled:true,
+                    value: 3,
+                    label: '退货中',
+                    disabled: true,
                 },
                 {
                     value: 4,
-                    label: '退货完成',
-                    disabled:true,
+                    label: '收货成功',
+                    disabled: true,
                 },
             ]
         }
@@ -127,63 +133,96 @@ export default {
                 console.log(err);
             })
         },
-        handleEdit(order) {
+        checkDetail(order) {
             this.dialogFormVisible = true
             this.form = JSON.parse(JSON.stringify(order))
             console.log(order)
         },
-        save() {
-            let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
-            let config = {
-                headers: {
-                    "Content-Type": "multipart/form-data ",
-                    "Authorization": tokenx,
-                },
-            };
-            this.postForm = this.form.orders
-            console.log(this.postForm)
-            this.axios.post("/orders/modify", this.postForm,config).then(res => {
-                this.dialogFormVisible = false;
-                ElMessage.success("修改成功")
-                console.log(res);
-                this.load()
-            }).catch(err => {
-                ElMessage.info("取消修改")
-                console.log(err);
+        handleReceive(order) {
+            ElMessageBox.confirm(
+                '确认收货吗？',
+                {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'success',
+                }
+            ).then(() => {
+                let tokenx = this.$cookies.get("token");
+                console.log(tokenx)
+                let config = {
+                    headers: {
+                        "Content-Type": "multipart/form-data ",
+                        "Authorization": tokenx,
+                    },
+                    params: {
+                        "exNum": order.orders.exNum,
+                        "id": order.orders.id
+                    }
+                };
+                this.axios.get("/orders/receive", config).then(res => {
+                    this.dialogFormVisible = false;
+                    ElMessage.success("确认收货")
+                    console.log(res);
+                    this.load()
+                }).catch(err => {
+                    ElMessage.danger("请求失败")
+                    console.log(err);
+                })
             })
         },
-        // handleDelete(deleteid) {
-        //     ElMessageBox.confirm(
-        //         '删除后无法恢复',
-        //         '警告',
-        //         {
-        //             confirmButtonText: '确认',
-        //             cancelButtonText: '取消',
-        //             type: 'warning',
-        //         }
-        //     ).then(() => {
-        //         let tokenx = this.$cookies.get("token");
-        //         console.log(tokenx)
-        //         let config = {
-        //             headers: {
-        //                 "Content-Type": "multipart/form-data ",
-        //                 "Authorization": tokenx,
-        //             },
-        //         };
-        //         this.axios.delete("/orders/del", {
-        //             params: {
-        //                 "id": deleteid
-        //             }
-        //         }, config).then(res => {
-        //             ElMessage.success("删除成功")
-        //             console.log(res);
-        //             this.load()
-        //         }).catch(err => {
-        //             console.log(err);
-        //         })
+        handleReturn(order) {
+            ElMessageBox.confirm(
+                '确认退货吗？',
+                {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                }
+            ).then(() => {
+                let tokenx = this.$cookies.get("token");
+                console.log(tokenx)
+                let config = {
+                    headers: {
+                        "Content-Type": "multipart/form-data ",
+                        "Authorization": tokenx,
+                    },
+                    params: {
+                        "exNum": order.orders.exNum,
+                        "id": order.orders.id
+                    }
+                };
+                this.axios.get("/orders/return", config).then(res => {
+                    this.dialogFormVisible = false;
+                    ElMessage.success("确认退货")
+                    console.log(res);
+                    this.load()
+                }).catch(err => {
+                    ElMessage.warning("请求失败")
+                    console.log(err);
+                })
+            })
+        },
+        // save() {
+        //     let tokenx = this.$cookies.get("token");
+        //     console.log(tokenx)
+        //     let config = {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data ",
+        //             "Authorization": tokenx,
+        //         },
+        //     };
+        //     this.postForm = this.form.orders
+        //     console.log(this.postForm)
+        //     this.axios.post("/orders/modify", this.postForm, config).then(res => {
+        //         this.dialogFormVisible = false;
+        //         ElMessage.success("修改成功")
+        //         console.log(res);
+        //         this.load()
+        //     }).catch(err => {
+        //         ElMessage.info("取消修改")
+        //         console.log(err);
         //     })
-        // }
+        // },
     }
 }
 </script>
