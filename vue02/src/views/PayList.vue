@@ -185,10 +185,11 @@ export default {
               axios.post(url, data, config).then(res => {
                 // console.log(res);
                 // console.log("添加成功");
-                ElMessage.success("添加成功");
+                ElMessage.success("购买成功");
+                this.$router.push("/myorders");
               }).catch(err => {
                 // console.log(err);
-                ElMessage.error("添加失败");
+                ElMessage.error("购买失败");
               })
               let url2 = "shop/del"
               let config2 = {
@@ -204,17 +205,26 @@ export default {
                 res => {
                   // console.log(res);
                   // console.log("ok");
-                  ElMessage.success("删除成功");
+                  // ElMessage.success("删除成功");
                 }
               ).catch(err => {
                 // console.log(err);
-                ElMessage.error("删除失败");
+                // ElMessage.error("删除失败");
               })
               // console.log(this.select.shop.id);
               // console.log(this.select[i].shop.id)
             }
           }
           else {
+            let url = "orders/add";
+            let tokenx = this.$cookies.get("token");
+            // console.log(tokenx)
+            let config = {
+              headers: {
+                "Content-Type": "multipart/form-data ",
+                "Authorization": tokenx,
+              },
+            };
             let data = new FormData();
             // console.log(this.item);
             data.append("addrId", this.addressid);
@@ -228,12 +238,15 @@ export default {
             data.append("totalPrice", this.sumall);
             // console.log(t[i].sum)
             // console.log(t[i].sum)
-            // axios.post(url, data, config).then(res => {
-            //   console.log(res);
-            //   console.log("添加成功");
-            // }).catch(err => {
-            //   console.log(err);
-            // })
+            axios.post(url, data, config).then(res => {
+              // console.log(res);
+              ElMessage.success("购买成功");
+              this.$router.push("/myorders");
+              // console.log("添加成功");
+            }).catch(err => {
+              // console.log(err);
+              ElMessage.error("购买失败");
+            })
           }
         }
         else {
