@@ -4,17 +4,17 @@
     <div class="nav-topbar">
       <div class="container">
         <div class="topbar-menu">
-          <a href="javascript:;">商城</a>
+          <a href="javascript:;" @click="gotoIndex">商城</a>
         </div>
         <div class="topbar-user">
           <a href="javascript:;" v-if="!username" @click="register">注册</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
-          <a href="javascript:;" v-if="username" @click="goToUserInfo">{{
+          <a href="javascript:;" v-if="username" @click="goToUserInfo">欢迎&nbsp;&nbsp;&nbsp;{{
               username
           }}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="javascript:;" v-if="(role == 1)" @click="gotoMyOrder" >我的订单</a>
-          <a href="javascript:;" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
+          <a href="javascript:;" v-if="(role == 1)" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
               class="badge bg-secondary">1111</span></a>
         </div>
       </div>
@@ -29,16 +29,16 @@
         <div class="collapse navbar-collapse" style="font-size: 2vmin; margin-left: 2vmin" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" @click="gotoIndex" aria-current="page" href="#">首页</a>
+              <a class="nav-link" @click="gotoIndex" aria-current="page" href="javascript:;">首页</a>
             </li>
             <li class="nav-item" v-if="(role != null)" @click="goToUserInfo">
-              <a class="nav-link" href="#">个人中心</a>
+              <a class="nav-link" href="javascript:;">个人中心</a>
             </li>
             <li class="nav-item" v-if="(role == 2)">
-              <a class="nav-link" @click="gotoControl" href="#">管理中心</a>
+              <a class="nav-link" @click="gotoControl" href="javascript:;">管理中心</a>
             </li>
             <li class="nav-item" v-if="(role == 1)">
-              <a class="nav-link" @click="findGoods" href="#">搜索商品</a>
+              <a class="nav-link" @click="findGoods" href="javascript:;">搜索商品</a>
             </li>
           </ul>
         </div>
