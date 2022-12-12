@@ -18,7 +18,7 @@
     <template #default>
       <el-form label-width="10vmin" style="margin: 3vmin;" label-position="right" size="large">
         <el-form-item label="用户名">
-          <el-input v-model="tempform.nickName" autocomplete="off"></el-input>
+          <el-input v-model="tempform.nickName" disabled autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实名">
           <el-input v-model="tempform.name" autocomplete="off"></el-input>
@@ -47,7 +47,6 @@
       </div>
     </template>
   </el-dialog>
-
   <el-dialog title="添加地址" v-model="dialogFormVisible2" style="max-width: 60vmin;">
     <template #default>
       <el-table :data="addressList">
@@ -133,7 +132,7 @@ export default {
         province: '',
         detail: '',
       },
-
+      changePassword: false,
       options: [
         {
           value: 1,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="row g-3" v-on:submit.prevent>
+    <form class="row g-3" v-on:submit.prevent  :rules="rules">
       <div class="col-md-3 RegisterForm">
         <div class="col-md-12">
           <label for="username" class="col-md-6 form-label">用户名</label>
@@ -99,6 +99,7 @@ export default {
       UserName: "",
       sex: null,
       model: null,
+
     };
   },
   methods: {
