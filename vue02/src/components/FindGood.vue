@@ -12,7 +12,7 @@
             </el-select>
         </form>
     </div>
-    <div>
+    <div style="width: 95%;margin: 0 auto;">
         <div class="list-box" v-if="goodList">
             <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
                 <div style="border: 2px solid #ff6600;overflow: hidden;" class="item" v-for="(item, j) in arr" v-bind:key="j">
@@ -82,7 +82,6 @@ export default {
     methods: {
         orderChange() {
             this.getOrder = this.orders.value;
-            // console.log("order:" + this.getOrder)
             this.load()
         },
         load() {
@@ -157,7 +156,7 @@ export default {
         }
 
         .item {
-            width: 18%;
+            width: 17%;
             height: 360px;
             background-color: $colorG;
             text-align: center;

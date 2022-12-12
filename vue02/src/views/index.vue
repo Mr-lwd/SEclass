@@ -14,7 +14,7 @@
                   <img :src="item.photos[0].url" alt="" />
                 </div>
                 <div  class="item-img" v-if="!item.photos[0]">
-                  <img src="../assets/logo.png" alt="" />
+                  <img src="../assets/noImg.png" alt="" />
                 </div>
                 <div class="item-info">
                   <h3>{{ item.goods.name }}</h3>、
@@ -28,9 +28,9 @@
             </div>
           </div>
         </div>
-        <div style="display: flex; justify-content: center; margin-top: 20px">
+        <!-- <div style="display: flex; justify-content: center; margin-top: 20px">
           <el-pagination background layout="prev, pager, next" :total="1000" :page-size="100"/>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -73,7 +73,7 @@ export default {
       this.axios
         .get("/goods/list?pageNum=1&pageSize=10&order=4")
         .then((res) => {
-          // console.log(res.data.data.goodsList);
+          //console.log(res.data.data.goodsList);
           this.goodList = [
             res.data.data.goodsList.slice(0, 4),
             res.data.data.goodsList.slice(4, 8),

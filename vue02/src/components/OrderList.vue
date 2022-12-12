@@ -134,7 +134,6 @@ export default {
         },
         load() {
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
@@ -142,9 +141,7 @@ export default {
                 },
             };
             this.axios.get("/orders/list", config).then(res => {
-                console.log(res.data.data.orderList);
                 this.list = res.data.data.orderList
-                console.log(this.list)
             }).catch(err => {
                 console.log(err);
             })
@@ -152,13 +149,10 @@ export default {
         handleEdit(order) {
             this.dialogFormVisible = true
             this.form = JSON.parse(JSON.stringify(order))
-            console.log(order)
         },
         deliver() {
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
             this.postForm = this.form.orders
-            console.log(this.postForm)
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
@@ -172,7 +166,6 @@ export default {
             this.axios.get("/orders/ex", config).then(res => {
                 this.dialogFormVisible = false;
                 ElMessage.success("发货成功")
-                console.log(res);
                 this.load()
             }).catch(err => {
                 ElMessage.info("取消修改")
@@ -189,7 +182,6 @@ export default {
                 }
             ).then(() => {
                 let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data ",
@@ -203,7 +195,6 @@ export default {
                 this.axios.get("/orders/over", config).then(res => {
                     this.dialogFormVisible = false;
                     ElMessage.success("确认退货结束")
-                    console.log(res);
                     this.load()
                 }).catch(err => {
                     ElMessage.warning("请求失败")
@@ -222,7 +213,6 @@ export default {
                 }
             ).then(() => {
                 let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data ",
@@ -235,7 +225,6 @@ export default {
                     }
                 }, config).then(res => {
                     ElMessage.success("删除成功")
-                    console.log(res);
                     this.load()
                 }).catch(err => {
                     console.log(err);

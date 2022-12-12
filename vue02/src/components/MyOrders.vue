@@ -118,7 +118,6 @@ export default {
         },
         load() {
             let tokenx = this.$cookies.get("token");
-            console.log(tokenx)
             let config = {
                 headers: {
                     "Content-Type": "multipart/form-data ",
@@ -126,9 +125,7 @@ export default {
                 },
             };
             this.axios.get("/orders/list", config).then(res => {
-                console.log(res.data.data.orderList);
                 this.list = res.data.data.orderList
-                console.log(this.list)
             }).catch(err => {
                 console.log(err);
             })
@@ -136,7 +133,6 @@ export default {
         checkDetail(order) {
             this.dialogFormVisible = true
             this.form = JSON.parse(JSON.stringify(order))
-            console.log(order)
         },
         handleReceive(order) {
             ElMessageBox.confirm(
@@ -148,7 +144,6 @@ export default {
                 }
             ).then(() => {
                 let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data ",
@@ -162,7 +157,6 @@ export default {
                 this.axios.get("/orders/receive", config).then(res => {
                     this.dialogFormVisible = false;
                     ElMessage.success("确认收货")
-                    console.log(res);
                     this.load()
                 }).catch(err => {
                     ElMessage.danger("请求失败")
@@ -180,7 +174,6 @@ export default {
                 }
             ).then(() => {
                 let tokenx = this.$cookies.get("token");
-                console.log(tokenx)
                 let config = {
                     headers: {
                         "Content-Type": "multipart/form-data ",
@@ -194,7 +187,6 @@ export default {
                 this.axios.get("/orders/return", config).then(res => {
                     this.dialogFormVisible = false;
                     ElMessage.success("确认退货")
-                    console.log(res);
                     this.load()
                 }).catch(err => {
                     ElMessage.warning("请求失败")
