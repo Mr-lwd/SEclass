@@ -179,6 +179,10 @@ export default {
             return true
         },
         addGood() {
+            if(this.good.name == '' || this.good.price == 0){
+                ElMessage.error("商品名称、价格数据无效");
+                return false;
+            }
             console.log(this.fileList);
             let config = {
                 headers: {
