@@ -14,7 +14,15 @@
       <el-table-column label="选择">
         <template #default="scope">
           <el-button @click="gotoInFo(scope.row.goodsVo)">详细</el-button>
-          <el-button @click="deleteCart(scope.row)">删除</el-button>
+          <el-popconfirm title="是否要删除"
+                         confirm-button-text="是"
+                         cancel-button-text="否"
+                         @confirm="deleteCart(scope.row)">
+            <template #reference>
+              <el-button type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
+
         </template>
       </el-table-column>
     </el-table>
@@ -103,14 +111,20 @@ export default {
     },
     gotoPay()
     {
-      this.$router.push({
-        path:'/pay',
-      query:{
-        money: JSON.stringify(this.sumAll),
-        select: JSON.stringify(this.multipleSelection),
-        from: JSON.stringify(1)
+      if(this.sumAll > 0) {
+        this.$router.push({
+          path: '/pay',
+          query: {
+            money: JSON.stringify(this.sumAll),
+            select: JSON.stringify(this.multipleSelection),
+            from: JSON.stringify(1)
+          }
+        });
       }
-      });
+      else
+      {
+        ElMessage.error("请选择商品")
+      }
     },
     deleteCart(id) {
       // console.log(id);
