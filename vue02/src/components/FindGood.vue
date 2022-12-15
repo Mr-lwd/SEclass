@@ -14,26 +14,22 @@
     </div>
     <div style="width: 95%;margin: 0 auto;">
         <div class="list-box" v-if="goodList">
-            <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
-                <div style="border: 2px solid #ff6600;overflow: hidden;" class="item" v-for="(item, j) in arr" v-bind:key="j">
-                    <div class="item-img" v-if="item.photos[0]">
-                        <img :src="item.photos[0].url" alt="" />
-                    </div>
-                    <div class="item-img" v-if="!item.photos[0]">
-                        <img src="../assets/noImg.png" alt="" />
-                    </div>
-                    <div class="item-info">
-                        <h3>{{ item.goods.name }}</h3>
-                        <p class="price" @click="addCart(item.goods.id)">
-                            {{ item.goods.price }}元
-                        </p>
-                        <div><el-icon @click="goToCart(item)" style="font-size: 28px;">
-                                <ShoppingCart />
-                            </el-icon></div>
-                        <!-- <p>{{ item.goods.detail }}</p> -->
-
-                    </div>
+            <div style="display: flex;flex-wrap: wrap;" class="list"  v-bind:key="i">
+                <div v-for="(item, i) in goodList" @click="goToCart(item)" style="border: 1px solid #ff6600;overflow: hidden;" class="item">
+                 <div class="item-img" v-if="item.photos[0]">
+                      <img :src="item.photos[0].url" alt="" />
+                 </div>
+                 <div  class="item-img" v-if="!item.photos[0]">
+                   <img src="../assets/noImg.png" alt="" />
                 </div>
+                <div class="item-info">
+                  <h3>{{ item.goods.name }}</h3>
+                  <p class="price" @click="addCart(item.goods.id)">
+                    {{ item.goods.price }}元
+                  </p>
+                  <p>{{ item.goods.detail }}</p>
+                </div>
+              </div>
             </div>
         </div>
     </div>
@@ -98,10 +94,7 @@ export default {
             };
             this.axios.get("/goods/search", config).then(res => {
                 // console.log(res)
-                this.goodList = [
-                    res.data.data.result.slice(0, 5),
-                    res.data.data.result.slice(5, 10),
-                ];
+                this.goodList = res.data.data.result;
             }).catch(err => {
                 // console.log(err)
                 ElMessage.error("查询失败")
@@ -147,7 +140,7 @@ export default {
 
 .list-box {
     .list {
-        @include flex();
+
         width: 100%;
         margin-bottom: 14px;
 
@@ -156,17 +149,19 @@ export default {
         }
 
         .item {
-            width: 17%;
+            width: 19%;
             height: 360px;
             background-color: $colorG;
             text-align: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
 
             span {
                 display: inline-block;
                 width: 67px;
-                height: 28px;
-                font-size: 28px;
-                line-height: 28px;
+                height: 24px;
+                font-size: 14px;
+                line-height: 24px;
                 color: $colorG;
 
                 &.new-pro {
@@ -187,10 +182,10 @@ export default {
 
             .item-info {
                 h3 {
-                    font-size: 20px;
-                    color: $colorB;
-                    line-height: 20px;
-                    font-weight: bold;
+                    font-size: $fontJ;
+                color: $colorB;
+                line-height: $fontJ;
+                font-weight: bold;
                 }
 
                 p {

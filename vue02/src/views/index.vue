@@ -22,7 +22,6 @@
                     {{ item.goods.price }}元
                   </p>
                   <p>{{ item.goods.detail }}</p>
-                  
                 </div>
               </div>
             </div>
