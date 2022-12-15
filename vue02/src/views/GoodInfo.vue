@@ -1,6 +1,6 @@
 <template>
-  <div style="display:flex; align-items: center;">
-    <div style="width: 500px;  margin-left: 300px">
+  <div style="display:flex; align-items: center; margin-bottom: 70px; margin-top: 30px">
+    <div style="width: 500px;  margin-left: 300px; margin-right: 90px">
       <swiper
         :modules="modules"
         :loop="true"
@@ -12,11 +12,13 @@
         :scrollbar="{ draggable: true }"
         style="height: 540px;width:60vmin"
         effect="cards"
+        v-if="isImg==1"
       >
-        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%">
-          <img :src="item.url" alt="" style="width: 100%;"/>
+        <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%"  >
+          <img :src="item.url" alt="" style="width: 100%"  />
         </swiper-slide>
       </swiper>
+      <img src="../assets/noImg.png" alt=""  style="width: 100%;" v-if="isImg==0"/>
     </div>
     <div style="width: 500px; margin-left: 100px">
       <el-card class="box-card">
@@ -79,6 +81,7 @@ export default {
   data(){
     return{
       num:1,
+      isImg : 0,
       item: {
         "id":23,
         "name":"jzh",
@@ -90,7 +93,7 @@ export default {
         "gmtModify":null,
         "deleted":false
       },
-      img: ['https://slynium-mall.oss-cn-hangzhou.aliyuncs.com/202cd611-3a0d-485d-a596-d2fd18c63df0.png'],
+      img: [],
       imglist: null,
       modules: [Pagination, Navigation,Autoplay,EffectCards],
     }
@@ -109,17 +112,21 @@ export default {
   //
   // },
   mounted() {
+    this.isImg = 0;
     this.item =  JSON.parse(this.$route.query.item);
     if(JSON.parse(this.$route.query.img).length > 0)
     this.img = JSON.parse(this.$route.query.img);
     // console.log(this.img);
     let immg  = [];
     if(this.img.length > 0) {
+      this.isImg = 1;
+      // console.log(this.isImg);
       for (let i = 0; i < this.img.length; i++) {
         immg.push(this.img[i].url);
       }
       this.imglist = immg;
     }
+
     // console.log(immg);
     // console.log(this.img[0].url)
     // let mySwiper = new Swiper ('.swiper', {
