@@ -7,9 +7,9 @@
             </button>
             <el-button style="margin-left: 3vmin;" type="info"
                 @click="getOrder = 4; strLike = ''; load()">重置</el-button>
-            <el-select style="margin-left: 3vmin;" v-model="orders.value" placeholder="请选择" @change="orderChange()">
+            <!-- <el-select style="margin-left: 3vmin;" v-model="orders.value" placeholder="请选择" @change="orderChange()">
                 <el-option v-for="item in orders" :key="item.value" :label="item.label" :value="item.value"></el-option>
-            </el-select>
+            </el-select> -->
         </form>
     </div>
     <div style="width: 95%;margin: 0 auto;">
