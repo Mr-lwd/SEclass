@@ -14,8 +14,7 @@
           }}</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="javascript:;" v-if="(role == 1)" @click="gotoMyOrder" >我的订单</a>
-          <a href="javascript:;" v-if="(role == 1)" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车<span
-              class="badge bg-secondary">1111</span></a>
+          <a href="javascript:;" v-if="(role == 1)" class="my-cart" @click="goToCart"><i class="bi bi-cart-fill"></i>购物车</a>
         </div>
       </div>
     </div>

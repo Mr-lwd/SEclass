@@ -20,7 +20,7 @@
                         <img :src="item.photos[0].url" alt="" />
                     </div>
                     <div class="item-img" v-if="!item.photos[0]">
-                        <img src="../assets/logo.png" alt="" />
+                        <img src="../assets/noImg.png" alt="" />
                     </div>
                     <div class="item-info">
                         <h3>{{ item.goods.name }}</h3>

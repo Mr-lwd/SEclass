@@ -10,7 +10,7 @@
         navigation
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
-        style="height: 540px;width:100%"
+        style="height: 540px;width:60vmin"
         effect="cards"
       >
         <swiper-slide class="swiper-slide" v-for="(item, i) in img" :key="i" style="width: 100%">
