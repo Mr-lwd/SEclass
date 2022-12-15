@@ -23,7 +23,7 @@
                    <img src="../assets/noImg.png" alt="" />
                 </div>
                 <div class="item-info">
-                  <h3>{{ item.goods.name }}</h3>
+                  <h3 style="margin-top: 10px;">{{ item.goods.name }}</h3>
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
@@ -150,7 +150,7 @@ export default {
 
         .item {
             width: 19%;
-            height: 360px;
+            height: 300px;
             background-color: $colorG;
             text-align: center;
             margin-right: 10px;

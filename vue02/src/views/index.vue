@@ -17,7 +17,7 @@
                   <img src="../assets/noImg.png" alt="" />
                 </div>
                 <div class="item-info">
-                  <h3>{{ item.goods.name }}</h3>
+                  <h3 style="margin-top: 10px;">{{ item.goods.name }}</h3>
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
