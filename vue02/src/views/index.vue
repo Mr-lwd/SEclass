@@ -43,24 +43,6 @@ export default {
   components: {},
   data() {
     return {
-      // adsList: [
-      //   {
-      //     id: 33,
-      //     img: "../assets/logo.png",
-      //   },
-      //   {
-      //     id: 48,
-      //     img: "../assets/logo.png",
-      //   },
-      //   {
-      //     id: 45,
-      //     img: "../assets/logo.png",
-      //   },
-      //   {
-      //     id: 47,
-      //     img: "../assets/logo.png",
-      //   },
-      // ],
       goodList: [],
       showModal: false,
     };
