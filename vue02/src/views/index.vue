@@ -21,7 +21,7 @@
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
-                  <p>{{ item.goods.detail }}</p>
+                  <p style="width:80%;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">{{ item.goods.detail }}</p>
                 </div>
               </div>
             </div>
