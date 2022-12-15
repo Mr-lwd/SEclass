@@ -1,6 +1,6 @@
 <template>
   <div style="display:flex; align-items: center; margin-bottom: 70px; margin-top: 30px">
-    <div style="width: 500px;  margin-left: 300px; margin-right: 90px">
+    <div style="width: 500px;  margin-left: 300px; margin-right: 0px">
       <swiper
         :modules="modules"
         :loop="true"
