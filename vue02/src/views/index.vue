@@ -6,6 +6,7 @@
         <div class="wrapper" v-if="goodList">
           <div class="banner-left">
             <a href="javascript:;"><img src="../assets/logo.png" alt="" /></a>
+<!--            <a href="javascript:;"><img src="../assets/12.png" alt="" /></a>-->
           </div>
           <div class="list-box" v-if="goodList">
             <div class="list" v-for="(arr, i) in goodList" v-bind:key="i">
@@ -17,7 +18,7 @@
                   <img src="../assets/noImg.png" alt="" />
                 </div>
                 <div class="item-info">
-                  <h3>{{ item.goods.name }}</h3>、
+                  <h3>{{ item.goods.name }}</h3>
                   <p class="price" @click="addCart(item.goods.id)">
                     {{ item.goods.price }}元
                   </p>
