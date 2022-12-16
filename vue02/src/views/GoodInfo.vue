@@ -10,7 +10,7 @@
         navigation
         :pagination="{ clickable: true }"
         :scrollbar="{ draggable: true }"
-        style="height: 540px;width:60vmin"
+        style="height: 540 px;width:60vmin"
         effect="cards"
         v-if="isImg==1"
       >

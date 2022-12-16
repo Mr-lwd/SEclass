@@ -54,8 +54,8 @@ const COS = require('cos-js-sdk-v5');
 
 // SECRETID 和 SECRETKEY请登录 https://console.cloud.tencent.com/cam/capi 进行查看和管理
 let cos = new COS({
-    SecretId: 'AKIDegYJsDON8h2CC4qSSEl4D8mAH8iRzQbV',
-    SecretKey: 'iNr6B6mCNIJ7g5ShjaJvPjtupeIjvsiP'
+    SecretId: '',
+    SecretKey: ''
 })
 export default {
     data() {
